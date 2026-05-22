@@ -21,6 +21,7 @@ return new class extends Migration
     $table->decimal('prix', 8, 2);
     $table->integer('age_min');
     $table->integer('age_max');
+    $table->string('image')->nullable();
     $table->timestamps();
         });
     }

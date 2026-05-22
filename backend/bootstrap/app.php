@@ -11,11 +11,14 @@ return Application::configure(basePath: dirname(__DIR__))
         commands: __DIR__.'/../routes/console.php',
         health: '/up',
     )
-    ->withMiddleware(function (Middleware $middleware): void {
-        $middleware->alias([
-            'admin' => \App\Http\Middleware\AdminMiddleware::class,
-        ]);
-    })
+   ->withMiddleware(function ($middleware) {
+
+    $middleware->alias([
+        'admin' => \App\Http\Middleware\AdminMiddleware::class,
+        'formateur' => \App\Http\Middleware\FormateurMiddleware::class,
+    ]);
+
+})
     ->withExceptions(function (Exceptions $exceptions): void {
 
         $exceptions->render(function (\Illuminate\Auth\AuthenticationException $e, $request) {

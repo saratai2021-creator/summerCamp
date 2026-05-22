@@ -1,0 +1,66 @@
+.elite-page {
+  background: #f7f8fc;
+  padding: 40px;
+}
+
+.elite-card {
+  background: white;
+  border-radius: 12px;
+  padding: 25px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+}
+
+.elite-card-header {
+  margin-bottom: 20px;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 10px;
+}
+
+.elite-breadcrumb {
+  font-size: 14px;
+  color: #777;
+}
+
+.elite-row:hover {
+  background: #fafbff;
+}
+
+.elite-progress {
+  height: 8px;
+}
+
+.score-badge {
+  background: #e9fff5;
+  color: #1dbf73;
+  padding: 5px 10px;
+  border-radius: 8px;
+  font-weight: 600;
+}
+
+.elite-btn-download {
+  background: #6c63ff;
+  color: white;
+  border: none;
+}
+
+.elite-btn-mail {
+  background: #1dbf73;
+  color: white;
+  border: none;
+}
+
+.skeleton-row {
+  height: 35px;
+  background: linear-gradient(90deg, #eee, #f5f5f5, #eee);
+  border-radius: 6px;
+  animation: skeleton 1.5s infinite;
+}
+
+@keyframes skeleton {
+  0% {
+    background-position: -200px 0;
+  }
+  100% {
+    background-position: 200px 0;
+  }
+}

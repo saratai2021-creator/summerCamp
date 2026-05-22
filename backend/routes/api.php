@@ -1,10 +1,11 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+
+use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\AtelierController;
 use App\Http\Controllers\Api\ReservationController;
-use App\Http\Controllers\Api\AuthController;
-use App\Http\Controllers\Api\PlanningController;
+use App\Http\Controllers\Api\RapportController;
 
 /*
 |--------------------------------------------------------------------------
@@ -12,19 +13,24 @@ use App\Http\Controllers\Api\PlanningController;
 |--------------------------------------------------------------------------
 */
 
-// Admin login
-Route::post('/admin/login', [AuthController::class, 'login']);
+// login
+Route::post('/login', [AuthController::class, 'login']);
 
-// Ateliers
+// ateliers
 Route::get('/ateliers', [AtelierController::class, 'index']);
 Route::get('/ateliers/{id}', [AtelierController::class, 'show']);
 
-// Plannings
-Route::get('/plannings', [PlanningController::class, 'index']);
+/*
+|--------------------------------------------------------------------------
+| PARENT ROUTES
+|--------------------------------------------------------------------------
+*/
 
-// Reservations (parent)
-Route::post('/reservations', [ReservationController::class, 'store']);
+Route::middleware('auth:sanctum')->group(function () {
 
+    // reservation
+    Route::post('/reservations', [ReservationController::class, 'store']);
+});
 
 /*
 |--------------------------------------------------------------------------
@@ -32,19 +38,43 @@ Route::post('/reservations', [ReservationController::class, 'store']);
 |--------------------------------------------------------------------------
 */
 
-Route::middleware('auth:sanctum')->group(function () {
+Route::middleware(['auth:sanctum', 'admin'])->group(function () {
 
-    // Ateliers
+    // ateliers
     Route::post('/ateliers', [AtelierController::class, 'store']);
     Route::put('/ateliers/{id}', [AtelierController::class, 'update']);
     Route::delete('/ateliers/{id}', [AtelierController::class, 'destroy']);
 
-    // Plannings
-    Route::post('/plannings', [PlanningController::class, 'store']);
-    Route::delete('/plannings/{id}', [PlanningController::class, 'destroy']);
-
-    // Reservations (admin)
+    // reservations
     Route::get('/reservations', [ReservationController::class, 'index']);
-    Route::patch('/reservations/{id}/confirm', [ReservationController::class, 'confirm']);
-    Route::patch('/reservations/{id}/cancel', [ReservationController::class, 'cancel']);
+
+    Route::patch('/reservations/{id}/confirm', [
+        ReservationController::class,
+        'confirm'
+    ]);
+
+    Route::patch('/reservations/{id}/cancel', [
+        ReservationController::class,
+        'cancel'
+    ]);
+});
+
+/*
+|--------------------------------------------------------------------------
+| FORMATEUR ROUTES
+|--------------------------------------------------------------------------
+*/
+
+Route::middleware(['auth:sanctum', 'formateur'])->group(function () {
+
+    // rapports
+    Route::post('/rapports', [RapportController::class, 'store']);
+
+    Route::get('/rapports', [RapportController::class, 'index']);
+
+    Route::get('/rapports/{id}', [RapportController::class, 'show']);
+
+    Route::put('/rapports/{id}', [RapportController::class, 'update']);
+
+    Route::delete('/rapports/{id}', [RapportController::class, 'destroy']);
 });

@@ -1,0 +1,90 @@
+.elite-page {
+  background: #f7f8fc;
+}
+
+.elite-card {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+  padding: 25px;
+}
+
+.elite-card-header {
+  border-bottom: 1px solid #eee;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+}
+
+.elite-breadcrumb {
+  font-size: 14px;
+  color: #777;
+}
+
+.elite-breadcrumb .breadcrumb-item {
+  margin-right: 10px;
+}
+
+.elite-table th {
+  font-weight: 600;
+  color: #555;
+}
+
+.elite-row:hover {
+  background: #fafbff;
+  transition: 0.2s;
+}
+
+.student-cell {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 500;
+}
+
+.formation-badge {
+  background: #f1efff;
+  color: #6c63ff;
+  padding: 5px 10px;
+  border-radius: 8px;
+  font-size: 13px;
+}
+
+.score-badge {
+  background: #e9fff5;
+  color: #1dbf73;
+  padding: 5px 10px;
+  border-radius: 8px;
+  font-weight: 600;
+}
+
+.elite-btn-download {
+  background: #6c63ff;
+  color: white;
+  border: none;
+}
+
+.elite-btn-mail {
+  background: #1dbf73;
+  color: white;
+  border: none;
+}
+
+.elite-progress {
+  height: 8px;
+}
+
+.skeleton-row {
+  height: 35px;
+  background: linear-gradient(90deg, #eee, #f5f5f5, #eee);
+  border-radius: 6px;
+  animation: skeleton 1.5s infinite;
+}
+
+@keyframes skeleton {
+  0% {
+    background-position: -200px 0;
+  }
+  100% {
+    background-position: 200px 0;
+  }
+}

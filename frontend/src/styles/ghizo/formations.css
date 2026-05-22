@@ -1,0 +1,154 @@
+.formations-page {
+  padding: 40px;
+  background: #f6f7fb;
+  min-height: 100vh;
+  font-family: "Inter", sans-serif;
+}
+
+/* HEADER */
+
+.dashboard-header {
+  margin-bottom: 25px;
+}
+
+.page-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.page-title i {
+  font-size: 28px;
+  color: #8b3fbf;
+}
+
+.page-title h2 {
+  margin: 0;
+  font-weight: 700;
+}
+
+.page-title p {
+  margin: 0;
+  font-size: 13px;
+  color: #777;
+}
+
+/* SEARCH + COUNT */
+
+.formations-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.formations-count {
+  font-size: 18px;
+  font-weight: 600;
+  color: #8b3fbf;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.search-box {
+  background: white;
+  border-radius: 8px;
+  padding: 10px 15px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.search-box input {
+  border: none;
+  outline: none;
+  width: 200px;
+}
+
+/* GRID */
+
+.formations-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 25px;
+}
+
+/* CARD */
+
+.formation-card {
+  background: white;
+  padding: 25px;
+  border-radius: 14px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  transition: 0.25s;
+}
+
+.formation-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+.formation-icon {
+  font-size: 28px;
+  color: #6bcb5c;
+  margin-bottom: 10px;
+}
+
+/* .formation-dates {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  margin: 15px 0;
+  color: #777;
+} */
+.formation-dates {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px solid #eee;
+}
+.date-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  color: #666;
+}
+
+/* BUTTONS */
+
+.formation-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.btn-students {
+  flex: 1;
+  background: #8b3fbf;
+  border: none;
+  color: white;
+  padding: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.btn-reports {
+  flex: 1;
+  background: #6bcb5c;
+  border: none;
+  color: white;
+  padding: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.btn-students:hover {
+  background: #7431a4;
+}
+
+.btn-reports:hover {
+  background: #55b84b;
+}

@@ -1,0 +1,39 @@
+.footer {
+  background: #1e1e2f;
+  color: white;
+  margin-top: 80px;
+}
+
+.footer-container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 40px 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 30px;
+}
+
+.footer-section h3 {
+  color: #6bcb5c;
+  margin-bottom: 10px;
+}
+
+.footer-section h4 {
+  color: #8b3fbf;
+  margin-bottom: 10px;
+}
+
+.footer-section p {
+  margin: 6px 0;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  font-size: 14px;
+}
+
+.footer-bottom {
+  text-align: center;
+  padding: 15px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  font-size: 14px;
+}

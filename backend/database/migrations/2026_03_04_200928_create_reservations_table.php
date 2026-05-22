@@ -11,17 +11,26 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('reservations', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('etudiant_id')->constrained()->onDelete('cascade');
-            $table->foreignId('atelier_id')->constrained()->onDelete('cascade');
+       Schema::create('reservations', function (Blueprint $table) {
 
-            $table->date('date_debut');
-            $table->date('date_fin');
+    $table->id();
 
-            $table->string('statut')->default('en_attente');
-            $table->timestamps();
-        });
+    $table->foreignId('etudiant_id')
+          ->constrained()
+          ->onDelete('cascade');
+
+    $table->foreignId('atelier_id')
+          ->constrained()
+          ->onDelete('cascade');
+
+    $table->enum('statut', [
+        'en_attente',
+        'payee',
+        'annulee'
+    ])->default('en_attente');
+
+    $table->timestamps();
+});
     }
 
     /**

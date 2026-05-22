@@ -2,14 +2,12 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-//When you create a model like:
-// class Atelier extends Model
-// Laravel automatically links it to
-//  the table: ateliers
+
 class Atelier extends Model
 {
-    //These fields are allowed to be inserted or updated.
+    use HasFactory;
     protected $fillable = [
         'titre',
         'description',
@@ -18,11 +16,16 @@ class Atelier extends Model
         'capacite',
         'prix',
         'age_min',
-        'age_max'
+        'age_max',
+        'image'
     ];
-    // One Atelier → Many Reservations
+
     public function reservations()
     {
         return $this->hasMany(Reservation::class);
+    }
+      public function rapports()
+    {
+        return $this->hasMany(Rapport::class);
     }
 }

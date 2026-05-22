@@ -2,17 +2,16 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Reservation extends Model
 {
+    use HasFactory;
     // Fields allowed for mass assignment
     protected $fillable = [
         'etudiant_id',
-        'planning_id',
         'atelier_id',
-        'date_debut',
-        'date_fin',
         'statut'
     ];
 
@@ -29,8 +28,5 @@ class Reservation extends Model
     }
 
     // Relation with planning
-    public function planning()
-    {
-        return $this->belongsTo(Planning::class);
-    }
+   
 }
