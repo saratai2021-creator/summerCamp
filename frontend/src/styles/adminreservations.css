@@ -1,0 +1,501 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+/* ─── KEYFRAMES ─── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes shimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+@keyframes orb1 {
+  0%, 100% { transform: translate(0,0) scale(1); }
+  50%       { transform: translate(20px,15px) scale(1.08); }
+}
+@keyframes orb2 {
+  0%, 100% { transform: translate(0,0) scale(1); }
+  50%       { transform: translate(-15px,-20px) scale(1.06); }
+}
+
+/* ─── PAGE ─── */
+.admin-reservations {
+  min-height: 100vh;
+  padding: 40px 32px;
+  background: #1c1c1f;
+  background-image: radial-gradient(circle, #a855f712 1px, transparent 1px);
+  background-size: 32px 32px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Purple orb top-left */
+.admin-reservations::before {
+  content: '';
+  position: fixed;
+  width: 500px; height: 500px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(168,85,247,0.10) 0%, transparent 70%);
+  top: -120px; left: -100px;
+  pointer-events: none;
+  filter: blur(60px);
+  animation: orb1 11s ease-in-out infinite;
+  z-index: 0;
+}
+
+/* Lime orb bottom-right */
+.admin-reservations::after {
+  content: '';
+  position: fixed;
+  width: 420px; height: 420px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(132,204,22,0.08) 0%, transparent 70%);
+  bottom: -100px; right: -80px;
+  pointer-events: none;
+  filter: blur(55px);
+  animation: orb2 14s ease-in-out infinite;
+  z-index: 0;
+}
+
+/* ─── PAGE HEADER ─── */
+.admin-reservations .page-header {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 28px;
+  animation: fadeUp 0.5s cubic-bezier(.22,1,.36,1) both;
+}
+
+.admin-reservations .eyebrow {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: #a855f7;
+  margin-bottom: 6px;
+}
+
+.admin-reservations h1 {
+  font-size: 26px;
+  font-weight: 700;
+  color: #f4f3f0;
+  letter-spacing: -0.4px;
+  margin: 0;
+}
+
+.admin-reservations h1 span {
+  background: linear-gradient(90deg, #a855f7, #84cc16);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ─── TABLE WRAPPER ─── */
+.reservations-table-wrapper {
+  position: relative;
+  z-index: 1;
+  background: #242428;
+  border-radius: 18px;
+  border: 1.5px solid #2e2e33;
+  overflow: hidden;
+  box-shadow: 0 16px 48px rgba(0,0,0,0.35),
+              0 0 0 1px rgba(168,85,247,0.07);
+  animation: fadeUp 0.6s 0.08s cubic-bezier(.22,1,.36,1) both;
+}
+
+/* Top accent bar */
+.reservations-table-wrapper::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #a855f7, #84cc16);
+}
+
+/* ─── TABLE ─── */
+.reservations-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: transparent;
+}
+
+/* ─── THEAD ─── */
+.reservations-table thead {
+  background: #1e1e22;
+  border-bottom: 1.5px solid #2e2e33;
+}
+
+.reservations-table th {
+  padding: 15px 18px;
+  text-align: left;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: #6b6b6b;
+  white-space: nowrap;
+}
+
+/* ─── TBODY ─── */
+.reservations-table td {
+  padding: 15px 18px;
+  border-bottom: 1px solid #2a2a2e;
+  font-size: 14px;
+  color: #c4c2bc;
+  vertical-align: middle;
+}
+
+.reservations-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.reservations-table tbody tr {
+  transition: background 0.18s ease;
+}
+
+.reservations-table tbody tr:hover {
+  background: rgba(168,85,247,0.05);
+}
+
+/* ─── STATUS BADGES ─── */
+.status-wait {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  padding: 5px 11px;
+  border-radius: 20px;
+  background: rgba(234,179,8,0.10);
+  color: #fbbf24;
+  border: 1px solid rgba(234,179,8,0.22);
+}
+.status-wait::before {
+  content: '';
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: #fbbf24;
+  flex-shrink: 0;
+  animation: shimmer 2s ease-in-out infinite;
+}
+
+.status-confirm {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  padding: 5px 11px;
+  border-radius: 20px;
+  background: rgba(132,204,22,0.10);
+  color: #a3e635;
+  border: 1px solid rgba(132,204,22,0.25);
+}
+.status-confirm::before {
+  content: '';
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: #84cc16;
+  flex-shrink: 0;
+}
+
+.status-cancel {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  padding: 5px 11px;
+  border-radius: 20px;
+  background: rgba(239,68,68,0.09);
+  color: #f87171;
+  border: 1px solid rgba(239,68,68,0.22);
+}
+.status-cancel::before {
+  content: '';
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: #ef4444;
+  flex-shrink: 0;
+}
+
+/* ─── ACTION BUTTONS ─── */
+.action-buttons {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.confirm-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 7px 14px;
+  border: 1.5px solid rgba(132,204,22,0.30);
+  border-radius: 8px;
+  background: rgba(132,204,22,0.08);
+  color: #a3e635;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s, transform 0.15s;
+}
+.confirm-btn:hover {
+  background: rgba(132,204,22,0.16);
+  border-color: #84cc16;
+  transform: scale(1.04);
+}
+.confirm-btn:active { transform: scale(0.97); }
+
+.cancel-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 7px 14px;
+  border: 1.5px solid rgba(239,68,68,0.25);
+  border-radius: 8px;
+  background: rgba(239,68,68,0.08);
+  color: #f87171;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s, transform 0.15s;
+}
+.cancel-btn:hover {
+  background: rgba(239,68,68,0.16);
+  border-color: #ef4444;
+  transform: scale(1.04);
+}
+.cancel-btn:active { transform: scale(0.97); }
+
+.delete-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 7px 14px;
+  border: 1.5px solid #2e2e33;
+  border-radius: 8px;
+  background: #1e1e22;
+  color: #6b6b6b;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s, color 0.2s, transform 0.15s;
+}
+.delete-btn:hover {
+  background: rgba(239,68,68,0.08);
+  border-color: rgba(239,68,68,0.25);
+  color: #f87171;
+  transform: scale(1.04);
+}
+.delete-btn:active { transform: scale(0.97); }
+
+/* ─── EMPTY STATE ─── */
+.empty-state {
+  text-align: center;
+  padding: 60px 20px;
+  color: #52525b;
+  font-size: 13px;
+  font-family: 'JetBrains Mono', monospace;
+  letter-spacing: 0.5px;
+}
+
+/* ─── SKELETON ─── */
+.skeleton-cell {
+  height: 14px;
+  border-radius: 6px;
+  background: linear-gradient(90deg, #2a2a2e 25%, #313136 50%, #2a2a2e 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.4s infinite;
+}
+
+/* ─── FIX: ensure td never inherits badge/button layout ─── */
+.reservations-table td {
+  vertical-align: middle;
+}
+
+/* Status column — force inline, no flex bleed */
+.reservations-table td .status-wait,
+.reservations-table td .status-confirm,
+.reservations-table td .status-cancel {
+  display: inline-flex;
+  width: auto;
+  white-space: nowrap;
+}
+
+/* Action column — flex row, never column */
+.reservations-table td .action-buttons {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: nowrap;
+  white-space: nowrap;
+}
+
+/* Buttons inside action — never stretch full width */
+.reservations-table td .action-buttons .confirm-btn,
+.reservations-table td .action-buttons .cancel-btn,
+.reservations-table td .action-buttons .delete-btn {
+  width: auto;
+  flex-shrink: 0;
+}
+
+/* Prevent any td from becoming flex/grid container */
+.reservations-table td:not(:last-child) {
+  display: table-cell;
+}
+
+/* Last td (actions) stays table-cell too */
+.reservations-table td:last-child {
+  display: table-cell;
+  white-space: nowrap;
+}
+
+/* ─── STATUS BADGES OVERRIDE — outlined only, no fill ─── */
+.status-wait {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  padding: 5px 11px;
+  border-radius: 20px;
+  background: transparent;
+  color: #fbbf24;
+  border: 1.5px solid #fbbf24;
+}
+.status-wait::before {
+  content: '';
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: #fbbf24;
+  flex-shrink: 0;
+}
+
+.status-confirm {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  padding: 5px 11px;
+  border-radius: 20px;
+  background: transparent;
+  color: #a3e635;
+  border: 1.5px solid #a3e635;
+}
+.status-confirm::before {
+  content: '';
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: #a3e635;
+  flex-shrink: 0;
+}
+
+.status-cancel {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  padding: 5px 11px;
+  border-radius: 20px;
+  background: transparent;
+  color: #f87171;
+  border: 1.5px solid #f87171;
+}
+.status-cancel::before {
+  content: '';
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: #f87171;
+  flex-shrink: 0;
+}
+
+/* ─── STATUS BADGES — no border, no background, just text + dot ─── */
+.status-wait {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  padding: 0;
+  border-radius: 0;
+  background: transparent;
+  border: none;
+  color: #fbbf24;
+}
+.status-wait::before {
+  content: '';
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: #fbbf24;
+  flex-shrink: 0;
+}
+
+.status-confirm {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  padding: 0;
+  border-radius: 0;
+  background: transparent;
+  border: none;
+  color: #a3e635;
+}
+.status-confirm::before {
+  content: '';
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: #a3e635;
+  flex-shrink: 0;
+}
+
+.status-cancel {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  padding: 0;
+  border-radius: 0;
+  background: transparent;
+  border: none;
+  color: #f87171;
+}
+.status-cancel::before {
+  content: '';
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: #f87171;
+  flex-shrink: 0;
+}

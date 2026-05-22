@@ -1,0 +1,27 @@
+@media(max-width:768px){
+
+.navbar{
+padding:14px 20px;
+}
+
+.hero{
+padding:100px 20px 90px;
+}
+
+.program-grid,
+.ateliers-container{
+grid-template-columns:1fr;
+}
+
+.admin-sidebar{
+width:180px;
+}
+
+.admin-main{
+padding:24px;
+}
+
+.login-form{
+width:90%;
+}
+}

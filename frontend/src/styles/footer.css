@@ -1,0 +1,33 @@
+.footer{
+margin-top:140px;
+padding:70px 20px;
+background:var(--surface);
+border-top:1px solid var(--border);
+}
+
+.footer-container{
+display:flex;
+justify-content:space-around;
+flex-wrap:wrap;
+gap:48px;
+}
+
+.footer-section h4{
+color:var(--accent);
+font-size:10px;
+letter-spacing:2px;
+
+}
+
+.footer-section a:hover{
+color:var(--primary);
+}
+.footer-section p{
+    color: rgb(165, 164, 163);
+}
+.footer-section .footer-logo {
+    color: rgb(165, 164, 163) ;
+}
+.footer-bottom{
+    color: rgb(165, 164, 163) ;
+}

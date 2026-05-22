@@ -1,0 +1,131 @@
+/* SECTION LABEL (optional if you use it) */
+
+.section-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--accent);
+  border: 1px solid var(--border-a);
+  background: var(--accent-dim);
+  padding: 5px 14px;
+  border-radius: 99px;
+  margin-bottom: 18px;
+}
+
+.section-label::before {
+  content: '//';
+  color: var(--primary);
+}
+
+
+/* WHY US SECTION */
+
+.why-us {
+  padding: 120px 20px;
+  text-align: center;
+  position: relative;
+}
+
+.why-us h2 {
+  font-size: clamp(30px, 4vw, 54px);
+  letter-spacing: -2px;
+  margin-bottom: 14px;
+  color:white
+}
+
+.why-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1px;
+  width: min(90%, 1120px);
+  margin: auto;
+  background: var(--border);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  border: 1px solid var(--border);
+}
+
+.why-card {
+  background: var(--surface);
+  padding: 38px 32px;
+  text-align: left;
+  position: relative;
+  overflow: hidden;
+  transition: background var(--transition);
+}
+
+.why-card:hover {
+  background: var(--surface-2);
+}
+
+.why-card h3 {
+  font-size: 17px;
+  color: var(--white);
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+.why-card p {
+  font-size: 14px;
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+
+
+/* PROGRAMS SECTION */
+
+.programs {
+  padding: 120px 20px;
+  background: var(--surface);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.programs h2 {
+  font-size: clamp(30px, 4vw, 54px);
+  letter-spacing: -2px;
+  margin-bottom: 14px;
+  color: white;
+}
+
+.program-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px;
+  width: min(90%, 1120px);
+  margin: 64px auto 0;
+}
+
+.program-card {
+  background: var(--dark);
+  padding: 34px 30px;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+  text-align: left;
+  transition: transform var(--transition), border-color var(--transition);
+}
+
+.program-card:hover {
+  transform: translateY(-6px);
+  border-color: var(--border-a);
+}
+
+.program-card h3 {
+  font-size: 16px;
+  color: var(--white);
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+.program-card p {
+  font-size: 14px;
+  color: var(--text-muted);
+}
