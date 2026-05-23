@@ -28,4 +28,13 @@ class Atelier extends Model
     {
         return $this->hasMany(Rapport::class);
     }
+    public function etudiants()
+    {
+        return $this->belongsToMany(
+            Etudiant::class,
+            'reservations',
+            'atelier_id',
+            'etudiant_id'
+        );
+    }
 }
