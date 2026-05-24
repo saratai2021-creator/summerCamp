@@ -4,25 +4,23 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-// This imports the Atelier model to
-// interact with the database.
 use App\Models\Atelier;
 
 class AtelierController extends Controller
 {
+    // ==============================
     // Get all ateliers
+    // ==============================
     public function index()
     {
-        // return all ateliers from database
-        //select * from ateliers
         return response()->json(Atelier::all());
-        //returns them as JSON
     }
 
-    // Create a new atelier (admin action)
+    // ==============================
+    // Create atelier
+    // ==============================
     public function store(Request $request)
     {
-        // validate incoming data
         $validated = $request->validate([
             'titre' => 'required|string|max:255',
             'description' => 'required|string',
@@ -31,56 +29,62 @@ class AtelierController extends Controller
             'capacite' => 'required|integer|min:1',
             'prix' => 'required|numeric',
             'age_min' => 'required|integer',
-            'age_max' => 'required|integer'
+            'age_max' => 'required|integer',
+            'image' => 'nullable|string'
         ]);
 
-        // create atelier with validated data
         $atelier = Atelier::create($validated);
 
-        // return created atelier
-        return response()->json($atelier, 201);
+        return response()->json([
+            'message' => 'Atelier created successfully',
+            'atelier' => $atelier
+        ], 201);
     }
 
-    // Get one specific atelier
-    public function show($id)
+    // ==============================
+    // Show one atelier
+    // ==============================
+    public function show(string $id)
     {
-        // find atelier or return 404
         $atelier = Atelier::findOrFail($id);
 
         return response()->json($atelier);
     }
 
-    // Update an atelier (admin action)
-    public function update(Request $request, $id)
+    // ==============================
+    // Update atelier
+    // ==============================
+    public function update(Request $request, string $id)
     {
-        // find atelier
         $atelier = Atelier::findOrFail($id);
 
-        // validate data
         $validated = $request->validate([
             'titre' => 'sometimes|string|max:255',
             'description' => 'sometimes|string',
             'date_debut' => 'sometimes|date',
-            'date_fin' => 'sometimes|date',
+            'date_fin' => 'sometimes|date|after:date_debut',
             'capacite' => 'sometimes|integer|min:1',
             'prix' => 'sometimes|numeric',
             'age_min' => 'sometimes|integer',
-            'age_max' => 'sometimes|integer'
+            'age_max' => 'sometimes|integer',
+            'image' => 'sometimes|string'
         ]);
-          //sometimes means validate only if the field exists
-        // update atelier
+
         $atelier->update($validated);
 
-        return response()->json($atelier);
+        return response()->json([
+            'message' => 'Atelier updated successfully',
+            'atelier' => $atelier
+        ]);
     }
 
-    // Delete an atelier (admin action)
-    public function destroy($id)
+    // ==============================
+    // Delete atelier
+    // ==============================
+    public function destroy(string $id)
     {
-        // fiand atelier
         $atelier = Atelier::findOrFail($id);
 
-        // delete atelier
         $atelier->delete();
 
         return response()->json([

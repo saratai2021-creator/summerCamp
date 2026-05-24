@@ -14,8 +14,8 @@ class Etudiant extends Model
         'prenom',
         'date_naissance',
         'parent_telephone',
-        'email',
-        'password'
+        'parent_email',
+        'parent_password'
     ];
 
     protected $hidden = [

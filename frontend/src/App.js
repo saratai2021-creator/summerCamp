@@ -1,35 +1,49 @@
-import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from "react-router-dom"
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+  useLocation
+} from "react-router-dom"
 
-import { Navbar } from "./components/navbar"
-import { Hero } from "./components/hero"
-import { Ateliers } from "./pages/ateliers"
-import { Footer } from "./components/footer"
-import { Reservation } from "./pages/reservation"
-import { WhyUs } from "./components/whyUs"
-import { Programs } from "./components/programms"
-import { Planning } from "./pages/Planning"
+import { Navbar } from "./shared/components/navbar"
+import { Footer } from "./shared/components/footer"
 
-import { AdminAtelierForm } from "./pages/AdminAtelierForm"
-import { AdminAteliers } from "./pages/adminAtelier"
-import { AdminLayout } from "./pages/AdminLayout"
-import { AdminReservations } from "./pages/AdminReservations"
-import { AdminLogin } from "./pages/AdminLogin"
-import { AdminPlannings } from "./pages/AdminPlanning" // ✅ FIXED NAME
+import { Hero } from "./shared/components/hero"
+import { WhyUs } from "./shared/components/whyUs"
+import { Programs } from "./shared/components/programmes"
 
-import { AdminRoute } from "./pages/AdminRoute"
+import { Login } from "./auth/login"
 
+import { Ateliers } from "./visiteur/pages/ateliers"
+import { Reservation } from "./visiteur/pages/reservation"
+import { Dashboard } from "./visiteur/pages/Dashboard"
+import { Profile } from "./visiteur/pages/Profile"
+import { MesReservations } from "./visiteur/pages/MesReservations"
+
+import { AdminAteliers } from "./admin/pages/adminAtelier"
+import { AdminAtelierForm } from "./admin/pages/AdminAtelierForm"
+import { AdminReservations } from "./admin/pages/AdminReservations"
+
+import { AdminLayout } from "./admin/components/AdminLayout"
+import { AdminRoute } from "./admin/routes/AdminRoute"
+import { Register } from "./auth/register"
 function LayoutWrapper() {
 
   const location = useLocation()
-  const isAdminRoute = location.pathname.startsWith("/admin")
+
+  const isAdminRoute =
+    location.pathname.startsWith("/admin")
 
   return (
+
     <>
+
       {!isAdminRoute && <Navbar />}
 
       <Routes>
 
-        {/* PUBLIC */}
+        {/* HOME */}
         <Route
           path="/"
           element={
@@ -41,14 +55,41 @@ function LayoutWrapper() {
           }
         />
 
-        <Route path="/ateliers" element={<Ateliers />} />
-        <Route path="/planning" element={<Planning />} />
-        <Route path="/reservation" element={<Reservation />} />
+        {/* AUTH */}
+        <Route
+          path="/login"
+          element={<Login />}
+        />
+        <Route
+  path="/register"
+  element={<Register />}
+/>
 
-        <Route path="/login" element={<Navigate to="/admin/login" replace />} />
+        {/* VISITEUR */}
+        <Route
+          path="/ateliers"
+          element={<Ateliers />}
+        />
 
-        {/* ADMIN LOGIN */}
-        <Route path="/admin/login" element={<AdminLogin />} />
+        <Route
+          path="/reservation"
+          element={<Reservation />}
+        />
+
+        <Route
+          path="/visiteur"
+          element={<Dashboard />}
+        />
+
+        <Route
+          path="/visiteur/profile"
+          element={<Profile />}
+        />
+
+        <Route
+          path="/visiteur/reservations"
+          element={<MesReservations />}
+        />
 
         {/* ADMIN */}
         <Route
@@ -60,34 +101,57 @@ function LayoutWrapper() {
           }
         >
 
-          <Route index element={<AdminAteliers />} />
+          <Route
+            index
+            element={<AdminAteliers />}
+          />
 
-          <Route path="ateliers" element={<AdminAteliers />} />
-          <Route path="ateliers/create" element={<AdminAtelierForm />} />
-          <Route path="ateliers/edit/:id" element={<AdminAtelierForm />} />
+          <Route
+            path="ateliers"
+            element={<AdminAteliers />}
+          />
 
-          {/* ✅ PLANNINGS */}
-          <Route path="plannings" element={<AdminPlannings />} />
+          <Route
+            path="ateliers/create"
+            element={<AdminAtelierForm />}
+          />
 
-          <Route path="reservations" element={<AdminReservations />} />
+          <Route
+            path="ateliers/edit/:id"
+            element={<AdminAtelierForm />}
+          />
+
+          <Route
+            path="reservations"
+            element={<AdminReservations />}
+          />
 
         </Route>
 
-        <Route path="*" element={<Navigate to="/" replace />} />
+        {/* FALLBACK */}
+        <Route
+          path="*"
+          element={<Navigate to="/" replace />}
+        />
 
       </Routes>
 
       {!isAdminRoute && <Footer />}
+
     </>
   )
 }
 
 function App() {
+
   return (
+
     <div className="app">
+
       <Router>
         <LayoutWrapper />
       </Router>
+
     </div>
   )
 }
