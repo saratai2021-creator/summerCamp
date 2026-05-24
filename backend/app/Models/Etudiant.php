@@ -19,7 +19,10 @@ class Etudiant extends Model
     ];
 
     protected $hidden = [
-        'password'
+        'password',
+        
+    'parent_password'
+
     ];
 
     public function reservations()
@@ -36,4 +39,16 @@ class Etudiant extends Model
     {
         return $this->belongsTo(User::class);
     }
+    public function ateliers()
+    {
+        return $this->belongsToMany(
+            Atelier::class,
+            'reservations',
+            'etudiant_id',
+            'atelier_id'
+        );
+    }
+
+
+    
 }
