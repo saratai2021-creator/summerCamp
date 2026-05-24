@@ -41,13 +41,6 @@ export function Navbar(){
           Inscription
         </Link>
 
-        {/* reservation */}
-        <Link 
-          style={{textDecoration:"none"}}
-          to="/reservation"
-        >
-          Réservation
-        </Link>
 
       </div>
 

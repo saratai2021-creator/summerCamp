@@ -1,8 +1,11 @@
 import { useEffect, useState } from "react"
+import { useNavigate } from "react-router-dom"
 
-//import "../../styles/MesReservations.css"
+import "../../styles/MesReservations.css"
 
 export function MesReservations() {
+
+  const navigate = useNavigate()
 
   const [reservations, setReservations] = useState([])
 
@@ -12,7 +15,6 @@ export function MesReservations() {
   useEffect(() => {
 
     // temporary fake data
-    // later replace with API
 
     setReservations([
 
@@ -45,9 +47,6 @@ export function MesReservations() {
 
     if (!confirmCancel) return
 
-    // temporary frontend update
-    // later replace with API call
-
     setReservations(
 
       reservations.map((reservation) =>
@@ -68,7 +67,44 @@ export function MesReservations() {
 
     <div className="reservations-container">
 
-      <h1>Mes Réservations</h1>
+      {/* TOPBAR */}
+
+      <div className="reservations-topbar">
+
+        <div>
+
+          <h2 className="reservations-logo">
+            Summer Camp
+          </h2>
+
+          <p className="reservations-subtitle">
+            My Reservations
+          </p>
+
+        </div>
+
+        <button
+          className="back-btn"
+          onClick={() => navigate("/visiteur")}
+        >
+          Dashboard
+        </button>
+
+      </div>
+
+      {/* TITLE */}
+
+      <div className="reservations-header">
+
+        <h1>Mes Réservations</h1>
+
+        <p>
+          Consultez l’historique de vos réservations.
+        </p>
+
+      </div>
+
+      {/* LIST */}
 
       <div className="reservations-list">
 
@@ -78,6 +114,10 @@ export function MesReservations() {
             key={reservation.id}
             className="reservation-card"
           >
+
+            <div className="reservation-icon">
+              📚
+            </div>
 
             <h2>
               {reservation.atelier}
@@ -89,15 +129,18 @@ export function MesReservations() {
               {reservation.date}
             </p>
 
-            <p>
+            <div className="status-box">
+
               <strong>Statut :</strong>
-              {" "}
+
               <span className={reservation.statut}>
                 {reservation.statut}
               </span>
-            </p>
 
-            {/* pending reservation */}
+            </div>
+
+            {/* pending */}
+
             {reservation.statut === "en_attente" && (
 
               <button
@@ -111,7 +154,8 @@ export function MesReservations() {
 
             )}
 
-            {/* confirmed reservation */}
+            {/* confirmed */}
+
             {reservation.statut === "confirme" && (
 
               <button
@@ -123,7 +167,8 @@ export function MesReservations() {
 
             )}
 
-            {/* cancelled reservation */}
+            {/* cancelled */}
+
             {reservation.statut === "annule" && (
 
               <button

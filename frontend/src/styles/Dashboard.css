@@ -1,0 +1,258 @@
+/* =========================
+   GLOBAL
+========================= */
+
+.dashboard-container {
+
+    min-height: 100vh;
+
+    background: #0f172a;
+
+    padding: 35px;
+
+    font-family: Arial, sans-serif;
+
+    color: white;
+}
+
+/* =========================
+   TOPBAR
+========================= */
+
+.dashboard-topbar {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-bottom: 35px;
+}
+
+.dashboard-logo {
+
+    font-size: 34px;
+
+    font-weight: bold;
+
+    color: #38bdf8;
+
+    margin-bottom: 5px;
+}
+
+.dashboard-subtitle {
+
+    color: #94a3b8;
+
+    font-size: 15px;
+}
+
+/* =========================
+   LOGOUT
+========================= */
+
+.logout-btn {
+
+    background: #1e293b;
+
+    color: white;
+
+    border: 1px solid #334155;
+
+    padding: 12px 20px;
+
+    border-radius: 12px;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+
+    font-weight: bold;
+}
+
+.logout-btn:hover {
+
+    background: #ef4444;
+
+    border-color: #ef4444;
+}
+
+/* =========================
+   HERO
+========================= */
+
+.dashboard-hero {
+
+    background: linear-gradient(
+        135deg,
+        #1e293b,
+        #111827
+    );
+
+    border-radius: 24px;
+
+    padding: 45px;
+
+    margin-bottom: 40px;
+
+    border: 1px solid #334155;
+}
+
+.dashboard-hero h1 {
+
+    font-size: 46px;
+
+    margin-bottom: 15px;
+
+    color: white;
+}
+
+.dashboard-hero p {
+
+    color: #cbd5e1;
+
+    font-size: 18px;
+}
+
+/* =========================
+   CARDS GRID
+========================= */
+
+.dashboard-cards {
+
+    display: grid;
+
+    grid-template-columns: repeat(
+        auto-fit,
+        minmax(260px, 1fr)
+    );
+
+    gap: 25px;
+}
+
+/* =========================
+   CARD
+========================= */
+
+.dashboard-card {
+
+    background: #111827;
+
+    border: 1px solid #1e293b;
+
+    border-radius: 22px;
+
+    padding: 30px;
+
+    transition: 0.3s;
+
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+.dashboard-card:hover {
+
+    transform: translateY(-8px);
+
+    border-color: #38bdf8;
+}
+
+/* =========================
+   ICON
+========================= */
+
+.card-icon {
+
+    font-size: 42px;
+
+    margin-bottom: 20px;
+}
+
+/* =========================
+   TITLES
+========================= */
+
+.dashboard-card h2 {
+
+    font-size: 28px;
+
+    margin-bottom: 15px;
+
+    color: white;
+}
+
+/* =========================
+   TEXT
+========================= */
+
+.dashboard-card p {
+
+    color: #94a3b8;
+
+    line-height: 1.7;
+
+    margin-bottom: 25px;
+}
+
+/* =========================
+   BUTTONS
+========================= */
+
+.dashboard-card button {
+
+    width: 100%;
+
+    background: #38bdf8;
+
+    color: #0f172a;
+
+    border: none;
+
+    padding: 14px;
+
+    border-radius: 12px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+.dashboard-card button:hover {
+
+    background: #0ea5e9;
+
+    transform: scale(1.02);
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 768px) {
+
+    .dashboard-container {
+
+        padding: 20px;
+    }
+
+    .dashboard-topbar {
+
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        gap: 20px;
+    }
+
+    .dashboard-hero {
+
+        padding: 30px;
+    }
+
+    .dashboard-hero h1 {
+
+        font-size: 32px;
+    }
+}

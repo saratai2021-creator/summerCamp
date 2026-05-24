@@ -18,7 +18,8 @@ use App\Http\Controllers\Api\RapportController;
 
 // login
 Route::post('/login', [AuthController::class, 'login']);
-
+// register
+Route::post('/register', [AuthController::class, 'register']);
 // ateliers
 Route::get('/ateliers', [AtelierController::class, 'index']);
 Route::get('/ateliers/{id}', [AtelierController::class, 'show']);

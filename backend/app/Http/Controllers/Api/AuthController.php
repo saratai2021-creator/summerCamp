@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Etudiant;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
@@ -36,6 +37,56 @@ class AuthController extends Controller
             'user' => $user
         ]);
     }
+    public function register(Request $request)
+{
+    $request->validate([
+
+        'nom' => 'required|string',
+        'prenom' => 'required|string',
+
+        'date_naissance' => 'required|date',
+
+        'parent_telephone' => 'required|string',
+
+        'parent_email' => 'required|email|unique:etudiants,parent_email',
+
+        'parent_password' => 'required|min:6|confirmed'
+    ]);
+
+    $user = User::create([
+          'name' => $request->nom . ' ' . $request->prenom,
+        'email' => $request->parent_email,
+        'password' => bcrypt($request->parent_password),
+        'role' => 'parent'
+    ]);
+
+    $etudiant = Etudiant::create([
+
+        'user_id' => $user->id,
+
+        'nom' => $request->nom,
+
+        'prenom' => $request->prenom,
+
+        'date_naissance' => $request->date_naissance,
+
+        'parent_telephone' => $request->parent_telephone,
+
+        'parent_email' => $request->parent_email,
+
+        'parent_password' => bcrypt($request->parent_password)
+    ]);
+
+    return response()->json([
+
+        'message' => 'Register successful',
+
+        'user' => $user,
+
+        'etudiant' => $etudiant
+
+    ], 201);
+}
 
     // ==============================
     // Logout

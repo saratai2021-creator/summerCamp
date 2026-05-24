@@ -1,276 +1,418 @@
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
 
-/* ─── KEYFRAMES ─── */
+/* =========================
+   KEYFRAMES
+========================= */
+
 @keyframes fadeUp {
-  from { opacity: 0; transform: translateY(24px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-@keyframes gridMove {
-  from { background-position: 0 0; }
-  to   { background-position: 48px 48px; }
-}
-@keyframes orb {
-  0%, 100% { transform: translate(-50%, -50%) scale(1); }
-  50%       { transform: translate(-50%, -50%) scale(1.1); }
-}
-@keyframes pulse {
-  0%, 100% { opacity: 1; }
-  50%       { opacity: 0.4; }
+
+  from {
+
+    opacity: 0;
+
+    transform: translateY(24px);
+  }
+
+  to {
+
+    opacity: 1;
+
+    transform: translateY(0);
+  }
 }
 
-/* ─── PAGE ─── */
+@keyframes orb {
+
+  0%, 100% {
+
+    transform: translate(-50%, -50%) scale(1);
+  }
+
+  50% {
+
+    transform: translate(-50%, -50%) scale(1.1);
+  }
+}
+
+/* =========================
+   PAGE
+========================= */
+
 .reservation-container {
+
   min-height: 100vh;
+
   display: flex;
+
   flex-direction: column;
+
   align-items: center;
+
   justify-content: center;
+
   padding: 60px 20px;
-  background: #f4f3f0;
-  background-image: radial-gradient(circle, #a855f722 1px, transparent 1px);
+
+  background: #0f172a;
+
+  background-image:
+    radial-gradient(
+      circle,
+      rgba(56,189,248,0.08) 1px,
+      transparent 1px
+    );
+
   background-size: 32px 32px;
+
   font-family: 'Plus Jakarta Sans', sans-serif;
+
   position: relative;
+
   overflow: hidden;
 }
 
-/* Soft purple orb top-left */
+/* =========================
+   BLUE ORB
+========================= */
+
 .reservation-container::before {
+
   content: '';
+
   position: fixed;
-  width: 500px; height: 500px;
+
+  width: 500px;
+  height: 500px;
+
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(168,85,247,0.12) 0%, transparent 70%);
-  top: -100px; left: -100px;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(56,189,248,0.12) 0%,
+      transparent 70%
+    );
+
+  top: -100px;
+  left: -100px;
+
   pointer-events: none;
+
   filter: blur(60px);
+
   animation: orb 10s ease-in-out infinite;
 }
 
-/* Lime orb bottom-right */
+/* =========================
+   SECOND ORB
+========================= */
+
 .reservation-container::after {
+
   content: '';
+
   position: fixed;
-  width: 400px; height: 400px;
+
+  width: 400px;
+  height: 400px;
+
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(132,204,22,0.10) 0%, transparent 70%);
-  bottom: -80px; right: -80px;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(14,165,233,0.10) 0%,
+      transparent 70%
+    );
+
+  bottom: -80px;
+  right: -80px;
+
   pointer-events: none;
+
   filter: blur(50px);
+
   animation: orb 13s ease-in-out infinite reverse;
 }
 
-/* ─── TITLE ─── */
+/* =========================
+   TITLE
+========================= */
+
 .reservation-container h1 {
+
   position: relative;
+
   z-index: 1;
-  font-size: 30px;
+
+  font-size: 34px;
+
   font-weight: 700;
-  color: #1a1a1a;
+
+  color: white;
+
   letter-spacing: -0.5px;
+
   margin-bottom: 28px;
+
   text-align: center;
-  animation: fadeUp 0.5s cubic-bezier(.22,1,.36,1) both;
+
+  animation:
+    fadeUp 0.5s cubic-bezier(.22,1,.36,1) both;
 }
 
 .reservation-container h1 span {
-  background: linear-gradient(90deg, #a855f7, #84cc16);
+
+  background:
+    linear-gradient(
+      90deg,
+      #38bdf8,
+      #0ea5e9
+    );
+
   -webkit-background-clip: text;
+
   -webkit-text-fill-color: transparent;
+
   background-clip: text;
 }
 
-/* ─── FORM CARD ─── */
+/* =========================
+   FORM CARD
+========================= */
+
 .reservation-form {
+
   position: relative;
+
   z-index: 1;
-  background: #ffffff;
+
+  background: rgba(17,24,39,0.92);
+
   padding: 40px 36px;
-  border-radius: 22px;
+
+  border-radius: 24px;
+
   width: 100%;
+
   max-width: 520px;
+
   display: flex;
+
   flex-direction: column;
-  gap: 12px;
-  border: 1.5px solid #e4e2db;
+
+  gap: 14px;
+
+  border: 1px solid rgba(255,255,255,0.06);
+
+  backdrop-filter: blur(18px);
+
   box-shadow:
-    0 20px 60px rgba(168,85,247,0.08),
-    0 8px 24px rgba(0,0,0,0.06);
-  animation: fadeUp 0.65s 0.1s cubic-bezier(.22,1,.36,1) both;
+    0 20px 60px rgba(0,0,0,0.35);
+
+  animation:
+    fadeUp 0.65s 0.1s cubic-bezier(.22,1,.36,1) both;
 }
 
-/* Top gradient bar */
+/* =========================
+   TOP BAR
+========================= */
+
 .reservation-form::before {
+
   content: '';
+
   position: absolute;
-  top: 0; left: 0; right: 0;
+
+  top: 0;
+  left: 0;
+  right: 0;
+
   height: 3px;
-  border-radius: 22px 22px 0 0;
-  background: linear-gradient(90deg, #a855f7, #84cc16);
+
+  border-radius: 24px 24px 0 0;
+
+  background:
+    linear-gradient(
+      90deg,
+      #38bdf8,
+      #0ea5e9
+    );
 }
 
-/* ─── INPUTS ─── */
-.reservation-form input[type="text"],
-.reservation-form input[type="number"],
-.reservation-form input[type="date"] {
-  width: 100%;
-  padding: 13px 16px;
-  background: #f9f8f6;
-  border: 1.5px solid #e4e2db;
-  border-radius: 12px;
-  color: #1a1a1a;
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  font-size: 14px;
-  outline: none;
-  box-sizing: border-box;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
-}
+/* =========================
+   SELECT
+========================= */
 
-.reservation-form input::placeholder {
-  color: #a1a1aa;
-}
-
-.reservation-form input:focus {
-  border-color: #a855f7;
-  background: #ffffff;
-  box-shadow: 0 0 0 3px rgba(168,85,247,0.10);
-}
-
-.reservation-form input:hover:not(:focus) {
-  border-color: #c4c0bb;
-}
-
-/* ─── SELECT ─── */
 .reservation-form select {
+
   width: 100%;
-  padding: 13px 16px;
-  background: #f9f8f6;
-  border: 1.5px solid #e4e2db;
-  border-radius: 12px;
-  color: #1a1a1a;
+
+  padding: 15px 16px;
+
+  background: #1e293b;
+
+  border: 1.5px solid #334155;
+
+  border-radius: 14px;
+
+  color: white;
+
   font-family: 'Plus Jakarta Sans', sans-serif;
+
   font-size: 14px;
+
   outline: none;
-  box-sizing: border-box;
+
   cursor: pointer;
+
   appearance: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23a855f7' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: right 16px center;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 .reservation-form select:focus {
-  border-color: #a855f7;
-  box-shadow: 0 0 0 3px rgba(168,85,247,0.10);
+
+  border-color: #38bdf8;
+
+  box-shadow:
+    0 0 0 3px rgba(56,189,248,0.12);
 }
 
-/* ─── PLANNING RADIO GROUP ─── */
-.planning-radio-group {
-  background: #f9f8f6;
-  border: 1.5px solid #e4e2db;
-  border-radius: 14px;
-  padding: 16px 18px;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
+/* =========================
+   ATELIER BLOCK
+========================= */
 
-.planning-radio-group p {
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-  color: #6b6b6b;
-  font-family: 'JetBrains Mono', monospace;
-  margin: 0 0 4px 0;
-}
-
-.planning-radio-group label {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-size: 14px;
-  color: #52525b;
-  cursor: pointer;
-  padding: 10px 14px;
-  border-radius: 10px;
-  border: 1.5px solid transparent;
-  transition: background 0.2s, border-color 0.2s, color 0.2s;
-}
-
-.planning-radio-group label:hover {
-  background: #f0edf8;
-  border-color: #d8b4fe;
-  color: #1a1a1a;
-}
-
-.planning-radio-group label:has(input:checked) {
-  background: rgba(168,85,247,0.07);
-  border-color: rgba(168,85,247,0.35);
-  color: #1a1a1a;
-}
-
-.planning-radio-group input[type="radio"] {
-  width: 16px;
-  height: 16px;
-  accent-color: #a855f7;
-  cursor: pointer;
-  flex-shrink: 0;
-  margin: 0;
-  padding: 0;
-  border: none;
-  background: none;
-  box-shadow: none;
-}
-
-/* ─── ATELIER SELECT BLOCK ─── */
 .atelier-select {
+
   display: flex;
+
   flex-direction: column;
-  gap: 8px;
+
+  gap: 10px;
 }
 
 .atelier-select p {
+
   font-size: 11px;
+
   font-weight: 600;
+
   letter-spacing: 1.5px;
+
   text-transform: uppercase;
-  color: #6b6b6b;
+
+  color: #94a3b8;
+
   font-family: 'JetBrains Mono', monospace;
+
   margin: 0;
 }
 
-/* ─── DATE ROW ─── */
-.date-row {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
-}
+/* =========================
+   BUTTON
+========================= */
 
-/* ─── SUBMIT BUTTON ─── */
 .btn-reserve {
+
   width: 100%;
-  padding: 14px;
+
+  padding: 15px;
+
   border: none;
-  border-radius: 12px;
-  background: linear-gradient(135deg, #a855f7, #7c3aed);
+
+  border-radius: 14px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #38bdf8,
+      #0284c7
+    );
+
   color: #fff;
+
   font-family: 'Plus Jakarta Sans', sans-serif;
+
   font-size: 15px;
+
   font-weight: 700;
+
   cursor: pointer;
+
   letter-spacing: 0.2px;
-  margin-top: 6px;
-  box-shadow: 0 4px 20px rgba(168,85,247,0.28);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+  margin-top: 8px;
+
+  box-shadow:
+    0 4px 20px rgba(56,189,248,0.25);
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 .btn-reserve:hover {
+
   transform: scale(1.02);
-  box-shadow: 0 8px 28px rgba(168,85,247,0.40);
+
+  box-shadow:
+    0 8px 28px rgba(56,189,248,0.35);
 }
 
 .btn-reserve:active {
+
   transform: scale(0.98);
+}
+
+/* =========================
+   BACK BUTTON
+========================= */
+
+.back-btn {
+
+  width: 100%;
+
+  padding: 14px;
+
+  border-radius: 14px;
+
+  border: 1px solid #334155;
+
+  background: #111827;
+
+  color: white;
+
+  cursor: pointer;
+
+  font-weight: 600;
+
+  margin-top: 10px;
+
+  transition: 0.25s;
+}
+
+.back-btn:hover {
+
+  background: #1e293b;
+
+  border-color: #38bdf8;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 768px) {
+
+  .reservation-form {
+
+    padding: 30px 22px;
+  }
+
+  .reservation-container h1 {
+
+    font-size: 28px;
+  }
 }

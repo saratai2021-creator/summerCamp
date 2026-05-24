@@ -61,6 +61,7 @@ function Students() {
 
   return (
     <div className="students-page">
+      
       {/* BREADCRUMB */}
       <div className="breadcrumb">
         <i className="bi bi-house"></i>
@@ -73,6 +74,7 @@ function Students() {
 
       {/* HEADER */}
       <div className="header-row">
+        
         <div className="students-header">
           <button className="back-btn" onClick={() => navigate(-1)}>
             <i className="bi bi-arrow-left"></i>

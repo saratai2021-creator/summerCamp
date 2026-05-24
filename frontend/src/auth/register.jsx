@@ -1,21 +1,20 @@
 import { useState } from "react"
 
 import { Link, useNavigate } from "react-router-dom"
-
-//import "../styles/Register.css"
-
+import "../styles/Register.css"
 export function Register() {
 
   const navigate = useNavigate()
 
   const [formData, setFormData] = useState({
 
-   nom: "",
-prenom: "",
-date_naissance: "",
-parent_telephone: "",
-    password: "",
-    password_confirmation: ""
+    nom: "",
+    prenom: "",
+    date_naissance: "",
+    parent_telephone: "",
+    parent_email: "",
+    parent_password: "",
+    parent_password_confirmation: ""
 
   })
 
@@ -23,22 +22,23 @@ parent_telephone: "",
 
   const [error, setError] = useState("")
 
-  /* ===============================
-     HANDLE INPUT CHANGE
-  =============================== */
+  // ===============================
+  // HANDLE INPUT CHANGE
+  // ===============================
   const handleChange = (e) => {
 
     setFormData({
 
       ...formData,
+
       [e.target.name]: e.target.value
 
     })
   }
 
-  /* ===============================
-     REGISTER
-  =============================== */
+  // ===============================
+  // REGISTER
+  // ===============================
   const handleSubmit = async (e) => {
 
     e.preventDefault()
@@ -67,10 +67,16 @@ parent_telephone: "",
 
       if (response.ok) {
 
-        alert("Compte créé avec succès")
+        localStorage.setItem("token", data.token)
 
-        navigate("/login")
+  localStorage.setItem(
+    "user",
+    JSON.stringify(data.user)
+  )
 
+  alert("Compte créé avec succès")
+
+  navigate("/visiteur")
       } else {
 
         setError(
@@ -107,52 +113,62 @@ parent_telephone: "",
 
         <input
           type="text"
-          name="name"
+          name="nom"
           placeholder="Nom"
-          value={formData.name}
+          value={formData.nom}
+          onChange={handleChange}
+          required
+        />
+
+        <input
+          type="text"
+          name="prenom"
+          placeholder="Prénom"
+          value={formData.prenom}
           onChange={handleChange}
           required
         />
 
         <input
           type="email"
-          name="email"
-          placeholder="Email"
-          value={formData.email}
+          name="parent_email"
+          placeholder="Email parent"
+          value={formData.parent_email}
           onChange={handleChange}
           required
         />
-        <input
-  type="date"
-  name="date_naissance"
-  value={formData.date_naissance}
-  onChange={handleChange}
-  required
-/>
 
-<input
-  type="text"
-  name="parent_telephone"
-  placeholder="Téléphone parent"
-  value={formData.parent_telephone}
-  onChange={handleChange}
-  required
-/>
+        <input
+          type="date"
+          name="date_naissance"
+          value={formData.date_naissance}
+          onChange={handleChange}
+          required
+        />
+
+        <input
+          type="text"
+          name="parent_telephone"
+          placeholder="Téléphone parent"
+          value={formData.parent_telephone}
+          onChange={handleChange}
+          required
+        />
 
         <input
           type="password"
-          name="password"
+          name="parent_password"
           placeholder="Mot de passe"
-          value={formData.password}
+          value={formData.parent_password}
           onChange={handleChange}
           required
         />
 
         <input
           type="password"
-          name="password_confirmation"
+          name="parent_password_confirmation"
           placeholder="Confirmer le mot de passe"
-          value={formData.password_confirmation}
+          value={formData.parent_password_confirmation}
           onChange={handleChange}
           required
         />
@@ -168,7 +184,6 @@ parent_telephone: "",
 
         </button>
 
-        {/* login link */}
         <p className="auth-link">
 
           Vous avez déjà un compte ?

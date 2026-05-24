@@ -1,18 +1,17 @@
 import { useEffect, useState } from "react"
+import { useNavigate } from "react-router-dom"
+
 import { getAteliers } from "../../shared/services/AdminService"
-import "../../styles/forms.css"
+
+import "../../styles/Reservation.css"
 
 export function Reservation() {
+
+  const navigate = useNavigate()
 
   const [ateliers, setAteliers] = useState([])
 
   const [formData, setFormData] = useState({
-    nom: "",
-    prenom: "",
-    date_naissance: "",
-    parent_telephone: "",
-    parent_email: "",
-    parent_password: "",
     atelier_id: ""
   })
 
@@ -22,9 +21,11 @@ export function Reservation() {
   useEffect(() => {
 
     const fetchAteliers = async () => {
+
       try {
 
         const data = await getAteliers()
+
         setAteliers(data || [])
 
       } catch (err) {
@@ -43,7 +44,9 @@ export function Reservation() {
   const handleChange = (e) => {
 
     setFormData({
+
       ...formData,
+
       [e.target.name]: e.target.value
     })
   }
@@ -57,14 +60,19 @@ export function Reservation() {
 
     try {
 
+      const token = localStorage.getItem("token")
+
       const response = await fetch(
         "http://127.0.0.1:8000/api/reservations",
         {
           method: "POST",
+
           headers: {
             "Content-Type": "application/json",
-            "Accept": "application/json"
+            "Accept": "application/json",
+            "Authorization": `Bearer ${token}`
           },
+
           body: JSON.stringify(formData)
         }
       )
@@ -74,25 +82,22 @@ export function Reservation() {
       if (!response.ok) {
 
         console.error(data)
+
         alert(data.message || "Erreur serveur")
+
         return
       }
 
       alert("Réservation envoyée avec succès")
 
       setFormData({
-        nom: "",
-        prenom: "",
-        date_naissance: "",
-        parent_telephone: "",
-        parent_email: "",
-        parent_password: "",
         atelier_id: ""
       })
 
     } catch (err) {
 
       console.error("Network error:", err)
+
       alert("Erreur serveur")
     }
   }
@@ -101,68 +106,57 @@ export function Reservation() {
 
     <div className="reservation-container">
 
-      <h1>Réservation Atelier</h1>
+      {/* TOPBAR */}
 
-      <form onSubmit={handleSubmit} className="reservation-form">
+      <div className="reservation-topbar">
 
-        <input
-          type="text"
-          name="nom"
-          placeholder="Nom de l'enfant"
-          value={formData.nom}
-          onChange={handleChange}
-          required
-        />
+        <div>
 
-        <input
-          type="text"
-          name="prenom"
-          placeholder="Prénom de l'enfant"
-          value={formData.prenom}
-          onChange={handleChange}
-          required
-        />
+          <h2 className="reservation-logo">
+            Summer Camp
+          </h2>
 
-        <input
-          type="date"
-          name="date_naissance"
-          value={formData.date_naissance}
-          onChange={handleChange}
-          required
-        />
+          <p className="reservation-subtitle">
+            Workshop Reservation
+          </p>
 
-        <input
-          type="text"
-          name="parent_telephone"
-          placeholder="Téléphone du parent"
-          value={formData.parent_telephone}
-          onChange={handleChange}
-          required
-        />
+        </div>
 
-        <input
-          type="email"
-          name="parent_email"
-          placeholder="Email du parent"
-          value={formData.parent_email}
-          onChange={handleChange}
-          required
-        />
+        <button
+          className="back-btn"
+          onClick={() => navigate("/visiteur")}
+        >
+          Dashboard
+        </button>
 
-        <input
-          type="password"
-          name="parent_password"
-          placeholder="Mot de passe parent"
-          value={formData.parent_password}
-          onChange={handleChange}
-          required
-        />
+      </div>
 
-        {/* Atelier Choice */}
+      {/* HERO */}
+
+      <div className="reservation-hero">
+
+        <h1>
+          Reserve Your Workshop 🚀
+        </h1>
+
+        <p>
+          Choose an atelier and confirm your reservation.
+        </p>
+
+      </div>
+
+      {/* FORM */}
+
+      <form
+        onSubmit={handleSubmit}
+        className="reservation-form"
+      >
 
         <div className="atelier-select">
 
-          <p>Choisissez un atelier :</p>
+          <label>
+            Choose an atelier
+          </label>
 
           <select
             name="atelier_id"
@@ -171,12 +165,19 @@ export function Reservation() {
             required
           >
 
-            <option value="">-- choisir atelier --</option>
+            <option value="">
+              -- choose atelier --
+            </option>
 
             {ateliers.map((atelier) => (
-              <option key={atelier.id} value={atelier.id}>
+
+              <option
+                key={atelier.id}
+                value={atelier.id}
+              >
                 {atelier.titre}
               </option>
+
             ))}
 
           </select>
@@ -184,7 +185,9 @@ export function Reservation() {
         </div>
 
         <button className="btn-reserve">
-          Envoyer la réservation
+
+          Reserve Now
+
         </button>
 
       </form>

@@ -1,0 +1,322 @@
+/* =========================
+   CONTAINER
+========================= */
+
+.reservations-container {
+
+    min-height: 100vh;
+
+    background: #0f172a;
+
+    padding: 35px;
+
+    font-family: Arial, sans-serif;
+
+    color: white;
+}
+
+/* =========================
+   TOPBAR
+========================= */
+
+.reservations-topbar {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-bottom: 40px;
+}
+
+.reservations-logo {
+
+    font-size: 34px;
+
+    font-weight: bold;
+
+    color: #38bdf8;
+
+    margin-bottom: 5px;
+}
+
+.reservations-subtitle {
+
+    color: #94a3b8;
+
+    font-size: 15px;
+}
+
+/* =========================
+   BACK BUTTON
+========================= */
+
+.back-btn {
+
+    background: #1e293b;
+
+    color: white;
+
+    border: 1px solid #334155;
+
+    padding: 12px 20px;
+
+    border-radius: 12px;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+
+    font-weight: bold;
+}
+
+.back-btn:hover {
+
+    background: #38bdf8;
+
+    color: #0f172a;
+}
+
+/* =========================
+   HEADER
+========================= */
+
+.reservations-header {
+
+    margin-bottom: 35px;
+}
+
+.reservations-header h1 {
+
+    font-size: 42px;
+
+    margin-bottom: 10px;
+}
+
+.reservations-header p {
+
+    color: #94a3b8;
+
+    font-size: 17px;
+}
+
+/* =========================
+   GRID
+========================= */
+
+.reservations-list {
+
+    display: grid;
+
+    grid-template-columns: repeat(
+        auto-fit,
+        minmax(280px, 1fr)
+    );
+
+    gap: 25px;
+}
+
+/* =========================
+   CARD
+========================= */
+
+.reservation-card {
+
+    background: #111827;
+
+    border: 1px solid #1e293b;
+
+    border-radius: 22px;
+
+    padding: 30px;
+
+    transition: 0.3s;
+
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+.reservation-card:hover {
+
+    transform: translateY(-8px);
+
+    border-color: #38bdf8;
+}
+
+/* =========================
+   ICON
+========================= */
+
+.reservation-icon {
+
+    font-size: 42px;
+
+    margin-bottom: 20px;
+}
+
+/* =========================
+   TITLE
+========================= */
+
+.reservation-card h2 {
+
+    font-size: 28px;
+
+    margin-bottom: 20px;
+}
+
+/* =========================
+   TEXT
+========================= */
+
+.reservation-card p {
+
+    color: #cbd5e1;
+
+    margin-bottom: 15px;
+
+    line-height: 1.6;
+}
+
+/* =========================
+   STATUS
+========================= */
+
+.status-box {
+
+    margin-bottom: 25px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+}
+
+/* pending */
+
+.en_attente {
+
+    background: #f59e0b;
+
+    color: black;
+
+    padding: 6px 12px;
+
+    border-radius: 8px;
+
+    font-weight: bold;
+}
+
+/* confirmed */
+
+.confirme {
+
+    background: #22c55e;
+
+    color: white;
+
+    padding: 6px 12px;
+
+    border-radius: 8px;
+
+    font-weight: bold;
+}
+
+/* cancelled */
+
+.annule {
+
+    background: #ef4444;
+
+    color: white;
+
+    padding: 6px 12px;
+
+    border-radius: 8px;
+
+    font-weight: bold;
+}
+
+/* =========================
+   BUTTONS
+========================= */
+
+.cancel-btn,
+.confirmed-btn,
+.cancelled-btn {
+
+    width: 100%;
+
+    padding: 14px;
+
+    border: none;
+
+    border-radius: 12px;
+
+    font-weight: bold;
+
+    font-size: 15px;
+}
+
+/* cancel */
+
+.cancel-btn {
+
+    background: #ef4444;
+
+    color: white;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+.cancel-btn:hover {
+
+    background: #dc2626;
+}
+
+/* confirmed */
+
+.confirmed-btn {
+
+    background: #22c55e;
+
+    color: white;
+}
+
+/* cancelled */
+
+.cancelled-btn {
+
+    background: #64748b;
+
+    color: white;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 768px) {
+
+    .reservations-container {
+
+        padding: 20px;
+    }
+
+    .reservations-topbar {
+
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        gap: 20px;
+    }
+
+    .reservations-header h1 {
+
+        font-size: 32px;
+    }
+}

@@ -1,8 +1,11 @@
 import { useEffect, useState } from "react"
+import { useNavigate } from "react-router-dom"
 
-//import "../../styles/Profile.css"
+import "../../styles/Profile.css"
 
 export function Profile() {
+
+  const navigate = useNavigate()
 
   const [user, setUser] = useState(null)
 
@@ -23,43 +26,84 @@ export function Profile() {
 
     <div className="profile-container">
 
-      <h1>Mon Profil</h1>
+      {/* TOPBAR */}
+
+      <div className="profile-topbar">
+
+        <div>
+
+          <h2 className="profile-logo">
+            Summer Camp
+          </h2>
+
+          <p className="profile-subtitle">
+            Visitor Profile
+          </p>
+
+        </div>
+
+        <button
+          className="back-btn"
+          onClick={() => navigate("/visiteur")}
+        >
+          Dashboard
+        </button>
+
+      </div>
+
+      {/* PROFILE CARD */}
 
       <div className="profile-card">
 
-        <div className="profile-item">
-
-          <span className="label">
-            Nom :
-          </span>
-
-          <span className="value">
-            {user?.name || "Non disponible"}
-          </span>
-
+        <div className="profile-avatar">
+          👤
         </div>
 
-        <div className="profile-item">
+        <h1>
+          {user?.name || "Visitor"}
+        </h1>
 
-          <span className="label">
-            Email :
-          </span>
+        <p className="profile-role">
+          {user?.role || "visiteur"}
+        </p>
 
-          <span className="value">
-            {user?.email || "Non disponible"}
-          </span>
+        <div className="profile-info">
 
-        </div>
+          <div className="profile-item">
 
-        <div className="profile-item">
+            <span className="label">
+              Full Name
+            </span>
 
-          <span className="label">
-            Rôle :
-          </span>
+            <span className="value">
+              {user?.name || "Non disponible"}
+            </span>
 
-          <span className="value">
-            {user?.role || "visiteur"}
-          </span>
+          </div>
+
+          <div className="profile-item">
+
+            <span className="label">
+              Email
+            </span>
+
+            <span className="value">
+              {user?.email || "Non disponible"}
+            </span>
+
+          </div>
+
+          <div className="profile-item">
+
+            <span className="label">
+              Role
+            </span>
+
+            <span className="value">
+              {user?.role || "visiteur"}
+            </span>
+
+          </div>
 
         </div>
 

@@ -1,0 +1,236 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+/* =========================
+   PAGE
+========================= */
+
+.register-page {
+
+  min-height: 100vh;
+
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+
+  padding: 30px;
+
+  background:
+    radial-gradient(
+      circle at bottom right,
+      rgba(56,189,248,0.14),
+      transparent 25%
+    ),
+    #0f172a;
+}
+
+/* =========================
+   FORM
+========================= */
+
+.register-page form {
+
+  width: 100%;
+
+  max-width: 500px;
+
+  background: rgba(17,24,39,0.92);
+
+  border: 1px solid rgba(255,255,255,0.06);
+
+  border-radius: 28px;
+
+  padding: 45px;
+
+  backdrop-filter: blur(18px);
+
+  box-shadow:
+    0 10px 40px rgba(0,0,0,0.35);
+}
+
+/* =========================
+   TITLE
+========================= */
+
+.register-page h1 {
+
+  text-align: center;
+
+  margin-bottom: 12px;
+
+  font-size: 38px;
+
+  color: white;
+}
+
+.register-page form::before {
+
+  content: "Create Your Account 🚀";
+
+  display: block;
+
+  text-align: center;
+
+  margin-bottom: 28px;
+
+  color: #38bdf8;
+
+  font-weight: bold;
+}
+
+/* =========================
+   INPUTS
+========================= */
+
+.register-page input {
+
+  width: 100%;
+
+  padding: 16px 18px;
+
+  margin-bottom: 18px;
+
+  border-radius: 14px;
+
+  border: 1px solid #334155;
+
+  background: #1e293b;
+
+  color: white;
+
+  font-size: 15px;
+
+  outline: none;
+
+  transition: 0.25s;
+}
+
+.register-page input:focus {
+
+  border-color: #38bdf8;
+
+  box-shadow:
+    0 0 0 4px rgba(56,189,248,0.15);
+}
+
+.register-page input::placeholder {
+
+  color: #94a3b8;
+}
+
+/* =========================
+   BUTTON
+========================= */
+
+.register-page button {
+
+  width: 100%;
+
+  padding: 16px;
+
+  border: none;
+
+  border-radius: 14px;
+
+  background: linear-gradient(
+    135deg,
+    #38bdf8,
+    #0ea5e9
+  );
+
+  color: #0f172a;
+
+  font-size: 16px;
+
+  font-weight: bold;
+
+  cursor: pointer;
+
+  transition: 0.3s;
+}
+
+.register-page button:hover {
+
+  transform: translateY(-2px);
+
+  background: linear-gradient(
+    135deg,
+    #0ea5e9,
+    #0284c7
+  );
+}
+
+/* =========================
+   ERROR
+========================= */
+
+.login-error {
+
+  background: rgba(239,68,68,0.15);
+
+  color: #fca5a5;
+
+  border: 1px solid rgba(239,68,68,0.25);
+
+  padding: 14px;
+
+  border-radius: 12px;
+
+  margin-bottom: 18px;
+
+  text-align: center;
+}
+
+/* =========================
+   AUTH LINK
+========================= */
+
+.auth-link {
+
+  margin-top: 20px;
+
+  text-align: center;
+
+  color: #94a3b8;
+
+  font-size: 14px;
+}
+
+.auth-link a {
+
+  color: #38bdf8;
+
+  text-decoration: none;
+
+  font-weight: 600;
+}
+
+.auth-link a:hover {
+
+  text-decoration: underline;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 768px) {
+
+  .register-page {
+
+    padding: 20px;
+  }
+
+  .register-page form {
+
+    padding: 35px 25px;
+  }
+}

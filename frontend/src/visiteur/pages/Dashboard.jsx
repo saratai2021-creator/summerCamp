@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom"
 
-//import "../../styles/Dashboard.css"
+import "../../styles/Dashboard.css"
 
 export function Dashboard() {
 
@@ -10,52 +10,104 @@ export function Dashboard() {
     localStorage.getItem("user")
   )
 
+  const handleLogout = () => {
+
+    localStorage.removeItem("token")
+
+    localStorage.removeItem("user")
+
+    navigate("/login")
+  }
+
   return (
 
     <div className="dashboard-container">
 
-      {/* welcome section */}
-      <div className="dashboard-header">
+      {/* TOP BAR */}
 
-        <h1>
-          Bienvenue
-          {" "}
-          {user?.name || "Visiteur"}
-        </h1>
+      <div className="dashboard-topbar">
 
-        <p>
-          Gérez vos réservations et consultez vos rapports.
-        </p>
+        <div>
+
+          <h2 className="dashboard-logo">
+            Summer Camp
+          </h2>
+
+          <p className="dashboard-subtitle">
+            Visitor Space
+          </p>
+
+        </div>
+
+        <button
+          className="logout-btn"
+          onClick={handleLogout}
+        >
+          Logout
+        </button>
 
       </div>
 
-      {/* dashboard cards */}
+      {/* HERO */}
+
+      <div className="dashboard-hero">
+
+        <div>
+
+          <h1>
+            Welcome back,
+            {" "}
+            {user?.name || "Visitor"} 👋
+          </h1>
+
+          <p>
+            Manage your workshops and reservations easily.
+          </p>
+
+        </div>
+
+      </div>
+
+      {/* CARDS */}
+
       <div className="dashboard-cards">
 
         {/* profile */}
+
         <div className="dashboard-card">
 
-          <h2>Mon Profil</h2>
+          <div className="card-icon">
+            👤
+          </div>
+
+          <h2>My Profile</h2>
 
           <p>
-            Consulter vos informations personnelles.
+            View your personal information.
           </p>
 
           <button
-            onClick={() => navigate("/visiteur/profile")}
+            onClick={() =>
+              navigate("/visiteur/profile")
+            }
           >
-            Voir Profil
+            Open
           </button>
 
         </div>
 
         {/* reservations */}
+
         <div className="dashboard-card">
 
-          <h2>Mes Réservations</h2>
+          <div className="card-icon">
+            📅
+          </div>
+
+          <h2>Reservations</h2>
 
           <p>
-            Voir l’historique de vos réservations.
+            Check your reservation history.
           </p>
 
           <button
@@ -63,18 +115,23 @@ export function Dashboard() {
               navigate("/visiteur/reservations")
             }
           >
-            Voir Réservations
+            Open
           </button>
 
         </div>
 
-        {/* new reservation */}
+        {/* reserve */}
+
         <div className="dashboard-card">
 
-          <h2>Nouvelle Réservation</h2>
+          <div className="card-icon">
+            🚀
+          </div>
+
+          <h2>New Reservation</h2>
 
           <p>
-            Réserver un nouvel atelier.
+            Reserve a new workshop quickly.
           </p>
 
           <button
@@ -82,18 +139,23 @@ export function Dashboard() {
               navigate("/reservation")
             }
           >
-            Réserver
+            Reserve
           </button>
 
         </div>
 
-        {/* rapports */}
+        {/* reports */}
+
         <div className="dashboard-card">
 
-          <h2>Mes Rapports</h2>
+          <div className="card-icon">
+            📄
+          </div>
+
+          <h2>Reports</h2>
 
           <p>
-            Consulter les rapports pédagogiques.
+            View your educational reports.
           </p>
 
           <button
@@ -101,7 +163,7 @@ export function Dashboard() {
               navigate("/visiteur/rapports")
             }
           >
-            Voir Rapports
+            Open
           </button>
 
         </div>
