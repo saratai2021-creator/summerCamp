@@ -173,7 +173,6 @@ Route::prefix('formateur')->group(function () {
         'students'
     ]);
 
-
     /*
     |--------------------------------------------------
     | Créer rapport
@@ -184,6 +183,27 @@ Route::prefix('formateur')->group(function () {
         'store'
     ]);
 
+    /*
+    |--------------------------------------------------
+    | Télécharger PDF
+    |--------------------------------------------------
+    */
+    Route::get('/rapports/{rapport}/download', [
+
+        RapportController::class,
+
+        'download'
+    ]);
+    /*
+|--------------------------------------------------------------------------
+| Envoyer email parent
+|--------------------------------------------------------------------------
+*/
+
+Route::post(
+    'rapports/{rapport}/send-email',
+    [RapportController::class, 'sendEmail']
+);
     /*
     |--------------------------------------------------
     | Historique

@@ -1,0 +1,319 @@
+/* =====================================================
+   PAGE
+===================================================== */
+
+.result-page {
+  min-height: 100vh;
+
+  padding: 50px 20px;
+
+  background: linear-gradient(135deg, #081120, #0f1c33);
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+}
+
+/* =====================================================
+   BREADCRUMB
+===================================================== */
+
+.result-breadcrumb {
+  width: 100%;
+  max-width: 950px;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  margin-bottom: 30px;
+
+  padding: 15px 22px;
+
+  border-radius: 18px;
+
+  background: rgba(255, 255, 255, 0.05);
+
+  backdrop-filter: blur(10px);
+
+  border: 1px solid rgba(255, 255, 255, 0.08);
+
+  color: #cbd5e1;
+
+  font-size: 14px;
+}
+
+.result-breadcrumb i {
+  color: #38bdf8;
+}
+
+.result-breadcrumb .active {
+  color: #f5e6c8;
+
+  font-weight: 700;
+}
+
+/* =====================================================
+   CARD
+===================================================== */
+
+.result-card {
+  width: 100%;
+  max-width: 750px;
+
+  background: rgba(255, 255, 255, 0.04);
+
+  backdrop-filter: blur(14px);
+
+  border: 1px solid rgba(255, 255, 255, 0.08);
+
+  border-radius: 30px;
+
+  padding: 60px 45px;
+
+  text-align: center;
+
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.35);
+}
+
+/* =====================================================
+   SUCCESS ICON
+===================================================== */
+
+.success-icon {
+  width: 120px;
+
+  height: 120px;
+
+  margin: auto;
+
+  margin-bottom: 30px;
+
+  border-radius: 50%;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  font-size: 55px;
+
+  color: white;
+
+  background: linear-gradient(135deg, #38bdf8, #f5e6c8);
+
+  box-shadow: 0 15px 30px rgba(56, 189, 248, 0.3);
+}
+
+/* =====================================================
+   TITLE
+===================================================== */
+
+.result-card h2 {
+  color: white;
+
+  font-size: 38px;
+
+  font-weight: 700;
+
+  margin-bottom: 18px;
+}
+
+.result-card p {
+  color: #cbd5e1;
+
+  font-size: 17px;
+
+  line-height: 1.7;
+
+  margin-bottom: 40px;
+}
+
+/* =====================================================
+   ALERT SUCCESS
+===================================================== */
+
+.success-alert {
+  background: rgba(16, 185, 129, 0.12);
+
+  border: 1px solid rgba(16, 185, 129, 0.3);
+
+  color: #6ee7b7;
+
+  padding: 16px;
+
+  border-radius: 18px;
+
+  margin-bottom: 20px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 10px;
+
+  font-weight: 600;
+}
+
+/* =====================================================
+   ALERT ERROR
+===================================================== */
+
+.error-alert {
+  background: rgba(239, 68, 68, 0.12);
+
+  border: 1px solid rgba(239, 68, 68, 0.3);
+
+  color: #fca5a5;
+
+  padding: 16px;
+
+  border-radius: 18px;
+
+  margin-bottom: 20px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 10px;
+
+  font-weight: 600;
+}
+
+/* =====================================================
+   ACTIONS
+===================================================== */
+
+.result-actions {
+  display: flex;
+
+  justify-content: center;
+
+  gap: 20px;
+
+  flex-wrap: wrap;
+}
+
+/* =====================================================
+   DOWNLOAD BUTTON
+===================================================== */
+
+.download-btn {
+  text-decoration: none;
+
+  border: none;
+
+  padding: 18px 30px;
+
+  border-radius: 18px;
+
+  background: linear-gradient(135deg, #38bdf8, #0ea5e9);
+
+  color: #081120;
+
+  font-weight: 700;
+
+  font-size: 16px;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  transition: 0.3s;
+}
+
+.download-btn:hover {
+  transform: translateY(-3px);
+
+  box-shadow: 0 12px 25px rgba(56, 189, 248, 0.25);
+
+  color: #081120;
+}
+
+/* =====================================================
+   MAIL BUTTON
+===================================================== */
+
+.mail-btn {
+  border: none;
+
+  padding: 18px 30px;
+
+  border-radius: 18px;
+
+  background: linear-gradient(135deg, #f5e6c8, #e9d5a1);
+
+  color: #081120;
+
+  font-weight: 700;
+
+  font-size: 16px;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  cursor: pointer;
+
+  transition: 0.3s;
+}
+
+.mail-btn:hover {
+  transform: translateY(-3px);
+
+  box-shadow: 0 12px 25px rgba(245, 230, 200, 0.18);
+}
+
+.mail-btn:disabled {
+  opacity: 0.7;
+
+  cursor: not-allowed;
+}
+
+/* =====================================================
+   SPINNER
+===================================================== */
+
+.spinner-border {
+  width: 18px;
+  height: 18px;
+}
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media (max-width: 768px) {
+  .result-card {
+    padding: 40px 25px;
+  }
+
+  .result-card h2 {
+    font-size: 28px;
+  }
+
+  .result-actions {
+    flex-direction: column;
+  }
+
+  .download-btn,
+  .mail-btn {
+    width: 100%;
+
+    justify-content: center;
+  }
+}

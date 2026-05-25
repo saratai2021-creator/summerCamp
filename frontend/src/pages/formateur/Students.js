@@ -61,7 +61,6 @@ function Students() {
 
   return (
     <div className="students-page">
-      
       {/* BREADCRUMB */}
       <div className="breadcrumb">
         <i className="bi bi-house"></i>
@@ -74,7 +73,6 @@ function Students() {
 
       {/* HEADER */}
       <div className="header-row">
-        
         <div className="students-header">
           <button className="back-btn" onClick={() => navigate(-1)}>
             <i className="bi bi-arrow-left"></i>
@@ -130,7 +128,7 @@ function Students() {
             <p>Aucun étudiant trouvé</p>
           </div>
         ) : (
-          <table className="table table-hover">
+          <table className="table table-hover align-middle">
             <thead>
               <tr>
                 <th>Nom</th>
@@ -151,7 +149,7 @@ function Students() {
 
                   <td>{etudiant.parent_email}</td>
 
-                  <td>
+                  <td className="actions-cell">
                     <button
                       className="btn btn-report"
                       onClick={() => genererRapport(etudiant.id)}
@@ -161,7 +159,7 @@ function Students() {
                     </button>
 
                     <button
-                      className="btn btn-history"
+                      className="btn-history"
                       onClick={() => viewReports(etudiant.id)}
                     >
                       <i className="bi bi-clock-history"></i>

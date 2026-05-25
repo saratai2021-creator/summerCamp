@@ -1,42 +1,70 @@
 import { useEffect, useState } from "react";
+
 import axios from "axios";
+
 import { useNavigate } from "react-router-dom";
 
 import "../../styles/Formateur/formateurAteliers.css";
 
 function FormateurAteliers() {
   const [ateliers, setAteliers] = useState([]);
+
   const [search, setSearch] = useState("");
 
   const navigate = useNavigate();
 
   /*
-   * Charger les ateliers
-   */
+  |--------------------------------------------------------------------------
+  | Charger ateliers
+  |--------------------------------------------------------------------------
+  */
+
   useEffect(() => {
     axios
+
       .get("http://127.0.0.1:8000/api/formateur/ateliers")
+
       .then((res) => setAteliers(res.data))
+
       .catch((err) => console.log(err));
   }, []);
 
   /*
-   * Voir étudiants
-   */
+  |--------------------------------------------------------------------------
+  | Voir étudiants
+  |--------------------------------------------------------------------------
+  */
+
   function allStudent(id) {
     navigate(`/formateur/ateliers/${id}/students`);
   }
 
   /*
-   * Voir rapports
-   */
+  |--------------------------------------------------------------------------
+  | Voir rapports atelier
+  |--------------------------------------------------------------------------
+  */
+
   function formationReports(id) {
     navigate(`/formateur/ateliers/${id}/reports`);
   }
 
   /*
-   * Recherche
-   */
+  |--------------------------------------------------------------------------
+  | Voir historique global
+  |--------------------------------------------------------------------------
+  */
+
+  function historyReports() {
+    navigate("/formateur/rapports");
+  }
+
+  /*
+  |--------------------------------------------------------------------------
+  | Recherche
+  |--------------------------------------------------------------------------
+  */
+
   const filteredAteliers = ateliers.filter((atelier) =>
     atelier.titre.toLowerCase().includes(search.toLowerCase()),
   );
@@ -44,30 +72,43 @@ function FormateurAteliers() {
   return (
     <div className="formateur-page">
       {/* HEADER */}
+
       <div className="formateur-header">
         <div className="header-title">
           <i className="bi bi-mortarboard-fill"></i>
 
           <div>
-            <h1>Formations</h1>
+            <h1>Ateliers</h1>
+
             <p>Catalogue des programmes disponibles</p>
           </div>
         </div>
+
+        {/* HISTORY BUTTON */}
+
+        <button className="history-btn" onClick={historyReports}>
+          <i className="bi bi-clock-history"></i>
+          Historique
+        </button>
       </div>
 
       {/* TOP BAR */}
+
       <div className="top-bar">
         <div className="formations-count">
           <i className="bi bi-mortarboard-fill"></i>
-          <span>{filteredAteliers.length} formations</span>
+
+          <span>{filteredAteliers.length} ateliers</span>
         </div>
+
+        {/* SEARCH */}
 
         <div className="search-box">
           <i className="bi bi-search"></i>
 
           <input
             type="text"
-            placeholder="Rechercher une formation..."
+            placeholder="Rechercher un atelier..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
           />
@@ -75,34 +116,42 @@ function FormateurAteliers() {
       </div>
 
       {/* GRID */}
+
       <div className="formations-grid">
         {filteredAteliers.map((atelier) => (
           <div key={atelier.id} className="formation-card">
             {/* ICON */}
+
             <div className="formation-icon">
               <i className="bi bi-code-slash"></i>
             </div>
 
             {/* TITLE */}
+
             <h3>{atelier.titre}</h3>
 
             {/* DESCRIPTION */}
+
             <p>{atelier.description}</p>
 
             {/* DATES */}
+
             <div className="formation-dates">
               <span className="date-item">
                 <i className="bi bi-calendar-event"></i>
+
                 {atelier.date_debut}
               </span>
 
               <span className="date-item">
                 <i className="bi bi-calendar-check"></i>
+
                 {atelier.date_fin}
               </span>
             </div>
 
             {/* ACTIONS */}
+
             <div className="formation-actions">
               <button
                 className="btn-students"

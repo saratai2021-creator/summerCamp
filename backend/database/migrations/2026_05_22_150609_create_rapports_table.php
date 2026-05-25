@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration
 {
     /**
-     * Run the migrations.
+     * Run migrations
      */
     public function up(): void
     {
@@ -15,45 +15,78 @@ return new class extends Migration
 
             $table->id();
 
+            /*
+            |--------------------------------------------------------------------------
+            | Relations
+            |--------------------------------------------------------------------------
+            */
+
             $table->foreignId('etudiant_id')
-                  ->constrained()
-                  ->onDelete('cascade');
+                ->constrained()
+                ->onDelete('cascade');
 
             $table->foreignId('atelier_id')
-                  ->constrained()
-                  ->onDelete('cascade');
+                ->constrained()
+                ->onDelete('cascade');
 
+            // formateur/admin qui crée rapport
             $table->foreignId('user_id')
-                  ->constrained()
-                  ->onDelete('cascade');
+                ->nullable()
+                ->constrained()
+                ->onDelete('cascade');
 
-            // période du rapport
+            /*
+            |--------------------------------------------------------------------------
+            | Période
+            |--------------------------------------------------------------------------
+            */
+
             $table->date('date_debut');
 
             $table->date('date_fin');
 
-            // présence
+            /*
+            |--------------------------------------------------------------------------
+            | Présence
+            |--------------------------------------------------------------------------
+            */
+
             $table->integer('total_seances');
 
             $table->integer('seances_assistees');
 
             $table->float('taux_presence');
 
-            // notes
+            /*
+            |--------------------------------------------------------------------------
+            | Notes
+            |--------------------------------------------------------------------------
+            */
+
             $table->decimal('moyenne_exercices', 5, 2)
-                  ->nullable();
+                ->nullable();
 
             $table->decimal('moyenne_examen', 5, 2)
-                  ->nullable();
+                ->nullable();
 
-            // progression
+            /*
+            |--------------------------------------------------------------------------
+            | Modules
+            |--------------------------------------------------------------------------
+            */
+
             $table->text('modules_termines')
-                  ->nullable();
+                ->nullable();
 
             $table->text('modules_en_cours')
-                  ->nullable();
+                ->nullable();
 
-            // commentaires
+            /*
+            |--------------------------------------------------------------------------
+            | Évaluation pédagogique
+            |--------------------------------------------------------------------------
+            */
+
             $table->text('appreciation_generale');
 
             $table->text('points_forts');
@@ -62,16 +95,21 @@ return new class extends Migration
 
             $table->text('recommandations');
 
-            // pdf
+            /*
+            |--------------------------------------------------------------------------
+            | PDF
+            |--------------------------------------------------------------------------
+            */
+
             $table->string('chemin_pdf')
-                  ->nullable();
+                ->nullable();
 
             $table->timestamps();
         });
     }
 
     /**
-     * Reverse the migrations.
+     * Reverse migrations
      */
     public function down(): void
     {

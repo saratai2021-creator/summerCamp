@@ -34,12 +34,14 @@ import { AdminRoute } from "./admin/routes/AdminRoute";
 // Formateur
 import FormateurAteliers from "./pages/formateur/Ateliers";
 import Students from "./pages/formateur/Students";
+import CreateReport from "./pages/formateur/CreateReport";
+import ReportResult from "./pages/formateur/ReportResult";
+import ReportsHistory from "./pages/formateur/ReportsHistory";
 
 function LayoutWrapper() {
   const location = useLocation();
 
-  const isAdminRoute =
-    location.pathname.startsWith("/admin");
+  const isAdminRoute = location.pathname.startsWith("/admin");
 
   return (
     <>
@@ -59,41 +61,20 @@ function LayoutWrapper() {
         />
 
         {/* AUTH */}
-        <Route
-          path="/login"
-          element={<Login />}
-        />
+        <Route path="/login" element={<Login />} />
 
-        <Route
-          path="/register"
-          element={<Register />}
-        />
+        <Route path="/register" element={<Register />} />
 
         {/* VISITEUR */}
-        <Route
-          path="/ateliers"
-          element={<Ateliers />}
-        />
+        <Route path="/ateliers" element={<Ateliers />} />
 
-        <Route
-          path="/reservation"
-          element={<Reservation />}
-        />
+        <Route path="/reservation" element={<Reservation />} />
 
-        <Route
-          path="/visiteur"
-          element={<Dashboard />}
-        />
+        <Route path="/visiteur" element={<Dashboard />} />
 
-        <Route
-          path="/visiteur/profile"
-          element={<Profile />}
-        />
+        <Route path="/visiteur/profile" element={<Profile />} />
 
-        <Route
-          path="/visiteur/reservations"
-          element={<MesReservations />}
-        />
+        <Route path="/visiteur/reservations" element={<MesReservations />} />
 
         {/* ADMIN */}
         <Route
@@ -104,48 +85,34 @@ function LayoutWrapper() {
             </AdminRoute>
           }
         >
-          <Route
-            index
-            element={<AdminAteliers />}
-          />
+          <Route index element={<AdminAteliers />} />
 
-          <Route
-            path="ateliers"
-            element={<AdminAteliers />}
-          />
+          <Route path="ateliers" element={<AdminAteliers />} />
 
-          <Route
-            path="ateliers/create"
-            element={<AdminAtelierForm />}
-          />
+          <Route path="ateliers/create" element={<AdminAtelierForm />} />
 
-          <Route
-            path="ateliers/edit/:id"
-            element={<AdminAtelierForm />}
-          />
+          <Route path="ateliers/edit/:id" element={<AdminAtelierForm />} />
 
-          <Route
-            path="reservations"
-            element={<AdminReservations />}
-          />
+          <Route path="reservations" element={<AdminReservations />} />
         </Route>
 
         {/* FORMATEUR */}
-        <Route
-          path="/formateur"
-          element={<FormateurAteliers />}
-        />
+        <Route path="/formateur" element={<FormateurAteliers />} />
+
+        <Route path="/formateur/ateliers/:id/students" element={<Students />} />
 
         <Route
-          path="/formateur/ateliers/:id/students"
-          element={<Students />}
+          path="/formateur/ateliers/:id/etudiants/:etudiantId/report"
+          element={<CreateReport />}
         />
+        <Route
+          path="/formateur/rapports/:id/result"
+          element={<ReportResult />}
+        />
+        <Route path="/formateur/rapports" element={<ReportsHistory />} />
 
         {/* FALLBACK */}
-        <Route
-          path="*"
-          element={<Navigate to="/" replace />}
-        />
+        <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
 
       {!isAdminRoute && <Footer />}
