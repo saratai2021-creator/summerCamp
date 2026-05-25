@@ -37,6 +37,7 @@ import Students from "./pages/formateur/Students";
 import CreateReport from "./pages/formateur/CreateReport";
 import ReportResult from "./pages/formateur/ReportResult";
 import ReportsHistory from "./pages/formateur/ReportsHistory";
+import AtelierReports from "./pages/formateur/AtelierReports";
 
 function LayoutWrapper() {
   const location = useLocation();
@@ -110,6 +111,11 @@ function LayoutWrapper() {
           element={<ReportResult />}
         />
         <Route path="/formateur/rapports" element={<ReportsHistory />} />
+
+        <Route
+          path="/formateur/ateliers/:id/reports"
+          element={<AtelierReports />}
+        />
 
         {/* FALLBACK */}
         <Route path="*" element={<Navigate to="/" replace />} />
