@@ -1,6 +1,248 @@
+// import { useEffect, useState } from "react";
+
+// import { useParams, useNavigate } from "react-router-dom";
+
+// import { getAtelierStudents } from "../../shared/services/AdminService";
+
+// import "../../styles/Formateur/students.css";
+
+// function Students() {
+//   const { id } = useParams();
+
+//   const navigate = useNavigate();
+
+//   /*
+//   |--------------------------------------------------------------------------
+//   | States
+//   |--------------------------------------------------------------------------
+//   */
+
+//   const [etudiants, setEtudiants] = useState([]);
+
+//   const [atelier, setAtelier] = useState(null);
+
+//   const [search, setSearch] = useState("");
+
+//   const [loading, setLoading] = useState(true);
+
+//   /*
+//   |--------------------------------------------------------------------------
+//   | Charger étudiants
+//   |--------------------------------------------------------------------------
+//   */
+
+//   useEffect(() => {
+//     setLoading(true);
+
+//     getAtelierStudents(id)
+//       .then((data) => {
+//         setEtudiants(data?.etudiants || []);
+
+//         setAtelier(data);
+
+//         setLoading(false);
+//       })
+
+//       .catch((err) => {
+//         console.log(err);
+
+//         setLoading(false);
+//       });
+//   }, [id]);
+
+//   /*
+//   |--------------------------------------------------------------------------
+//   | Générer rapport
+//   |--------------------------------------------------------------------------
+//   */
+
+//   function genererRapport(etudiantId) {
+//     navigate(`/formateur/ateliers/${id}/etudiants/${etudiantId}/report`);
+//   }
+
+//   /*
+//   |--------------------------------------------------------------------------
+//   | Historique rapports étudiant
+//   |--------------------------------------------------------------------------
+//   */
+
+//   // function viewReports(etudiantId) {
+//   //   navigate(`/formateur/ateliers/${id}/etudiants/${etudiantId}/reports`);
+//   // }
+
+//   /*
+//   |--------------------------------------------------------------------------
+//   | Recherche
+//   |--------------------------------------------------------------------------
+//   */
+
+//   const filteredEtudiants = etudiants.filter((e) =>
+//     `${e.nom} ${e.prenom}`.toLowerCase().includes(search.toLowerCase()),
+//   );
+
+//   /*
+//   |--------------------------------------------------------------------------
+//   | Render
+//   |--------------------------------------------------------------------------
+//   */
+
+//   return (
+//     <div className="students-page">
+//       {/* BREADCRUMB */}
+
+//       <div className="breadcrumb">
+//         <span>
+//           <i className="bi bi-house-fill"></i>
+//           Formateur
+//         </span>
+
+//         <i className="bi bi-chevron-right"></i>
+
+//         <span>{atelier?.titre}</span>
+
+//         <i className="bi bi-chevron-right"></i>
+
+//         <span className="active">Étudiants</span>
+//       </div>
+
+//       {/* HEADER */}
+
+//       <div className="header-row">
+//         <div className="students-header">
+//           <button className="back-btn" onClick={() => navigate(-1)}>
+//             <i className="bi bi-arrow-left"></i>
+//           </button>
+
+//           <div>
+//             <h2>
+//               <i className="bi bi-people-fill"></i>
+//               Étudiants
+//             </h2>
+
+//             <p>
+//               Atelier :<strong> {atelier?.titre}</strong>
+//             </p>
+//           </div>
+//         </div>
+
+//         {/* STATS */}
+
+//         <div className="stats-cards">
+//           <div className="stat-card">
+//             <i className="bi bi-mortarboard-fill"></i>
+
+//             <div>
+//               <span>Total étudiants</span>
+
+//               <h3>{filteredEtudiants.length}</h3>
+//             </div>
+//           </div>
+//         </div>
+//       </div>
+
+//       {/* SEARCH */}
+
+//       <div className="students-top">
+//         <div className="search-box">
+//           <i className="bi bi-search"></i>
+
+//           <input
+//             type="text"
+//             placeholder="Rechercher un étudiant..."
+//             value={search}
+//             onChange={(e) => setSearch(e.target.value)}
+//           />
+//         </div>
+//       </div>
+
+//       {/* TABLE */}
+
+//       <div className="table-card">
+//         {loading ? (
+//           <div className="loading">Chargement...</div>
+//         ) : filteredEtudiants.length === 0 ? (
+//           <div className="empty-state">
+//             <i className="bi bi-person-x-fill"></i>
+
+//             <p>Aucun étudiant trouvé</p>
+//           </div>
+//         ) : (
+//           <div className="table-responsive">
+//             <table className="students-table">
+//               <thead>
+//                 <tr>
+//                   <th>Étudiant</th>
+
+//                   <th>Email parent</th>
+
+//                   <th>Actions</th>
+//                 </tr>
+//               </thead>
+
+//               <tbody>
+//                 {filteredEtudiants.map((etudiant) => (
+//                   <tr key={etudiant.id}>
+//                     {/* ETUDIANT */}
+
+//                     <td>
+//                       <div className="student-name">
+//                         <div className="avatar">{etudiant.nom?.[0]}</div>
+
+//                         <div>
+//                           <strong>
+//                             {etudiant.nom} {etudiant.prenom}
+//                           </strong>
+//                         </div>
+//                       </div>
+//                     </td>
+
+//                     {/* EMAIL */}
+
+//                     <td>
+//                       <span className="email-text">
+//                         {etudiant.parent_email}
+//                       </span>
+//                     </td>
+
+//                     {/* ACTIONS */}
+
+//                     <td>
+//                       <div className="actions-cell">
+//                         <button
+//                           className="btn-report"
+//                           onClick={() => genererRapport(etudiant.id)}
+//                         >
+//                           <i className="bi bi-file-earmark-plus-fill"></i>
+//                           Rapport
+//                         </button>
+
+//                         <button
+//                           className="btn-history"
+//                           onClick={() => viewReports(etudiant.id)}
+//                         >
+//                           <i className="bi bi-clock-history"></i>
+//                           Historique
+//                         </button>
+//                       </div>
+//                     </td>
+//                   </tr>
+//                 ))}
+//               </tbody>
+//             </table>
+//           </div>
+//         )}
+//       </div>
+//     </div>
+//   );
+// }
+
+// export default Students;
+
 import { useEffect, useState } from "react";
-import axios from "axios";
+
 import { useParams, useNavigate } from "react-router-dom";
+
+import { getAtelierStudents } from "../../shared/services/AdminService";
 
 import "../../styles/Formateur/students.css";
 
@@ -9,7 +251,14 @@ function Students() {
 
   const navigate = useNavigate();
 
+  /*
+  |--------------------------------------------------------------------------
+  | States
+  |--------------------------------------------------------------------------
+  */
+
   const [etudiants, setEtudiants] = useState([]);
+
   const [atelier, setAtelier] = useState(null);
 
   const [search, setSearch] = useState("");
@@ -17,16 +266,19 @@ function Students() {
   const [loading, setLoading] = useState(true);
 
   /*
-   * Charger étudiants
-   */
+  |--------------------------------------------------------------------------
+  | Charger étudiants
+  |--------------------------------------------------------------------------
+  */
+
   useEffect(() => {
-    axios
-      .get(`http://127.0.0.1:8000/api/formateur/ateliers/${id}/etudiants`)
+    setLoading(true);
 
-      .then((res) => {
-        setEtudiants(res.data.etudiants || res.data.etudiants);
+    getAtelierStudents(id)
+      .then((data) => {
+        setEtudiants(data?.etudiants || []);
 
-        setAtelier(res.data);
+        setAtelier(data);
 
         setLoading(false);
       })
@@ -39,22 +291,21 @@ function Students() {
   }, [id]);
 
   /*
-   * Générer rapport
-   */
+  |--------------------------------------------------------------------------
+  | Générer rapport
+  |--------------------------------------------------------------------------
+  */
+
   function genererRapport(etudiantId) {
     navigate(`/formateur/ateliers/${id}/etudiants/${etudiantId}/report`);
   }
 
   /*
-   * Historique rapports
-   */
-  function viewReports(etudiantId) {
-    navigate(`/formateur/ateliers/${id}/etudiants/${etudiantId}/reports`);
-  }
+  |--------------------------------------------------------------------------
+  | Recherche
+  |--------------------------------------------------------------------------
+  */
 
-  /*
-   * Recherche
-   */
   const filteredEtudiants = etudiants.filter((e) =>
     `${e.nom} ${e.prenom}`.toLowerCase().includes(search.toLowerCase()),
   );
@@ -62,16 +313,24 @@ function Students() {
   return (
     <div className="students-page">
       {/* BREADCRUMB */}
+
       <div className="breadcrumb">
-        <i className="bi bi-house"></i>
-        Ateliers
+        <span>
+          <i className="bi bi-house-fill"></i>
+          Formateur
+        </span>
+
         <i className="bi bi-chevron-right"></i>
-        {atelier?.titre}
+
+        <span>{atelier?.titre}</span>
+
         <i className="bi bi-chevron-right"></i>
-        Étudiants
+
+        <span className="active">Étudiants</span>
       </div>
 
       {/* HEADER */}
+
       <div className="header-row">
         <div className="students-header">
           <button className="back-btn" onClick={() => navigate(-1)}>
@@ -91,12 +350,14 @@ function Students() {
         </div>
 
         {/* STATS */}
+
         <div className="stats-cards">
           <div className="stat-card">
-            <i className="bi bi-mortarboard"></i>
+            <i className="bi bi-mortarboard-fill"></i>
 
             <div>
-              <span>Étudiants</span>
+              <span>Total étudiants</span>
+
               <h3>{filteredEtudiants.length}</h3>
             </div>
           </div>
@@ -104,6 +365,7 @@ function Students() {
       </div>
 
       {/* SEARCH */}
+
       <div className="students-top">
         <div className="search-box">
           <i className="bi bi-search"></i>
@@ -118,52 +380,60 @@ function Students() {
       </div>
 
       {/* TABLE */}
-      <div className="card table-card">
+
+      <div className="table-card">
         {loading ? (
           <div className="loading">Chargement...</div>
         ) : filteredEtudiants.length === 0 ? (
           <div className="empty-state">
-            <i className="bi bi-person-x"></i>
+            <i className="bi bi-person-x-fill"></i>
 
             <p>Aucun étudiant trouvé</p>
           </div>
         ) : (
-          <table className="table table-hover align-middle">
+          <table className="students-table">
             <thead>
               <tr>
-                <th>Nom</th>
-                <th>Email Parent</th>
-                <th style={{ width: "260px" }}>Actions</th>
+                <th>Étudiant</th>
+
+                <th>Email parent</th>
+
+                <th className="actions-header">Actions</th>
               </tr>
             </thead>
 
             <tbody>
               {filteredEtudiants.map((etudiant) => (
                 <tr key={etudiant.id}>
+                  {/* ETUDIANT */}
+
                   <td>
                     <div className="student-name">
                       <div className="avatar">{etudiant.nom?.[0]}</div>
-                      {etudiant.nom} {etudiant.prenom}
+
+                      <div className="student-text">
+                        <strong>
+                          {etudiant.nom} {etudiant.prenom}
+                        </strong>
+                      </div>
                     </div>
                   </td>
 
-                  <td>{etudiant.parent_email}</td>
+                  {/* EMAIL */}
 
-                  <td className="actions-cell">
+                  <td>
+                    <span className="email-text">{etudiant.parent_email}</span>
+                  </td>
+
+                  {/* ACTION */}
+
+                  <td className="action-column">
                     <button
-                      className="btn btn-report"
+                      className="btn-report"
                       onClick={() => genererRapport(etudiant.id)}
                     >
-                      <i className="bi bi-file-earmark-plus"></i>
+                      <i className="bi bi-file-earmark-plus-fill"></i>
                       Rapport
-                    </button>
-
-                    <button
-                      className="btn-history"
-                      onClick={() => viewReports(etudiant.id)}
-                    >
-                      <i className="bi bi-clock-history"></i>
-                      Historique
                     </button>
                   </td>
                 </tr>

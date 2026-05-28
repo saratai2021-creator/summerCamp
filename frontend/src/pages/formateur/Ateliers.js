@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 
-import axios from "axios";
-
 import { useNavigate } from "react-router-dom";
+
+import { getFormateurAteliers } from "../../shared/services/AdminService";
 
 import "../../styles/Formateur/formateurAteliers.css";
 
@@ -20,13 +20,14 @@ function FormateurAteliers() {
   */
 
   useEffect(() => {
-    axios
+    getFormateurAteliers()
+      .then((data) => {
+        setAteliers(data || []);
+      })
 
-      .get("http://127.0.0.1:8000/api/formateur/ateliers")
-
-      .then((res) => setAteliers(res.data))
-
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err);
+      });
   }, []);
 
   /*

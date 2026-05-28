@@ -159,78 +159,152 @@ Route::middleware(['auth:sanctum', 'admin'])->group(function () {
 |--------------------------------------------------------------------------
 */
 
-Route::prefix('formateur')->group(function () {
+// Route::prefix('formateur')->group(function () {
 
-    // Liste ateliers
-    Route::get('/ateliers', [
-        FormateurController::class,
-        'ateliers'
-    ]);
+//     // Liste ateliers
+//     Route::get('/ateliers', [
+//         FormateurController::class,
+//         'ateliers'
+//     ]);
 
-    // Étudiants atelier
-    Route::get('/ateliers/{id}/etudiants', [
-        FormateurController::class,
-        'students'
-    ]);
+//     // Étudiants atelier
+//     Route::get('/ateliers/{id}/etudiants', [
+//         FormateurController::class,
+//         'students'
+//     ]);
 
-    /*
-    |--------------------------------------------------
-    | Créer rapport
-    |--------------------------------------------------
-    */
-    Route::post('/rapports', [
-        RapportController::class,
-        'store'
-    ]);
+//     /*
+//     |--------------------------------------------------
+//     | Créer rapport
+//     |--------------------------------------------------
+//     */
+//     Route::post('/rapports', [
+//         RapportController::class,
+//         'store'
+//     ]);
 
-    /*
-    |--------------------------------------------------
-    | Télécharger PDF
-    |--------------------------------------------------
-    */
-    Route::get('/rapports/{rapport}/download', [
+//     /*
+//     |--------------------------------------------------
+//     | Télécharger PDF
+//     |--------------------------------------------------
+//     */
+//     Route::get('/rapports/{rapport}/download', [
 
-        RapportController::class,
+//         RapportController::class,
 
-        'download'
-    ]);
-    /*
+//         'download'
+//     ]);
+//     /*
+// |--------------------------------------------------------------------------
+// | Envoyer email parent
+// |--------------------------------------------------------------------------
+// */
+
+// Route::post(
+//     'rapports/{rapport}/send-email',
+//     [RapportController::class, 'sendEmail']
+// );
+//     /*
+//     |--------------------------------------------------
+//     | Historique
+//     |--------------------------------------------------
+//     */
+//     Route::get('/rapports', [
+//         RapportController::class,
+//         'history'
+//     ]);
+
+//     /*
+//     |--------------------------------------------------
+//     | Rapports atelier
+//     |--------------------------------------------------
+//     */
+//     Route::get('/ateliers/{id}/rapports', [
+//         RapportController::class,
+//         'rapportsByAtelier'
+//     ]);
+
+//     /*
+//     |--------------------------------------------------
+//     | Rapports étudiant
+//     |--------------------------------------------------
+//     */
+//     Route::get(
+//         '/ateliers/{atelier_id}/etudiants/{etudiant_id}/rapports',
+//         [RapportController::class, 'rapportsByEtudiant']
+//     );
+// });
+
+
+/*
 |--------------------------------------------------------------------------
-| Envoyer email parent
+| FORMATEUR ROUTES
 |--------------------------------------------------------------------------
 */
 
-Route::post(
-    'rapports/{rapport}/send-email',
-    [RapportController::class, 'sendEmail']
-);
-    /*
-    |--------------------------------------------------
-    | Historique
-    |--------------------------------------------------
-    */
-    Route::get('/rapports', [
-        RapportController::class,
-        'history'
-    ]);
+Route::middleware(['auth:sanctum', 'formateur'])
 
-    /*
-    |--------------------------------------------------
-    | Rapports atelier
-    |--------------------------------------------------
-    */
-    Route::get('/ateliers/{id}/rapports', [
-        RapportController::class,
-        'rapportsByAtelier'
-    ]);
+    ->prefix('formateur')
 
-    /*
-    |--------------------------------------------------
-    | Rapports étudiant
-    |--------------------------------------------------
-    */
-    Route::get(
-        '/ateliers/{atelier_id}/etudiants/{etudiant_id}/rapports',
-        [RapportController::class, 'rapportsByEtudiant']
-    );
-});
+    ->group(function () {
+
+        /*
+        |--------------------------------------------------------------------------
+        | ATELIERS
+        |--------------------------------------------------------------------------
+        */
+
+        // Liste ateliers
+        Route::get('/ateliers', [
+            FormateurController::class,
+            'ateliers'
+        ]);
+
+        // Étudiants atelier
+        Route::get('/ateliers/{id}/etudiants', [
+            FormateurController::class,
+            'students'
+        ]);
+
+        /*
+        |--------------------------------------------------------------------------
+        | RAPPORTS
+        |--------------------------------------------------------------------------
+        */
+
+        // Créer rapport
+        Route::post('/rapports', [
+            RapportController::class,
+            'store'
+        ]);
+
+        // Télécharger PDF
+        Route::get('/rapports/{rapport}/download', [
+            RapportController::class,
+            'download'
+        ]);
+
+        // Envoyer email parent
+        Route::post('/rapports/{rapport}/send-email', [
+            RapportController::class,
+            'sendEmail'
+        ]);
+
+        // Historique
+        Route::get('/rapports', [
+            RapportController::class,
+            'history'
+        ]);
+
+        // Rapports atelier
+        Route::get('/ateliers/{id}/rapports', [
+            RapportController::class,
+            'rapportsByAtelier'
+        ]);
+
+        // Rapports étudiant
+        Route::get(
+            '/ateliers/{atelier_id}/etudiants/{etudiant_id}/rapports',
+            [RapportController::class, 'rapportsByEtudiant']
+        );
+    });

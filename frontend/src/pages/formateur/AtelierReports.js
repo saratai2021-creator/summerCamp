@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
 
-import axios from "axios";
-
+import {
+  getReportsHistory,
+  sendReportEmail,
+} from "../../shared/services/AdminService";
 import "../../styles/Formateur/atelierReports.css";
 
 function AtelierReports() {
@@ -30,13 +32,11 @@ function AtelierReports() {
   useEffect(() => {
     setLoading(true);
 
-    axios
-      .get(`http://127.0.0.1:8000/api/formateur/rapports?page=${page}`)
+    getReportsHistory(page)
+      .then((data) => {
+        setRapports(data.data);
 
-      .then((res) => {
-        setRapports(res.data.data);
-
-        setLastPage(res.data.last_page);
+        setLastPage(data.last_page);
 
         setLoading(false);
       })
@@ -197,9 +197,7 @@ function AtelierReports() {
                       <button
                         className="mail-btn"
                         onClick={() => {
-                          axios.post(
-                            `http://127.0.0.1:8000/api/formateur/rapports/${rapport.id}/send-email`,
-                          );
+                          sendReportEmail(rapport.id);
 
                           alert("Email envoyé 📧");
                         }}

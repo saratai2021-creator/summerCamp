@@ -2,10 +2,13 @@ import { useState, useEffect } from "react";
 
 import { useNavigate, useParams } from "react-router-dom";
 
-import axios from "axios";
+// import axios from "axios";
 
+import {
+  getAtelierStudents,
+  createRapport,
+} from "../../shared/services/AdminService";
 import "../../styles/Formateur/createReport.css";
-
 function CreateReport() {
   /*
   |--------------------------------------------------------------------------
@@ -70,25 +73,13 @@ function CreateReport() {
   */
 
   useEffect(() => {
-    axios
-      .get(`http://127.0.0.1:8000/api/formateur/ateliers/${id}/etudiants`)
+    getAtelierStudents(id)
+      .then((data) => {
+        console.log(data);
 
-      .then((res) => {
-        /*
-      |--------------------------------------------------------------------------
-      | Atelier
-      |--------------------------------------------------------------------------
-      */
-        console.log(res.data);
-        setAtelier(res.data);
+        setAtelier(data);
 
-        /*
-      |--------------------------------------------------------------------------
-      | Trouver étudiant
-      |--------------------------------------------------------------------------
-      */
-
-        const foundStudent = res.data.etudiants.find(
+        const foundStudent = data.etudiants.find(
           (e) => e.id === Number(etudiantId),
         );
 
@@ -165,47 +156,42 @@ function CreateReport() {
 
     setErrors({});
 
-    axios
+    createRapport({
+      /*
+      |--------------------------------------------------------------------------
+      | Relations
+      |--------------------------------------------------------------------------
+      */
 
-      .post(
-        "http://127.0.0.1:8000/api/formateur/rapports",
+      etudiant_id: Number(etudiantId),
 
-        {
-          /*
-          |--------------------------------------------------------------------------
-          | Relations
-          |--------------------------------------------------------------------------
-          */
+      atelier_id: Number(id),
 
-          etudiant_id: Number(etudiantId),
+      /*
+      |--------------------------------------------------------------------------
+      | Données formulaire
+      |--------------------------------------------------------------------------
+      */
 
-          atelier_id: Number(id),
-
-          /*
-          |--------------------------------------------------------------------------
-          | Données formulaire
-          |--------------------------------------------------------------------------
-          */
-
-          ...report,
-        },
-      )
-
-      .then((res) => {
+      ...report,
+    })
+      .then((data) => {
         alert("Rapport généré avec succès 📄");
 
-        console.log(res.data);
+        console.log(data);
 
         /*
-  |--------------------------------------------------------------------------
-  | Redirection vers page résultat
-  |--------------------------------------------------------------------------
-  */
+        |--------------------------------------------------------------------------
+        | Redirection vers page résultat
+        |--------------------------------------------------------------------------
+        */
 
-        navigate(`/formateur/rapports/${res.data.rapport.id}/result`);
+        navigate(`/formateur/rapports/${data.rapport.id}/result`);
       })
 
       .catch((err) => {
+        console.log(err);
+
         if (err.response?.data?.errors) {
           setErrors(err.response.data.errors);
 
@@ -341,7 +327,7 @@ function CreateReport() {
             </div>
 
             <div className="presence-preview">
-              <span>Taux de présence :{tauxPresence}%</span>
+              <span>Taux de présence : {tauxPresence}%</span>
 
               <div className="progress">
                 <div
@@ -388,7 +374,7 @@ function CreateReport() {
 
             <div className="score-preview">
               <i className="bi bi-trophy"></i>
-              Moyenne générale :{moyenneGenerale}
+              Moyenne générale : {moyenneGenerale}
             </div>
           </div>
 
