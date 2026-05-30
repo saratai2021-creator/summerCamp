@@ -88,7 +88,7 @@ export function Dashboard() {
 
           <button
             onClick={() =>
-              navigate("/visiteur/profile")
+              navigate("/parent/profile")
             }
           >
             Open
@@ -112,7 +112,7 @@ export function Dashboard() {
 
           <button
             onClick={() =>
-              navigate("/visiteur/reservations")
+              navigate("/parent/reservations")
             }
           >
             Open
@@ -160,7 +160,7 @@ export function Dashboard() {
 
           <button
             onClick={() =>
-              navigate("/visiteur/rapports")
+              navigate("/parent/rapports")
             }
           >
             Open

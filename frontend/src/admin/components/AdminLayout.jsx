@@ -1,94 +1,89 @@
-import { Link, Outlet, useNavigate } from "react-router-dom"
-import { useEffect, useState } from "react"
-import { getAteliers, getReservations } from "../../shared/services/AdminService"
-import "../../styles/admin.css"
+import { Link, Outlet, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import {
+  getAteliers,
+  getReservations,
+} from "../../shared/services/AdminService";
+import "../../styles/admin.css";
 
 export function AdminLayout() {
+  const navigate = useNavigate();
 
-  const navigate = useNavigate()
-
-  const [atelierCount, setAtelierCount] = useState(0)
-  const [reservationCount, setReservationCount] = useState(0)
-  const [loading, setLoading] = useState(true)
+  const [atelierCount, setAtelierCount] = useState(0);
+  const [reservationCount, setReservationCount] = useState(0);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-
     const checkAuth = async () => {
+      const token = localStorage.getItem("token");
 
-      const token = localStorage.getItem("token")
-
-      // No token → redirect
       if (!token) {
-        navigate("/admin/login", { replace: true })
-        return
+        navigate("/login", { replace: true });
+        return;
       }
 
       try {
-
-        const response = await fetch("http://127.0.0.1:8000/api/reservations", {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            Accept: "application/json"
+        const response = await fetch(
+          "http://127.0.0.1:8000/api/reservations",
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+              Accept: "application/json",
+            },
           }
-        })
+        );
 
-        // Invalid token → logout
         if (response.status === 401) {
-          localStorage.removeItem("token")
-          navigate("/admin/login", { replace: true })
-          return
+          localStorage.removeItem("token");
+          localStorage.removeItem("user");
+
+          navigate("/login", {
+            replace: true,
+          });
+
+          return;
         }
 
-        // Token valid → load dashboard data
-        await loadCounts()
-
+        await loadCounts();
       } catch (error) {
+        console.error(error);
 
-        console.error("Auth check failed:", error)
-        localStorage.removeItem("token")
-        navigate("/admin/login", { replace: true })
+        localStorage.removeItem("token");
+        localStorage.removeItem("user");
 
+        navigate("/login", {
+          replace: true,
+        });
       } finally {
-
-        setLoading(false)
-
+        setLoading(false);
       }
+    };
 
-    }
-
-    checkAuth()
-
-  }, [navigate])
+    checkAuth();
+  }, [navigate]);
 
   const loadCounts = async () => {
+    const ateliers = await getAteliers();
+    const reservations = await getReservations();
 
-    const ateliers = await getAteliers()
-    const reservations = await getReservations()
-
-    setAtelierCount(ateliers?.length || 0)
-    setReservationCount(reservations?.length || 0)
-
-  }
-
-  const logout = () => {
-    localStorage.removeItem("token")
-    navigate("/admin/login", { replace: true })
-  }
+    setAtelierCount(ateliers?.length || 0);
+    setReservationCount(reservations?.length || 0);
+  };
 
   if (loading) {
-    return <div className="admin-loading">Loading...</div>
+    return (
+      <div className="admin-loading">
+        Loading...
+      </div>
+    );
   }
 
   return (
-
     <div className="admin-container">
-
       <aside className="admin-sidebar">
-
         <h2>Tableau de bord</h2>
 
         <ul>
-
           <li>
             <Link to="/admin/ateliers">
               Ateliers ({atelierCount})
@@ -100,23 +95,12 @@ export function AdminLayout() {
               Réservations ({reservationCount})
             </Link>
           </li>
-         
-
-          <li>
-            <button onClick={logout}>
-              Logout
-            </button>
-          </li>
-
         </ul>
-
       </aside>
 
       <main className="admin-main">
         <Outlet />
       </main>
-
     </div>
-
-  )
+  );
 }

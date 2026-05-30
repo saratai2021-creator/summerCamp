@@ -1,37 +1,19 @@
 import { Link, useNavigate } from "react-router-dom";
-
 import "../../styles/navbar.css";
 
 export function Navbar() {
   const navigate = useNavigate();
 
-  /*
-  |--------------------------------------------------------------------------
-  | Utilisateur connecté
-  |--------------------------------------------------------------------------
-  */
-
   const user = JSON.parse(localStorage.getItem("user"));
-
-  /*
-  |--------------------------------------------------------------------------
-  | Vérifications
-  |--------------------------------------------------------------------------
-  */
 
   const isLoggedIn = !!user;
 
   const isFormateur = user?.role === "formateur";
-
-  /*
-  |--------------------------------------------------------------------------
-  | Logout
-  |--------------------------------------------------------------------------
-  */
+  const isParent = user?.role === "parent";
+  const isAdmin = user?.role === "admin";
 
   function logout() {
     localStorage.removeItem("user");
-
     localStorage.removeItem("token");
 
     navigate("/login");
@@ -48,50 +30,96 @@ export function Navbar() {
       <div className="nav-links">
         {/* HOME */}
 
-        <Link style={{ textDecoration: "none" }} to="/">
+        <Link
+          style={{ textDecoration: "none" }}
+          to="/"
+        >
           Accueil
         </Link>
 
         {/* ATELIERS */}
 
-        <Link style={{ textDecoration: "none" }} to="/ateliers">
+        <Link
+          style={{ textDecoration: "none" }}
+          to="/ateliers"
+        >
           Ateliers
         </Link>
+
+        {/* ADMIN */}
+
+        {isAdmin && (
+          <Link
+            style={{ textDecoration: "none" }}
+            to="/admin"
+          >
+            Espace Admin
+          </Link>
+        )}
 
         {/* FORMATEUR */}
 
         {isFormateur && (
           <>
-            {/* MES ATELIERS */}
-
-            <Link style={{ textDecoration: "none" }} to="/formateur">
+            <Link
+              style={{ textDecoration: "none" }}
+              to="/formateur"
+            >
               Espace Formateur
             </Link>
 
-            {/* HISTORIQUE */}
-
-            <Link style={{ textDecoration: "none" }} to="/formateur/rapports">
+            <Link
+              style={{ textDecoration: "none" }}
+              to="/formateur/rapports"
+            >
               Historique
             </Link>
           </>
         )}
 
-        {/* NON CONNECTÉ */}
+        {/* PARENT */}
+
+        {isParent && (
+          <>
+            <Link
+              style={{ textDecoration: "none" }}
+              to="/parent"
+            >
+              Espace Parent
+            </Link>
+
+            <Link
+              style={{ textDecoration: "none" }}
+              to="/parent/reservations"
+            >
+              Mes Réservations
+            </Link>
+          </>
+        )}
+
+        {/* NOT LOGGED IN */}
 
         {!isLoggedIn ? (
           <>
-            <Link style={{ textDecoration: "none" }} to="/login">
+            <Link
+              style={{ textDecoration: "none" }}
+              to="/login"
+            >
               Connexion
             </Link>
 
-            <Link style={{ textDecoration: "none" }} to="/register">
+            <Link
+              style={{ textDecoration: "none" }}
+              to="/register"
+            >
               Inscription
             </Link>
           </>
         ) : (
-          /* CONNECTÉ */
-
-          <button className="logout-btn" onClick={logout}>
+          <button
+            className="logout-btn"
+            onClick={logout}
+          >
             Logout
           </button>
         )}

@@ -85,7 +85,7 @@ export function MesReservations() {
 
         <button
           className="back-btn"
-          onClick={() => navigate("/visiteur")}
+          onClick={() => navigate("/parent")}
         >
           Dashboard
         </button>

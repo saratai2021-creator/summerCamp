@@ -1,452 +1,326 @@
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
-
-/* ─── KEYFRAMES ─── */
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateX(-10px); }
-  to   { opacity: 1; transform: translateX(0); }
-}
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(16px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-@keyframes pulse {
-  0%, 100% { opacity: 1; }
-  50%       { opacity: 0.4; }
-}
-@keyframes cardGlow {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(168,85,247,0); }
-  50%       { box-shadow: 0 0 24px 4px rgba(168,85,247,0.12); }
-}
-@keyframes shimmerLine {
-  0%   { background-position: -200% 0; }
-  100% { background-position: 200% 0; }
-}
-@keyframes popIn {
-  0%   { opacity: 0; transform: scale(0.88) translateY(12px); }
-  70%  { transform: scale(1.03) translateY(-2px); }
-  100% { opacity: 1; transform: scale(1) translateY(0); }
-}
-@keyframes dotPulse {
-  0%, 100% { transform: scale(1); opacity: 1; }
-  50%       { transform: scale(1.5); opacity: 0.5; }
-}
-
-/* ─── LAYOUT ─── */
+/* =========================
+   ADMIN LAYOUT
+========================= */
 .admin-container {
-  display: flex;
-  height: 100vh;
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  background: #1c1c1f;
-  overflow: hidden;
+    display: flex;
+    min-height: 100vh;
+    background: #0f172a;
+    color: white;
+    font-family: Arial, sans-serif;
 }
 
-/* ─── SIDEBAR ─── */
+/* =========================
+   SIDEBAR
+========================= */
 .admin-sidebar {
-  width: 220px;
-  min-width: 220px;
-  background: #111113;
-  border-right: 1px solid #252528;
-  padding: 24px 12px;
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  position: relative;
-  animation: fadeIn 0.5s cubic-bezier(.22,1,.36,1) both;
+    width: 260px;
+    min-width: 260px; /* prevents sidebar from shrinking */
+    background: #111827;
+    border-right: 1px solid #334155;
+    padding: 25px;
 }
 
-/* Sidebar top gradient accent */
-.admin-sidebar::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 2px;
-  background: linear-gradient(90deg, #a855f7, #84cc16);
-}
-
-/* Sidebar title */
 .admin-sidebar h2 {
-  font-size: 12px;
-  font-weight: 700;
-  color: #f4f3f0;
-  letter-spacing: 0.2px;
-  padding: 0 10px;
-  margin-bottom: 14px;
+    font-size: 28px;
+    font-weight: bold;
+    color: #38bdf8;
+    margin-bottom: 30px;
 }
 
-.admin-sidebar h2 span {
-  background: linear-gradient(90deg, #a855f7, #84cc16);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-/* Remove default list styles */
 .admin-sidebar ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  flex: 1;
+    list-style: none;
+    padding: 0;
+    margin: 0;
 }
 
-.admin-sidebar ul li:last-child {
-  margin-top: auto;
-  padding-top: 10px;
-  border-top: 1px solid #252528;
+.admin-sidebar li {
+    margin-bottom: 15px;
 }
 
-/* Links & buttons */
-.admin-sidebar a,
-.admin-sidebar button {
-  display: flex;
-  align-items: center;
-  gap: 9px;
-  width: 100%;
-  color: #52525b;
-  padding: 9px 10px;
-  border-radius: 8px;
-  font-size: 13px;
-  font-weight: 500;
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  text-decoration: none;
-  border: none;
-  background: none;
-  cursor: pointer;
-  transition: background 0.2s ease, color 0.2s ease;
-  text-align: left;
+.admin-sidebar a {
+    display: block;
+    text-decoration: none;
+    background: #1e293b;
+    color: #cbd5e1;
+    padding: 14px;
+    border-radius: 12px;
+    transition: .3s;
 }
 
 .admin-sidebar a:hover {
-  background: rgba(168,85,247,0.08);
-  color: #c084fc;
+    background: #38bdf8;
+    color: #0f172a;
 }
 
-.admin-sidebar a.active {
-  background: rgba(168,85,247,0.14);
-  color: #a855f7;
-  font-weight: 600;
-}
-
-/* Logout button */
 .admin-sidebar button {
-  color: #3f3f46;
+    width: 100%;
+    margin-top: 20px;
+    background: #ef4444;
+    color: white;
+    border: none;
+    padding: 14px;
+    border-radius: 12px;
+    cursor: pointer;
+    font-weight: bold;
 }
 
-.admin-sidebar button:hover {
-  background: rgba(239,68,68,0.08);
-  color: #f87171;
-}
-
-/* Count badge inside link */
-.admin-sidebar .count-badge {
-  margin-left: auto;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 9px;
-  font-weight: 500;
-  padding: 2px 6px;
-  border-radius: 20px;
-  background: rgba(168,85,247,0.12);
-  color: #a855f7;
-  border: 1px solid rgba(168,85,247,0.18);
-}
-
-/* ─── MAIN CONTENT ─── */
+/* =========================
+   MAIN
+========================= */
 .admin-main {
-  flex: 1;
-  overflow-y: auto;
-  background: #1c1c1f;
-  background-image: radial-gradient(circle, rgba(168,85,247,0.06) 1px, transparent 1px);
-  background-size: 28px 28px;
-
-  /* ✅ FIX: small, precise padding — not too much gap */
-  padding: 28px 24px;
-
-  animation: fadeUp 0.5s cubic-bezier(.22,1,.36,1) both;
+    flex: 1;
+    min-width: 0; /* CRITICAL: prevents main from overflowing past sidebar */
+    padding: 35px;
+    background: #0f172a;
+    overflow-y: auto;
 }
 
-.admin-main h1,
-.admin-main h2 {
-  color: #f4f3f0;
-  font-weight: 700;
-  margin-bottom: 20px;
-  letter-spacing: -0.4px;
+/* =========================
+   HERO
+========================= */
+.admin-hero {
+    background: linear-gradient(135deg, #1e293b, #111827);
+    border-radius: 24px;
+    padding: 45px;
+    margin-bottom: 40px;
+    border: 1px solid #334155;
 }
 
-/* ─── LOADING ─── */
-.admin-loading {
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: #1c1c1f;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 13px;
-  color: #a855f7;
-  letter-spacing: 2px;
-  text-transform: uppercase;
+.admin-hero h1 {
+    font-size: 46px;
+    color: white;
+    margin-bottom: 15px;
 }
 
-/* ─── EDIT BUTTON ─── */
-.edit-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 7px 14px;
-  background: transparent;
-  border: 1px solid rgba(168,85,247,0.3);
-  color: #a855f7;
-  border-radius: 7px;
-  cursor: pointer;
-  font-size: 12px;
-  font-weight: 600;
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  transition: background 0.2s, border-color 0.2s, transform 0.15s;
-}
-.edit-btn:hover {
-  background: rgba(168,85,247,0.10);
-  border-color: #a855f7;
-  transform: scale(1.03);
+.admin-hero p {
+    color: #cbd5e1;
+    font-size: 18px;
 }
 
-/* ─── DELETE BUTTON ─── */
-.delete-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 7px 14px;
-  border: 1px solid rgba(239,68,68,0.25);
-  background: transparent;
-  color: #f87171;
-  border-radius: 7px;
-  cursor: pointer;
-  font-size: 12px;
-  font-weight: 600;
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  transition: background 0.2s, border-color 0.2s, transform 0.15s;
-}
-.delete-btn:hover {
-  background: rgba(239,68,68,0.08);
-  border-color: #ef4444;
-  transform: scale(1.03);
+/* =========================
+   CARDS
+========================= */
+.admin-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 25px;
 }
 
-/* ─── ATELIER GRID ─── */
+.admin-card {
+    background: #111827;
+    border: 1px solid #1e293b;
+    border-radius: 22px;
+    padding: 30px;
+    transition: .3s;
+    box-shadow: 0 10px 30px rgba(0,0,0,.2);
+}
+
+.admin-card:hover {
+    transform: translateY(-8px);
+    border-color: #38bdf8;
+}
+
+.admin-card h3 {
+    font-size: 28px;
+    margin-bottom: 15px;
+    color: white;
+}
+
+.admin-card p {
+    color: #94a3b8;
+    line-height: 1.7;
+    margin-bottom: 25px;
+}
+
+.admin-card button {
+    width: 100%;
+    background: #38bdf8;
+    color: #0f172a;
+    border: none;
+    padding: 14px;
+    border-radius: 12px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.admin-card button:hover {
+    background: #0ea5e9;
+}
+
+/* =========================
+   ATELIERS PAGE
+========================= */
+/* =========================
+   ATELIERS PAGE
+========================= */
+/* =========================
+   ATELIERS PAGE
+========================= */
+
+.atelier-admin h1 {
+
+    font-size: 48px;
+
+    color: white;
+
+    margin-bottom: 30px;
+}
+
+/* =========================
+   GRID
+========================= */
+
 .atelier-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-  gap: 16px;
-  margin-top: 20px;
+
+    display: grid;
+
+    grid-template-columns: repeat(
+        auto-fit,
+        minmax(320px, 1fr)
+    );
+
+    gap: 25px;
 }
 
-/* ─── ATELIER CARD — redesigned ─── */
+/* =========================
+   CARD
+========================= */
+
 .atelier-card {
-  position: relative;
-  background: #18181b;
-  padding: 0;
-  border-radius: 14px;
-  border: 1px solid #27272a;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  transition: transform 0.28s cubic-bezier(.22,1,.36,1),
-              border-color 0.22s ease;
-  animation: popIn 0.5s cubic-bezier(.22,1,.36,1) both;
-}
 
-/* Numbered animation delay per card */
-.atelier-card:nth-child(1) { animation-delay: 0.05s; }
-.atelier-card:nth-child(2) { animation-delay: 0.12s; }
-.atelier-card:nth-child(3) { animation-delay: 0.19s; }
-.atelier-card:nth-child(4) { animation-delay: 0.26s; }
-.atelier-card:nth-child(5) { animation-delay: 0.33s; }
-.atelier-card:nth-child(6) { animation-delay: 0.40s; }
+    background: #111827;
+
+    border: 1px solid #334155;
+
+    border-radius: 20px;
+
+    padding: 25px;
+
+    color: white;
+
+    transition: 0.3s;
+
+    box-shadow: 0 10px 30px rgba(0,0,0,.2);
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 10px;
+}
 
 .atelier-card:hover {
-  transform: translateY(-5px) scale(1.012);
-  border-color: rgba(168,85,247,0.5);
-  animation: cardGlow 2.5s ease-in-out infinite;
+
+    transform: translateY(-5px);
+
+    border-color: #38bdf8;
 }
 
-/* ── Top shimmer bar (replaces boring accent bar) */
-.atelier-card::before {
-  content: '';
-  display: block;
-  height: 2px;
-  width: 100%;
-  background: linear-gradient(90deg,
-    #a855f7 0%, #84cc16 40%, #a855f7 80%, #84cc16 100%);
-  background-size: 200% 100%;
-  animation: shimmerLine 3s linear infinite;
-}
+/* =========================
+   TITLE
+========================= */
 
-/* ── Card inner padding wrapper */
-.atelier-card .card-inner {
-  padding: 18px 20px 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  flex: 1;
-}
-
-/* ── Live status dot in top-right */
-.atelier-card .card-dot {
-  position: absolute;
-  top: 16px;
-  right: 16px;
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: #84cc16;
-  box-shadow: 0 0 8px rgba(132, 204, 22, 0.7);
-  animation: dotPulse 2s ease-in-out infinite;
-}
-
-/* ── Category chip */
-.atelier-card .card-chip {
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 9px;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-  font-weight: 500;
-  padding: 3px 8px;
-  border-radius: 20px;
-  background: rgba(168,85,247,0.1);
-  color: #c084fc;
-  border: 1px solid rgba(168,85,247,0.22);
-  width: fit-content;
-  margin-bottom: 2px;
-}
-
-/* ── Title */
 .atelier-card h3 {
-  font-size: 15px;
-  font-weight: 700;
-  color: #f4f3f0;
-  margin: 0;
-  line-height: 1.3;
-  letter-spacing: -0.2px;
+
+    font-size: 22px;
+
+    color: white;
+
+    margin-bottom: 10px;
+
+    line-height: 1.4;
 }
 
-/* ── Accent underline on h3 hover */
-.atelier-card:hover h3 {
-  background: linear-gradient(90deg, #a855f7, #84cc16);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  transition: all 0.3s ease;
-}
+/* =========================
+   TEXT
+========================= */
 
-/* ── Description */
 .atelier-card p {
-  font-size: 12.5px;
-  color: #52525b;
-  line-height: 1.55;
-  margin: 0;
+
+    color: #cbd5e1;
+
+    font-size: 14px;
+
+    line-height: 1.7;
+
+    margin: 0;
 }
 
-/* ── Divider */
-.atelier-card .card-divider {
-  height: 1px;
-  background: #27272a;
-  margin: 6px 0;
+.atelier-card strong {
+
+    color: #38bdf8;
 }
 
-/* ── Actions row */
+/* =========================
+   ACTIONS
+========================= */
+
 .card-actions {
-  display: flex;
-  gap: 8px;
-  margin-top: 4px;
+
+    display: flex;
+
+    gap: 10px;
+
+    margin-top: 20px;
 }
 
-/* ─── FORM ─── */
-.reservation-form {
-  background: #18181b;
-  padding: 28px;
-  border-radius: 16px;
-  border: 1px solid #27272a;
-  box-shadow: 0 16px 48px rgba(0,0,0,0.35);
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  max-width: 580px;
-  position: relative;
+/* =========================
+   EDIT BUTTON
+========================= */
+
+.edit-btn {
+
+    flex: 1;
+
+    background: #38bdf8;
+
+    color: #0f172a;
+
+    border: none;
+
+    padding: 12px;
+
+    border-radius: 12px;
+
+    cursor: pointer;
+
+    font-weight: bold;
+
+    transition: 0.3s;
 }
 
-.reservation-form::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 2px;
-  border-radius: 16px 16px 0 0;
-  background: linear-gradient(90deg, #a855f7 0%, #84cc16 50%, #a855f7 100%);
-  background-size: 200% 100%;
-  animation: shimmerLine 3s linear infinite;
+.edit-btn:hover {
+
+    background: #0ea5e9;
 }
 
-.reservation-form input,
-.reservation-form textarea {
-  width: 100%;
-  padding: 12px 14px;
-  background: #111113;
-  border: 1px solid #27272a;
-  border-radius: 9px;
-  color: #f4f3f0;
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  font-size: 13.5px;
-  outline: none;
-  box-sizing: border-box;
-  transition: border-color 0.2s, box-shadow 0.2s;
+/* =========================
+   DELETE BUTTON
+========================= */
+
+.delete-btn {
+
+    flex: 1;
+
+    background: #ef4444;
+
+    color: white;
+
+    border: none;
+
+    padding: 12px;
+
+    border-radius: 12px;
+
+    cursor: pointer;
+
+    font-weight: bold;
+
+    transition: 0.3s;
 }
 
-.reservation-form textarea {
-  min-height: 100px;
-  resize: vertical;
-}
+.delete-btn:hover {
 
-.reservation-form input::placeholder,
-.reservation-form textarea::placeholder {
-  color: #3f3f46;
+    background: #dc2626;
 }
-
-.reservation-form input:focus,
-.reservation-form textarea:focus {
-  border-color: #a855f7;
-  box-shadow: 0 0 0 3px rgba(168,85,247,0.10);
-}
-
-/* ─── FORM BUTTONS ─── */
-.form-buttons {
-  display: flex;
-  gap: 10px;
-  margin-top: 4px;
-}
-
-/* ─── SAVE BUTTON ─── */
-.btn-reserve {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 11px 20px;
-  background: linear-gradient(135deg, #a855f7, #7c3aed);
-  border: none;
-  color: white;
-  border-radius: 9px;
-  cursor: pointer;
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  font-size: 13.5px;
-  font-weight: 700;
-  box-shadow: 0 4px 18px rgba(168,85,247,0.30);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-.btn-reserve:hover {
-  transform: scale(1.02);
-  box-shadow: 0 8px 28px rgba(168,85,247,0.44);
-}
-.btn-reserve:active {
-  transform: scale(0.98);
-}
+/*precidente*/

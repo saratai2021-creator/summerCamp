@@ -8,17 +8,13 @@ use App\Models\Atelier;
 
 class AtelierController extends Controller
 {
-    // ==============================
-    // Get all ateliers
-    // ==============================
+   
     public function index()
     {
         return response()->json(Atelier::all());
     }
 
-    // ==============================
-    // Create atelier
-    // ==============================
+
     public function store(Request $request)
     {
         $validated = $request->validate([
@@ -41,9 +37,6 @@ class AtelierController extends Controller
         ], 201);
     }
 
-    // ==============================
-    // Show one atelier
-    // ==============================
     public function show(string $id)
     {
         $atelier = Atelier::findOrFail($id);
@@ -51,9 +44,7 @@ class AtelierController extends Controller
         return response()->json($atelier);
     }
 
-    // ==============================
-    // Update atelier
-    // ==============================
+    
     public function update(Request $request, string $id)
     {
         $atelier = Atelier::findOrFail($id);
@@ -78,9 +69,7 @@ class AtelierController extends Controller
         ]);
     }
 
-    // ==============================
-    // Delete atelier
-    // ==============================
+    
     public function destroy(string $id)
     {
         $atelier = Atelier::findOrFail($id);
