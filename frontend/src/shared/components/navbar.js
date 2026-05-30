@@ -23,6 +23,8 @@ export function Navbar() {
 
   const isFormateur = user?.role === "formateur";
 
+  const isParent = user?.role === "parent";
+
   /*
   |--------------------------------------------------------------------------
   | Logout
@@ -62,10 +64,10 @@ export function Navbar() {
 
         {isFormateur && (
           <>
-            {/* MES ATELIERS */}
+            {/* WORKSPACE */}
 
             <Link style={{ textDecoration: "none" }} to="/formateur">
-              Espace Formateur
+              Workspace
             </Link>
 
             {/* HISTORIQUE */}
@@ -74,6 +76,14 @@ export function Navbar() {
               Historique
             </Link>
           </>
+        )}
+
+        {/* PARENT */}
+
+        {isParent && (
+          <Link style={{ textDecoration: "none" }} to="/visiteur">
+            Dashboard
+          </Link>
         )}
 
         {/* NON CONNECTÉ */}

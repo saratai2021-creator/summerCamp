@@ -1,18 +1,18 @@
 <!DOCTYPE html>
-<html lang="fr">
+
+<html>
 
 <head>
-    <meta charset="utf-8">
 
-    <title>Rapport pédagogique</title>
+    <meta charset="UTF-8">
 
     <style>
         body {
             font-family: DejaVu Sans;
+            font-size: 13px;
+            color: #1e293b;
             margin: 0;
             padding: 0;
-            color: #1e293b;
-            background: #f8fafc;
         }
 
         /* =====================================================
@@ -20,105 +20,22 @@
         ===================================================== */
 
         .header {
-            background: linear-gradient(135deg, #0f172a, #1e3a8a);
-            color: white;
-            padding: 35px 45px;
+            background: #081120;
+            padding: 25px 35px;
+            border-bottom: 4px solid #38bdf8;
+            margin-bottom: 20px;
         }
 
-        .school-name {
-            font-size: 34px;
+        .title {
+            font-size: 24px;
             font-weight: bold;
-            margin-bottom: 8px;
+            color: #ffffff;
         }
 
-        .school-subtitle {
-            font-size: 15px;
-            opacity: 0.9;
-        }
-
-        /* =====================================================
-           CONTAINER
-        ===================================================== */
-
-        .container {
-            padding: 40px;
-        }
-
-        /* =====================================================
-           TITLE
-        ===================================================== */
-
-        .report-title {
-            text-align: center;
-            margin-bottom: 35px;
-        }
-
-        .report-title h1 {
-            margin: 0;
-            color: #0f172a;
-            font-size: 30px;
-        }
-
-        .report-title p {
-            margin-top: 10px;
-            color: #64748b;
-            font-size: 14px;
-        }
-
-        /* =====================================================
-           INFO GRID
-        ===================================================== */
-
-        .info-grid {
-            width: 100%;
-            margin-bottom: 30px;
-        }
-
-        .info-box {
-            width: 48%;
-            display: inline-block;
-            background: white;
-            border: 1px solid #e2e8f0;
-            border-radius: 14px;
-            padding: 18px;
-            margin-bottom: 15px;
-            vertical-align: top;
-        }
-
-        .label {
-            font-size: 13px;
-            color: #64748b;
-            margin-bottom: 8px;
-        }
-
-        .value {
-            font-size: 18px;
-            font-weight: bold;
-            color: #0f172a;
-        }
-
-        /* =====================================================
-           PRESENCE CARD
-        ===================================================== */
-
-        .presence-card {
-            background: linear-gradient(135deg, #38bdf8, #2563eb);
-            color: white;
-            border-radius: 18px;
-            padding: 25px;
-            margin-bottom: 35px;
-            text-align: center;
-        }
-
-        .presence-card h2 {
-            margin: 0;
-            font-size: 20px;
-        }
-
-        .presence-value {
-            font-size: 52px;
-            font-weight: bold;
-            margin-top: 10px;
+        .subtitle {
+            color: #cbd5e1;
+            font-size: 12px;
+            margin-top: 5px;
         }
 
         /* =====================================================
@@ -126,24 +43,56 @@
         ===================================================== */
 
         .section {
-            background: white;
-            border: 1px solid #e2e8f0;
-            border-radius: 16px;
-            padding: 24px;
-            margin-bottom: 22px;
+            margin: 22px 35px;
+            page-break-inside: avoid;
         }
 
         .section-title {
-            font-size: 20px;
-            font-weight: bold;
-            margin-bottom: 16px;
+            background: #eff6ff;
             color: #2563eb;
+            padding: 10px 14px;
+            font-size: 14px;
+            font-weight: bold;
+            border-left: 4px solid #38bdf8;
+            margin-bottom: 10px;
         }
 
-        .section-content {
-            font-size: 15px;
+        /* =====================================================
+           TABLE
+        ===================================================== */
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 8px;
+        }
+
+        th {
+            background: #081120;
+            color: white;
+            font-weight: bold;
+        }
+
+        td {
+            background: #ffffff;
+        }
+
+        td,
+        th {
+            border: 1px solid #dbeafe;
+            padding: 10px;
+        }
+
+        /* =====================================================
+           PARAGRAPH
+        ===================================================== */
+
+        p {
             line-height: 1.8;
-            color: #334155;
+            background: #f8fafc;
+            padding: 12px;
+            border-radius: 6px;
+            border: 1px solid #e2e8f0;
         }
 
         /* =====================================================
@@ -151,28 +100,20 @@
         ===================================================== */
 
         .footer {
-            margin-top: 50px;
-            padding-top: 20px;
-            border-top: 1px solid #cbd5e1;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+
+            border-top: 2px solid #38bdf8;
+
             text-align: center;
+
+            font-size: 11px;
+
+            padding-top: 8px;
+
             color: #64748b;
-            font-size: 13px;
-        }
-
-        .signature {
-            margin-top: 50px;
-            text-align: right;
-        }
-
-        .signature-box {
-            display: inline-block;
-            text-align: center;
-        }
-
-        .signature-line {
-            width: 220px;
-            border-top: 1px solid #1e293b;
-            margin-bottom: 8px;
         }
     </style>
 
@@ -180,177 +121,231 @@
 
 <body>
 
-    <!-- =====================================================
-         HEADER
-    ====================================================== -->
+    <!-- HEADER -->
 
     <div class="header">
 
-        <div class="school-name">
+        <div class="title">
             Elite Coders Academy
         </div>
 
-        <div class="school-subtitle">
+        <div class="subtitle">
             Rapport pédagogique officiel
         </div>
 
     </div>
 
-    <!-- =====================================================
-         CONTENT
-    ====================================================== -->
+    <!-- INFORMATIONS -->
 
-    <div class="container">
+    <div class="section">
 
-        <!-- TITLE -->
-
-        <div class="report-title">
-
-            <h1>Rapport pédagogique</h1>
-
-            <p>
-                Suivi académique et pédagogique de l'étudiant
-            </p>
-
+        <div class="section-title">
+            Informations générales
         </div>
 
-        <!-- INFO -->
+        <table>
 
-        <div class="info-grid">
+            <tr>
+                <td width="30%">
+                    <strong>Étudiant</strong>
+                </td>
 
-            <div class="info-box">
-
-                <div class="label">Étudiant</div>
-
-                <div class="value">
+                <td>
                     {{ $rapport->etudiant->prenom }}
                     {{ $rapport->etudiant->nom }}
-                </div>
+                </td>
+            </tr>
 
-            </div>
+            <tr>
+                <td>
+                    <strong>Atelier</strong>
+                </td>
 
-            <div class="info-box">
-
-                <div class="label">Atelier</div>
-
-                <div class="value">
+                <td>
                     {{ $rapport->atelier->titre }}
-                </div>
+                </td>
+            </tr>
 
-            </div>
+            <tr>
+                <td>
+                    <strong>Période</strong>
+                </td>
 
-            <div class="info-box">
-
-                <div class="label">Date début</div>
-
-                <div class="value">
+                <td>
                     {{ $rapport->date_debut }}
-                </div>
-
-            </div>
-
-            <div class="info-box">
-
-                <div class="label">Date fin</div>
-
-                <div class="value">
+                    →
                     {{ $rapport->date_fin }}
-                </div>
+                </td>
+            </tr>
 
-            </div>
+        </table>
 
+    </div>
+
+    <!-- PRESENCE -->
+
+    <div class="section">
+
+        <div class="section-title">
+            Présence
         </div>
 
-        <!-- PRESENCE -->
+        <table>
 
-        <div class="presence-card">
+            <tr>
+                <th>Total séances</th>
+                <th>Séances assistées</th>
+                <th>Taux présence</th>
+            </tr>
 
-            <h2>Taux de présence</h2>
+            <tr>
+                <td>{{ $rapport->total_seances }}</td>
 
-            <div class="presence-value">
-                {{ $rapport->taux_presence }}%
-            </div>
+                <td>{{ $rapport->seances_assistees }}</td>
 
+                <td>
+                    {{ number_format($rapport->taux_presence, 2) }} %
+                </td>
+            </tr>
+
+        </table>
+
+    </div>
+
+    <!-- PERFORMANCE -->
+
+    <div class="section">
+
+        <div class="section-title">
+            Performance académique
         </div>
 
-        <!-- APPRECIATION -->
+        <table>
 
-        <div class="section">
+            <tr>
+                <th>Moyenne exercices</th>
+                <th>Moyenne examens</th>
+            </tr>
 
-            <div class="section-title">
-                Appréciation générale
-            </div>
+            <tr>
+                <td>{{ $rapport->moyenne_exercices }}</td>
 
-            <div class="section-content">
-                {{ $rapport->appreciation_generale }}
-            </div>
+                <td>{{ $rapport->moyenne_examen }}</td>
+            </tr>
 
+        </table>
+
+    </div>
+
+    <!-- MODULES -->
+
+    <div class="section">
+
+        <div class="section-title">
+            Modules de formation
         </div>
 
-        <!-- POINTS FORTS -->
+        <table>
 
-        <div class="section">
+            <tr>
+                <th width="50%">Modules terminés</th>
+                <th width="50%">Modules en cours</th>
+            </tr>
 
-            <div class="section-title">
-                Points forts
-            </div>
+            @php
+                $termines = preg_split('/[\r\n;]+/', $rapport->modules_termines ?? '');
+                $encours = preg_split('/[\r\n;]+/', $rapport->modules_en_cours ?? '');
+                $max = max(count($termines), count($encours));
+            @endphp
 
-            <div class="section-content">
-                {{ $rapport->points_forts }}
-            </div>
+            @for ($i = 0; $i < $max; $i++)
+                <tr>
 
+                    <td>
+                        {{ isset($termines[$i]) && trim($termines[$i]) != '' ? trim($termines[$i]) : '' }}
+                    </td>
+
+                    <td>
+                        {{ isset($encours[$i]) && trim($encours[$i]) != '' ? trim($encours[$i]) : '' }}
+                    </td>
+
+                </tr>
+            @endfor
+
+        </table>
+
+    </div>
+
+    <!-- APPRECIATION -->
+
+    <div class="section">
+
+        <div class="section-title">
+            Appréciation générale
         </div>
 
-        <!-- AMELIORATION -->
+        <p>
+            {{ $rapport->appreciation_generale }}
+        </p>
 
-        <div class="section">
+    </div>
 
-            <div class="section-title">
-                Points à améliorer
-            </div>
+    <!-- POINTS FORTS -->
 
-            <div class="section-content">
-                {{ $rapport->points_a_ameliorer }}
-            </div>
+    <div class="section">
 
+        <div class="section-title">
+            Points forts
         </div>
 
-        <!-- RECOMMANDATIONS -->
+        <p>
+            {{ $rapport->points_forts }}
+        </p>
 
-        <div class="section">
+    </div>
 
-            <div class="section-title">
-                Recommandations pédagogiques
-            </div>
+    <!-- AMELIORATIONS -->
 
-            <div class="section-content">
-                {{ $rapport->recommandations }}
-            </div>
+    <div class="section">
 
+        <div class="section-title">
+            Points à améliorer
         </div>
 
-        <!-- SIGNATURE -->
+        <p>
+            {{ $rapport->points_a_ameliorer }}
+        </p>
 
-        <div class="signature">
+    </div>
 
-            <div class="signature-box">
+    <!-- RECOMMANDATIONS -->
 
-                <div class="signature-line"></div>
+    <div class="section">
 
-                <strong>Signature du formateur</strong>
-
-            </div>
-
+        <div class="section-title">
+            Recommandations pédagogiques
         </div>
 
-        <!-- FOOTER -->
+        <p>
+            {{ $rapport->recommandations }}
+        </p>
 
-        <div class="footer">
+    </div>
 
-            Elite Coders Academy • Rapport généré automatiquement •
-            {{ now()->format('d/m/Y H:i') }}
+    <!-- FOOTER -->
 
-        </div>
+    <div class="footer">
+
+        <strong>Elite Coders Academy</strong>
+        © {{ date('Y') }}
+
+        ||
+
+        elitecodersacademy@gmail.com
+
+        ||
+
+        0708359267
 
     </div>
 
