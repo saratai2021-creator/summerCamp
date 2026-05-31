@@ -38,15 +38,16 @@ import CreateReport from "./pages/formateur/CreateReport";
 import ReportResult from "./pages/formateur/ReportResult";
 import ReportsHistory from "./pages/formateur/ReportsHistory";
 import AtelierReports from "./pages/formateur/AtelierReports";
+import ParentReports from "./visiteur/pages/ParentReports";
 
 function LayoutWrapper() {
-  const location = useLocation();
+  // const location = useLocation();
 
   //const isAdminRoute = location.pathname.startsWith("/admin");
 
   return (
     <>
-    <Navbar />
+      <Navbar />
       <Routes>
         {/* HOME */}
         <Route
@@ -66,16 +67,17 @@ function LayoutWrapper() {
         <Route path="/register" element={<Register />} />
 
         {/* VISITEUR */}
-       {/* PARENT */}
-<Route path="/ateliers" element={<Ateliers />} />
+        {/* PARENT */}
+        <Route path="/ateliers" element={<Ateliers />} />
 
-<Route path="/reservation" element={<Reservation />} />
+        <Route path="/reservation" element={<Reservation />} />
 
-<Route path="/parent" element={<Dashboard />} />
+        <Route path="/parent" element={<Dashboard />} />
 
-<Route path="/parent/profile" element={<Profile />} />
+        <Route path="/parent/profile" element={<Profile />} />
 
-<Route path="/parent/reservations" element={<MesReservations />} />
+        <Route path="/parent/reservations" element={<MesReservations />} />
+        <Route path="/parent/rapports" element={<ParentReports />} />
         {/* ADMIN */}
         <Route
           path="/admin/*"

@@ -34,6 +34,12 @@ Route::middleware('auth:sanctum')->group(function () {
 
     // reservation
     Route::post('/reservations', [ReservationController::class, 'store']);
+
+    // rapports parent
+    Route::get('/parent/rapports', [
+        RapportController::class,
+        'parentReports'
+    ]);
 });
 
 /*
