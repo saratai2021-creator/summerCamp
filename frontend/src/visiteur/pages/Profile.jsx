@@ -44,7 +44,7 @@ export function Profile() {
 
         <button
           className="back-btn"
-          onClick={() => navigate("/visiteur")}
+          onClick={() => navigate("/parent")}
         >
           Dashboard
         </button>
@@ -60,11 +60,11 @@ export function Profile() {
         </div>
 
         <h1>
-          {user?.name || "Visitor"}
+          {user?.name || "parent"}
         </h1>
 
         <p className="profile-role">
-          {user?.role || "visiteur"}
+          {user?.role || "parent"}
         </p>
 
         <div className="profile-info">

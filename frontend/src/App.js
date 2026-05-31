@@ -42,12 +42,11 @@ import AtelierReports from "./pages/formateur/AtelierReports";
 function LayoutWrapper() {
   const location = useLocation();
 
-  const isAdminRoute = location.pathname.startsWith("/admin");
+  //const isAdminRoute = location.pathname.startsWith("/admin");
 
   return (
     <>
-      {!isAdminRoute && <Navbar />}
-
+    <Navbar />
       <Routes>
         {/* HOME */}
         <Route
@@ -67,16 +66,16 @@ function LayoutWrapper() {
         <Route path="/register" element={<Register />} />
 
         {/* VISITEUR */}
-        <Route path="/ateliers" element={<Ateliers />} />
+       {/* PARENT */}
+<Route path="/ateliers" element={<Ateliers />} />
 
-        <Route path="/reservation" element={<Reservation />} />
+<Route path="/reservation" element={<Reservation />} />
 
-        <Route path="/visiteur" element={<Dashboard />} />
+<Route path="/parent" element={<Dashboard />} />
 
-        <Route path="/visiteur/profile" element={<Profile />} />
+<Route path="/parent/profile" element={<Profile />} />
 
-        <Route path="/visiteur/reservations" element={<MesReservations />} />
-
+<Route path="/parent/reservations" element={<MesReservations />} />
         {/* ADMIN */}
         <Route
           path="/admin/*"
@@ -121,7 +120,7 @@ function LayoutWrapper() {
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
 
-      {!isAdminRoute && <Footer />}
+      <Footer />
     </>
   );
 }

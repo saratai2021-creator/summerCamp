@@ -9,7 +9,7 @@
 /* ─── WHY CARD ─── */
 .why-card {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
   gap: 16px;
   background: #ffffff;
@@ -26,9 +26,9 @@
 
 .why-card:hover {
   transform: translateY(-4px);
-  background: #faf5ff;
-  border-color: #a855f7;
-  box-shadow: 0 12px 32px rgba(168,85,247,0.10);
+  /* background: #fa3c27; */
+  border-color: #351553;
+  box-shadow: 0 12px 32px rgba(212, 180, 243, 0.1);
 }
 
 /* ─── PROGRAM CARD ─── */

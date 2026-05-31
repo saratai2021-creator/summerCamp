@@ -11,7 +11,7 @@ import {
   useParams
 } from "react-router-dom"
 
-import "../../styles/admin.css"
+import "../../styles/formAdmin.css"
 
 export function AdminAtelierForm() {
 

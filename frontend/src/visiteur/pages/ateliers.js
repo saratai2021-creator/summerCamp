@@ -27,7 +27,7 @@ export function Ateliers() {
 
   return (
 
-    <div className="cards-container mt-3 mx-1">
+    <div className="cards-container">
 
       {ateliers.map((atelier) => (
 

@@ -1,5 +1,5 @@
 /* =========================
-   CONTAINER
+   PAGE
 ========================= */
 
 .reservation-container {
@@ -8,11 +8,11 @@
 
     background: #0f172a;
 
-    padding: 35px;
-
-    font-family: Arial, sans-serif;
+    padding: 40px;
 
     color: white;
+
+    font-family: Arial, sans-serif;
 }
 
 /* =========================
@@ -27,7 +27,7 @@
 
     align-items: center;
 
-    margin-bottom: 40px;
+    margin-bottom: 35px;
 }
 
 .reservation-logo {
@@ -37,20 +37,147 @@
     font-weight: bold;
 
     color: #38bdf8;
-
-    margin-bottom: 5px;
 }
 
 .reservation-subtitle {
 
     color: #94a3b8;
 
-    font-size: 15px;
+    margin-top: 5px;
 }
 
 /* =========================
-   BACK BUTTON
+   HERO
 ========================= */
+
+.reservation-hero {
+
+    background: #111827;
+
+    border: 1px solid #1e293b;
+
+    border-radius: 22px;
+
+    padding: 35px;
+
+    margin-bottom: 30px;
+
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+.reservation-hero h1 {
+
+    font-size: 38px;
+
+    margin-bottom: 12px;
+}
+
+.reservation-hero p {
+
+    color: #94a3b8;
+
+    line-height: 1.7;
+}
+
+/* =========================
+   FORM CARD
+========================= */
+
+.reservation-form {
+
+    max-width: 700px;
+
+    margin: auto;
+
+    background: #111827;
+
+    border: 1px solid #1e293b;
+
+    border-radius: 22px;
+
+    padding: 30px;
+
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+/* =========================
+   LABEL
+========================= */
+
+.atelier-select label {
+
+    display: block;
+
+    margin-bottom: 10px;
+
+    color: white;
+
+    font-weight: bold;
+}
+
+/* =========================
+   SELECT
+========================= */
+
+.atelier-select select {
+
+    width: 100%;
+
+    background: #1e293b;
+
+    border: 1px solid #334155;
+
+    color: white;
+
+    padding: 14px;
+
+    border-radius: 12px;
+
+    font-size: 15px;
+
+    transition: 0.3s;
+}
+
+.atelier-select select:focus {
+
+    outline: none;
+
+    border-color: #38bdf8;
+}
+
+/* =========================
+   BUTTONS
+========================= */
+
+.btn-reserve {
+
+    width: 100%;
+
+    margin-top: 25px;
+
+    background: #38bdf8;
+
+    color: #0f172a;
+
+    border: none;
+
+    padding: 14px;
+
+    border-radius: 12px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+.btn-reserve:hover {
+
+    background: #0ea5e9;
+
+    transform: translateY(-2px);
+}
 
 .back-btn {
 
@@ -67,151 +194,11 @@
     cursor: pointer;
 
     transition: 0.3s;
-
-    font-weight: bold;
 }
 
 .back-btn:hover {
 
-    background: #38bdf8;
-
-    color: #0f172a;
-}
-
-/* =========================
-   HERO
-========================= */
-
-.reservation-hero {
-
-    background: linear-gradient(
-        135deg,
-        #1e293b,
-        #111827
-    );
-
-    border-radius: 24px;
-
-    padding: 45px;
-
-    margin-bottom: 40px;
-
-    border: 1px solid #334155;
-}
-
-.reservation-hero h1 {
-
-    font-size: 42px;
-
-    margin-bottom: 15px;
-}
-
-.reservation-hero p {
-
-    color: #cbd5e1;
-
-    font-size: 18px;
-}
-
-/* =========================
-   FORM
-========================= */
-
-.reservation-form {
-
-    max-width: 650px;
-
-    margin: auto;
-
-    background: #111827;
-
-    border: 1px solid #1e293b;
-
-    border-radius: 24px;
-
-    padding: 40px;
-
-    box-shadow: 0 10px 30px rgba(0,0,0,0.25);
-}
-
-/* =========================
-   SELECT
-========================= */
-
-.atelier-select {
-
-    display: flex;
-
-    flex-direction: column;
-
-    gap: 12px;
-}
-
-.atelier-select label {
-
-    font-size: 17px;
-
-    color: #cbd5e1;
-}
-
-.atelier-select select {
-
-    background: #1e293b;
-
-    color: white;
-
-    border: 1px solid #334155;
-
-    padding: 16px;
-
-    border-radius: 14px;
-
-    font-size: 16px;
-
-    outline: none;
-
-    transition: 0.3s;
-}
-
-.atelier-select select:focus {
-
     border-color: #38bdf8;
-}
-
-/* =========================
-   BUTTON
-========================= */
-
-.btn-reserve {
-
-    width: 100%;
-
-    margin-top: 30px;
-
-    background: #38bdf8;
-
-    color: #0f172a;
-
-    border: none;
-
-    padding: 16px;
-
-    border-radius: 14px;
-
-    font-size: 16px;
-
-    font-weight: bold;
-
-    cursor: pointer;
-
-    transition: 0.3s;
-}
-
-.btn-reserve:hover {
-
-    background: #0ea5e9;
-
-    transform: scale(1.02);
 }
 
 /* =========================
@@ -234,11 +221,6 @@
         gap: 20px;
     }
 
-    .reservation-hero {
-
-        padding: 30px;
-    }
-
     .reservation-hero h1 {
 
         font-size: 30px;
@@ -246,6 +228,6 @@
 
     .reservation-form {
 
-        padding: 30px 20px;
+        padding: 20px;
     }
 }
