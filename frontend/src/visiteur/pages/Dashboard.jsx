@@ -24,7 +24,7 @@ export function Dashboard() {
         <div>
           <h2 className="dashboard-logo">Summer Camp</h2>
 
-          <p className="dashboard-subtitle">Visitor Space</p>
+          {/* <p className="dashboard-subtitle">Visitor Space</p> */}
         </div>
 
         {/* <button
