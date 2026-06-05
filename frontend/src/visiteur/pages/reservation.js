@@ -1,162 +1,125 @@
-import { useEffect, useState } from "react"
-import { useNavigate } from "react-router-dom"
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-import { getAteliers } from "../../shared/services/AdminService"
+import { getAteliers } from "../../shared/services/AdminService";
 
-import "../../styles/Reservation.css"
+import "../../styles/Reservation.css";
 
 export function Reservation() {
+  const navigate = useNavigate();
 
-  const navigate = useNavigate()
-
-  const [ateliers, setAteliers] = useState([])
+  const [ateliers, setAteliers] = useState([]);
 
   const [formData, setFormData] = useState({
-    atelier_id: ""
-  })
+    atelier_id: "",
+  });
 
   /* ===============================
      LOAD ATELIERS
   =============================== */
   useEffect(() => {
-
     const fetchAteliers = async () => {
-
       try {
+        const data = await getAteliers();
 
-        const data = await getAteliers()
-
-        setAteliers(data || [])
-
+        setAteliers(data || []);
       } catch (err) {
-
-        console.error("Error loading ateliers:", err)
+        console.error("Error loading ateliers:", err);
       }
-    }
+    };
 
-    fetchAteliers()
-
-  }, [])
+    fetchAteliers();
+  }, []);
 
   /* ===============================
      INPUT CHANGE
   =============================== */
   const handleChange = (e) => {
-
     setFormData({
-
       ...formData,
 
-      [e.target.name]: e.target.value
-    })
-  }
+      [e.target.name]: e.target.value,
+    });
+  };
 
   /* ===============================
      SUBMIT RESERVATION
   =============================== */
   const handleSubmit = async (e) => {
-
-    e.preventDefault()
+    e.preventDefault();
 
     try {
+      const token = localStorage.getItem("token");
+      console.log(localStorage.getItem("token"));
+      const response = await fetch("http://127.0.0.1:8000/api/reservations", {
+        method: "POST",
 
-      const token = localStorage.getItem("token")
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          Authorization: `Bearer ${token}`,
+        },
 
-      const response = await fetch(
-        "http://127.0.0.1:8000/api/reservations",
-        {
-          method: "POST",
+        body: JSON.stringify(formData),
+      });
 
-          headers: {
-            "Content-Type": "application/json",
-            "Accept": "application/json",
-            "Authorization": `Bearer ${token}`
-          },
-
-          body: JSON.stringify(formData)
-        }
-      )
-
-      const data = await response.json()
+      const data = await response.json();
 
       if (!response.ok) {
+        console.error(data);
 
-        console.error(data)
+        if (data.errors) {
+          const firstError = Object.values(data.errors)[0][0];
 
-        alert(data.message || "Erreur serveur")
+          alert(firstError);
+        } else {
+          alert(data.message || "Erreur serveur");
+        }
 
-        return
+        return;
       }
 
-      alert("Réservation envoyée avec succès")
+      alert("Réservation envoyée avec succès");
 
       setFormData({
-        atelier_id: ""
-      })
-
+        atelier_id: "",
+      });
     } catch (err) {
+      console.error("Network error:", err);
 
-      console.error("Network error:", err)
-
-      alert("Erreur serveur")
+      alert("Erreur serveur");
     }
-  }
+  };
 
   return (
-
     <div className="reservation-container">
-
       {/* TOPBAR */}
 
       <div className="reservation-topbar">
-
         <div>
+          <h2 className="reservation-logo">Summer Camp</h2>
 
-          <h2 className="reservation-logo">
-            Summer Camp
-          </h2>
-
-          <p className="reservation-subtitle">
-            Workshop Reservation
-          </p>
-
+          <p className="reservation-subtitle">Workshop Reservation</p>
         </div>
 
-        <button
-          className="back-btn"
-          onClick={() => navigate("/visiteur")}
-        >
+        <button className="back-btn" onClick={() => navigate("/visiteur")}>
           Dashboard
         </button>
-
       </div>
 
       {/* HERO */}
 
       <div className="reservation-hero">
+        <h1>Reserve Your Workshop 🚀</h1>
 
-        <h1>
-          Reserve Your Workshop 🚀
-        </h1>
-
-        <p>
-          Choose an atelier and confirm your reservation.
-        </p>
-
+        <p>Choose an atelier and confirm your reservation.</p>
       </div>
 
       {/* FORM */}
 
-      <form
-        onSubmit={handleSubmit}
-        className="reservation-form"
-      >
-
+      <form onSubmit={handleSubmit} className="reservation-form">
         <div className="atelier-select">
-
-          <label>
-            Choose an atelier
-          </label>
+          <label>Choose an atelier</label>
 
           <select
             name="atelier_id"
@@ -164,34 +127,18 @@ export function Reservation() {
             onChange={handleChange}
             required
           >
-
-            <option value="">
-              -- choose atelier --
-            </option>
+            <option value="">-- choose atelier --</option>
 
             {ateliers.map((atelier) => (
-
-              <option
-                key={atelier.id}
-                value={atelier.id}
-              >
+              <option key={atelier.id} value={atelier.id}>
                 {atelier.titre}
               </option>
-
             ))}
-
           </select>
-
         </div>
 
-        <button className="btn-reserve">
-
-          Reserve Now
-
-        </button>
-
+        <button className="btn-reserve">Reserve Now</button>
       </form>
-
     </div>
-  )
+  );
 }
