@@ -12,8 +12,19 @@ export function Navbar() {
    //veut dire :
    //Est-ce qu'un utilisateur est connecté ?
   const isFormateur = user?.role === "formateur";
+  // <<<<<<< HEAD
+
+  //   const isParent = user?.role === "parent";
+
+  //   /*
+  //   |--------------------------------------------------------------------------
+  //   | Logout
+  //   |--------------------------------------------------------------------------
+  //   */
+  // =======
   const isParent = user?.role === "parent";
   const isAdmin = user?.role === "admin";
+  // >>>>>>> 947ef4f569d34e65a0b5f3820c2fc2e783609f2e
 
   function logout() {
     localStorage.removeItem("user");
@@ -33,10 +44,7 @@ export function Navbar() {
       <div className="nav-links">
         {/* HOME */}
 
-        <Link
-          style={{ textDecoration: "none" }}
-          to="/"
-        >
+        <Link style={{ textDecoration: "none" }} to="/">
           Accueil
         </Link>
 //J'utilise Link au lieu de balise a car 
@@ -44,20 +52,14 @@ export function Navbar() {
 //  l'application React.
         {/* ATELIERS */}
 
-        <Link
-          style={{ textDecoration: "none" }}
-          to="/ateliers"
-        >
+        <Link style={{ textDecoration: "none" }} to="/ateliers">
           Ateliers
         </Link>
 
         {/* ADMIN */}
 
         {isAdmin && (
-          <Link
-            style={{ textDecoration: "none" }}
-            to="/admin"
-          >
+          <Link style={{ textDecoration: "none" }} to="/admin">
             Espace Admin
           </Link>
         )}
@@ -66,17 +68,22 @@ export function Navbar() {
 
         {isFormateur && (
           <>
+            {/* <<<<<<< HEAD */}
+            {/* WORKSPACE */}
+
+            <Link style={{ textDecoration: "none" }} to="/formateur">
+              Workspace
+            </Link>
+            {/* =======
             <Link
               style={{ textDecoration: "none" }}
               to="/formateur"
             >
               Espace Formateur
-            </Link>
+>>>>>>> 947ef4f569d34e65a0b5f3820c2fc2e783609f2e
+            </Link> */}
 
-            <Link
-              style={{ textDecoration: "none" }}
-              to="/formateur/rapports"
-            >
+            <Link style={{ textDecoration: "none" }} to="/formateur/rapports">
               Historique
             </Link>
           </>
@@ -85,46 +92,40 @@ export function Navbar() {
         {/* PARENT */}
 
         {isParent && (
+          // <<<<<<< HEAD
+          //           <Link style={{ textDecoration: "none" }} to="/visiteur">
+          //             Dashboard
+          //           </Link>
+          //         )}
+
+          //         {/* NON CONNECTÉ */}
+          // =======
           <>
-            <Link
-              style={{ textDecoration: "none" }}
-              to="/parent"
-            >
+            <Link style={{ textDecoration: "none" }} to="/parent">
               Espace Parent
             </Link>
 
-            <Link
-              style={{ textDecoration: "none" }}
-              to="/parent/reservations"
-            >
+            <Link style={{ textDecoration: "none" }} to="/parent/reservations">
               Mes Réservations
             </Link>
           </>
         )}
 
         {/* NOT LOGGED IN */}
+        {/* >>>>>>> 947ef4f569d34e65a0b5f3820c2fc2e783609f2e */}
 
         {!isLoggedIn ? (
           <>
-            <Link
-              style={{ textDecoration: "none" }}
-              to="/login"
-            >
+            <Link style={{ textDecoration: "none" }} to="/login">
               Connexion
             </Link>
 
-            <Link
-              style={{ textDecoration: "none" }}
-              to="/register"
-            >
+            <Link style={{ textDecoration: "none" }} to="/register">
               Inscription
             </Link>
           </>
         ) : (
-          <button
-            className="logout-btn"
-            onClick={logout}
-          >
+          <button className="logout-btn" onClick={logout}>
             Logout
           </button>
         )}
@@ -134,6 +135,7 @@ export function Navbar() {
 }
 
 export default Navbar;
+
 // Quand l'utilisateur se connecte,
 //  React envoie l'email et le mot de 
 //  passe à Laravel. Laravel vérifie les

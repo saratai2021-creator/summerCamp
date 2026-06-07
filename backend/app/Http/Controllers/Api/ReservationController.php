@@ -82,6 +82,53 @@ class ReservationController extends Controller
         ], 201);
     }
 
+
+    // public function store(Request $request)
+    // {
+    //     $request->validate([
+    //         'atelier_id' => 'required|exists:ateliers,id'
+    //     ]);
+
+    //     $user = Auth::user();
+
+    //     $etudiant = Etudiant::where('user_id', $user->id)->first();
+
+    //     if (!$etudiant) {
+
+    //         return response()->json([
+    //             'message' => 'Aucun étudiant trouvé'
+    //         ], 404);
+    //     }
+
+    //     // find atelier
+    //     $atelier = Atelier::findOrFail($request->atelier_id);
+
+    //     // check capacity
+    //     if ($atelier->capacite <= 0) {
+
+    //         return response()->json([
+    //             'message' => 'Atelier complet'
+    //         ], 400);
+    //     }
+
+    //     // decrease capacity
+    //     $atelier->capacite -= 1;
+
+    //     $atelier->save();
+
+    //     // create reservation
+    //     $reservation = Reservation::create([
+    //         'etudiant_id' => $etudiant->id,
+    //         'atelier_id' => $atelier->id,
+    //         'statut' => 'en_attente'
+    //     ]);
+
+    //     return response()->json([
+    //         'message' => 'Reservation created successfully',
+    //         'reservation' => $reservation
+    //     ], 201);
+    // }
+
     // ==============================
     // Confirm reservation
     // ==============================
@@ -89,8 +136,10 @@ class ReservationController extends Controller
     {
         $reservation = Reservation::findOrFail($id);
 
+
         $reservation->statut = 'payee';
-        $reservation->save();
+    //   $reservation->statut = 'confirme';
+       $reservation->save();
 
         return response()->json([
             'message' => 'Reservation confirmed',
@@ -113,7 +162,10 @@ class ReservationController extends Controller
             $atelier->save();
         }
 
+
         $reservation->statut = 'annulee';
+
+
         $reservation->save();
 
         return response()->json([
@@ -121,6 +173,7 @@ class ReservationController extends Controller
             'reservation' => $reservation
         ]);
     }
+
     public function mesReservations()
 {
     $etudiant = Etudiant::where(
@@ -132,4 +185,5 @@ class ReservationController extends Controller
         ->where('etudiant_id', $etudiant->id)
         ->get();
 }
+
 }

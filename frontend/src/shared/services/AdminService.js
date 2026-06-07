@@ -284,6 +284,30 @@ export const getAtelierReports = async (id) => {
 |--------------------------------------------------------------------------
 */
 
+// export const createRapport = async (data) => {
+//   try {
+//     const res = await fetch(`${API_URL}/formateur/rapports`, {
+//       method: "POST",
+
+//       headers: {
+//         Accept: "application/json",
+
+//         "Content-Type": "application/json",
+
+//         Authorization: `Bearer ${getToken()}`,
+//       },
+
+//       body: JSON.stringify(data),
+//     });
+
+//     return await handleResponse(res);
+//   } catch (e) {
+//     console.error(e);
+
+//     return null;
+//   }
+// };
+
 export const createRapport = async (data) => {
   try {
     const res = await fetch(`${API_URL}/formateur/rapports`, {
@@ -299,6 +323,20 @@ export const createRapport = async (data) => {
 
       body: JSON.stringify(data),
     });
+
+    /*
+    |--------------------------------------------------------------------------
+    | Validation Laravel
+    |--------------------------------------------------------------------------
+    */
+
+    if (res.status === 422) {
+      const errorData = await res.json();
+
+      return {
+        validationErrors: errorData.errors,
+      };
+    }
 
     return await handleResponse(res);
   } catch (e) {

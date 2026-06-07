@@ -56,9 +56,9 @@ function FormateurAteliers() {
   |--------------------------------------------------------------------------
   */
 
-  function historyReports() {
-    navigate("/formateur/rapports");
-  }
+  // function historyReports() {
+  //   navigate("/formateur/rapports");
+  // }
 
   /*
   |--------------------------------------------------------------------------
@@ -87,10 +87,10 @@ function FormateurAteliers() {
 
         {/* HISTORY BUTTON */}
 
-        <button className="history-btn" onClick={historyReports}>
+        {/* <button className="history-btn" onClick={historyReports}>
           <i className="bi bi-clock-history"></i>
           Historique
-        </button>
+        </button> */}
       </div>
 
       {/* TOP BAR */}

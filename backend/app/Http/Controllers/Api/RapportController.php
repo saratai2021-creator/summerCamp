@@ -9,11 +9,11 @@ use App\Models\Rapport;
 use Illuminate\Support\Facades\Mail;
 
 use App\Mail\RapportMail;
-
+use App\Models\Etudiant;
 use Barryvdh\DomPDF\Facade\Pdf;
 
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 class RapportController extends Controller
@@ -390,25 +390,67 @@ public function sendEmail(Rapport $rapport)
     |--------------------------------------------------------------------------
     */
 
-    public function rapportsByEtudiant(
-        $atelier_id,
-        $etudiant_id
-    ) {
+    // public function rapportsByEtudiant(
+    //     $atelier_id,
+    //     $etudiant_id
+    // ) {
 
-        $rapports = Rapport::with([
+    //     $rapports = Rapport::with([
 
-            'atelier'
+    //         'atelier'
 
-        ])
+    //     ])
 
-        ->where('etudiant_id', $etudiant_id)
+    //     ->where('etudiant_id', $etudiant_id)
 
-        ->where('atelier_id', $atelier_id)
+    //     ->where('atelier_id', $atelier_id)
+
+    //     ->latest()
+
+    //     ->get();
+
+    //     return response()->json($rapports);
+    // }
+
+
+
+    /*
+|--------------------------------------------------------------------------
+| Rapports du parent connecté
+|--------------------------------------------------------------------------
+*/
+
+public function parentReports()
+{
+    $user = Auth::user();
+
+    /*
+    |--------------------------------------------------------------------------
+    | Trouver étudiant lié au parent
+    |--------------------------------------------------------------------------
+    */
+
+    $etudiant = Etudiant::where('parent_email', $user->email)->first();
+
+    if (!$etudiant) {
+
+        return response()->json([]);
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Rapports étudiant
+    |--------------------------------------------------------------------------
+    */
+
+    $rapports = Rapport::with(['atelier'])
+
+        ->where('etudiant_id', $etudiant->id)
 
         ->latest()
 
         ->get();
 
-        return response()->json($rapports);
-    }
+    return response()->json($rapports);
+}
 }
