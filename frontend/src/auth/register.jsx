@@ -22,9 +22,7 @@ export function Register() {
 
   const [error, setError] = useState("")
 
-  // ===============================
-  // HANDLE INPUT CHANGE
-  // ===============================
+
   const handleChange = (e) => {
 
     setFormData({
@@ -36,9 +34,7 @@ export function Register() {
     })
   }
 
-  // ===============================
-  // REGISTER
-  // ===============================
+
   const handleSubmit = async (e) => {
 
     e.preventDefault()
@@ -76,7 +72,7 @@ export function Register() {
 
   alert("Compte créé avec succès")
 
-  navigate("/visiteur")
+  navigate("/parent")
       } else {
 
         setError(

@@ -2,43 +2,55 @@ import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 
 import "../../styles/MesReservations.css"
-
+import {
+   getMesReservations
+}
+from "../../shared/services/AdminService"
 export function MesReservations() {
 
   const navigate = useNavigate()
 
   const [reservations, setReservations] = useState([])
 
-  /* ===============================
-     LOAD RESERVATIONS
-  =============================== */
   useEffect(() => {
 
-    // temporary fake data
+   loadReservations()
 
-    setReservations([
+}, [])
 
-      {
-        id: 1,
-        atelier: "Laravel",
-        statut: "en_attente",
-        date: "2026-06-01"
-      },
+const loadReservations = async () => {
 
-      {
-        id: 2,
-        atelier: "React",
-        statut: "confirme",
-        date: "2026-06-10"
-      }
+   const data =
+      await getMesReservations()
 
-    ])
+   setReservations(data || [])
 
-  }, [])
+}
+  // useEffect(() => {
 
-  /* ===============================
-     CANCEL RESERVATION
-  =============================== */
+  //   // temporary fake data
+
+  //   setReservations([
+
+  //     {
+  //       id: 1,
+  //       atelier: "Laravel",
+  //       statut: "en_attente",
+  //       date: "2026-06-01"
+  //     },
+
+  //     {
+  //       id: 2,
+  //       atelier: "React",
+  //       statut: "confirme",
+  //       date: "2026-06-10"
+  //     }
+
+  //   ])
+
+  // }, [])
+
+
   const handleCancel = (id) => {
 
     const confirmCancel = window.confirm(
@@ -120,13 +132,13 @@ export function MesReservations() {
             </div>
 
             <h2>
-              {reservation.atelier}
+              {reservation.atelier?.titre}
             </h2>
 
             <p>
               <strong>Date :</strong>
               {" "}
-              {reservation.date}
+              {reservation.atelier?.date_debut}
             </p>
 
             <div className="status-box">

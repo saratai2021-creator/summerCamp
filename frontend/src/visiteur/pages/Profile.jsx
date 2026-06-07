@@ -100,7 +100,7 @@ export function Profile() {
             </span>
 
             <span className="value">
-              {user?.role || "visiteur"}
+              {user?.role || "parent"}
             </span>
 
           </div>

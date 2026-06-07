@@ -13,6 +13,11 @@ class AuthController extends Controller
     // ==============================
     // Login
     // ==============================
+    // Les mots de passe sont stockés chiffrés
+    // dans la base de données. On ne peut donc 
+    // pas comparer directement les mots de passe. 
+    // Hash::check compare le mot de passe saisi avec
+    //  sa version chiffrée stockée dans la base.
     public function login(Request $request)
     {
         $request->validate([
@@ -76,13 +81,13 @@ class AuthController extends Controller
 
         'parent_password' => bcrypt($request->parent_password)
     ]);
-
+$token = $user->createToken('api-token')->plainTextToken;
     return response()->json([
 
         'message' => 'Register successful',
 
         'user' => $user,
-
+          'token'=>$token,
         'etudiant' => $etudiant
 
     ], 201);

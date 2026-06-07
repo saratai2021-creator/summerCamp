@@ -34,7 +34,7 @@ export function Dashboard() {
           </h2>
 
           <p className="dashboard-subtitle">
-            Visitor Space
+            Parent Space
           </p>
 
         </div>
@@ -57,7 +57,7 @@ export function Dashboard() {
           <h1>
             Welcome back,
             {" "}
-            {user?.name || "Visitor"} 👋
+            {user?.name || "Parent"} 👋
           </h1>
 
           <p>

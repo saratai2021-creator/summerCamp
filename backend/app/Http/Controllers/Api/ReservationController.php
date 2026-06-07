@@ -26,30 +26,34 @@ class ReservationController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nom' => 'required|string',
-            'prenom' => 'required|string',
-            'date_naissance' => 'required|date',
-            'parent_telephone' => 'required|string',
+            // 'nom' => 'required|string',
+            // 'prenom' => 'required|string',
+            // 'date_naissance' => 'required|date',
+            // 'parent_telephone' => 'required|string',
 
-            'parent_email' => 'required|email|unique:etudiants,parent_email',
-            'parent_password' => 'required|min:6',
+            // 'parent_email' => 'required|email|unique:etudiants,parent_email',
+            // 'parent_password' => 'required|min:6',
 
             'atelier_id' => 'required|exists:ateliers,id'
         ]);
 
-        // create etudiant
-        $etudiant = Etudiant::create([
-          //'user_id' => Auth::id(),
-        'user_id' => 1,
-            'nom' => $request->nom,
-            'prenom' => $request->prenom,
-            'date_naissance' => $request->date_naissance,
+       $etudiant = Etudiant::where(
+    'user_id',
+    Auth::id()
+)->first();
 
-            'parent_telephone' => $request->parent_telephone,
+        // $etudiant = Etudiant::create([
+        //   'user_id' => Auth::id(),
+        // 'user_id' => 1,
+        //     'nom' => $request->nom,
+        //     'prenom' => $request->prenom,
+        //     'date_naissance' => $request->date_naissance,
 
-            'parent_email' => $request->parent_email,
-            'parent_password' => bcrypt($request->parent_password)
-        ]);
+        //     'parent_telephone' => $request->parent_telephone,
+
+        //     'parent_email' => $request->parent_email,
+        //     'parent_password' => bcrypt($request->parent_password)
+        // ]);
 
         // find atelier
         $atelier = Atelier::findOrFail($request->atelier_id);
@@ -85,7 +89,7 @@ class ReservationController extends Controller
     {
         $reservation = Reservation::findOrFail($id);
 
-        $reservation->statut = 'confirme';
+        $reservation->statut = 'payee';
         $reservation->save();
 
         return response()->json([
@@ -109,7 +113,7 @@ class ReservationController extends Controller
             $atelier->save();
         }
 
-        $reservation->statut = 'annule';
+        $reservation->statut = 'annulee';
         $reservation->save();
 
         return response()->json([
@@ -117,4 +121,15 @@ class ReservationController extends Controller
             'reservation' => $reservation
         ]);
     }
+    public function mesReservations()
+{
+    $etudiant = Etudiant::where(
+        'user_id',
+        Auth::id()
+    )->first();
+
+    return Reservation::with('atelier')
+        ->where('etudiant_id', $etudiant->id)
+        ->get();
+}
 }

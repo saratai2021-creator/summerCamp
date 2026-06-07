@@ -15,9 +15,6 @@ export function Reservation() {
     atelier_id: ""
   })
 
-  /* ===============================
-     LOAD ATELIERS
-  =============================== */
   useEffect(() => {
 
     const fetchAteliers = async () => {
@@ -38,9 +35,7 @@ export function Reservation() {
 
   }, [])
 
-  /* ===============================
-     INPUT CHANGE
-  =============================== */
+
   const handleChange = (e) => {
 
     setFormData({
@@ -51,9 +46,7 @@ export function Reservation() {
     })
   }
 
-  /* ===============================
-     SUBMIT RESERVATION
-  =============================== */
+
   const handleSubmit = async (e) => {
 
     e.preventDefault()
@@ -124,7 +117,7 @@ export function Reservation() {
 
         <button
           className="back-btn"
-          onClick={() => navigate("/visiteur")}
+          onClick={() => navigate("/parent")}
         >
           Dashboard
         </button>

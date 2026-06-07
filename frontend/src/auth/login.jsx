@@ -16,9 +16,8 @@ export function Login() {
 
   const [error, setError] = useState("")
 
-  /* ===============================
-     CHECK TOKEN
-  =============================== */
+   
+
   useEffect(() => {
 
     const token = localStorage.getItem("token")
@@ -49,7 +48,7 @@ export function Login() {
 
     } else {
 
-      navigate("/visiteur")
+      navigate("/parent")
     }
   }
 

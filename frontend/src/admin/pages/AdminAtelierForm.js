@@ -34,9 +34,7 @@ export function AdminAtelierForm() {
 
   })
 
-  /* ===============================
-     LOAD ATELIER WHEN EDITING
-  =============================== */
+
   useEffect(() => {
 
     if (id) {

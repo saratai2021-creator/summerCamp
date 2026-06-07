@@ -38,6 +38,7 @@ import CreateReport from "./pages/formateur/CreateReport";
 import ReportResult from "./pages/formateur/ReportResult";
 import ReportsHistory from "./pages/formateur/ReportsHistory";
 import AtelierReports from "./pages/formateur/AtelierReports";
+import { ParentRoute } from "./visiteur/components/ParentRoute";
 
 function LayoutWrapper() {
   const location = useLocation();
@@ -67,15 +68,25 @@ function LayoutWrapper() {
 
         {/* VISITEUR */}
        {/* PARENT */}
+       
 <Route path="/ateliers" element={<Ateliers />} />
 
 <Route path="/reservation" element={<Reservation />} />
 
-<Route path="/parent" element={<Dashboard />} />
+<Route path="/parent" element={
+  <ParentRoute>
+     <Dashboard />
+     </ParentRoute>
+ } />
 
-<Route path="/parent/profile" element={<Profile />} />
+<Route path="/parent/profile" element={<ParentRoute>
+      <Profile />
+    </ParentRoute>} />
 
-<Route path="/parent/reservations" element={<MesReservations />} />
+<Route path="/parent/reservations" element={ <ParentRoute>
+      <MesReservations />
+    </ParentRoute>} />
+
         {/* ADMIN */}
         <Route
           path="/admin/*"

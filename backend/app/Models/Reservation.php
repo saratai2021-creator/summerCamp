@@ -27,6 +27,6 @@ class Reservation extends Model
         return $this->belongsTo(Atelier::class);
     }
 
-    // Relation with planning
+    
    
 }

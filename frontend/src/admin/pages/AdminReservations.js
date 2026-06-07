@@ -12,9 +12,6 @@ export function AdminReservations() {
 
   const [reservations, setReservations] = useState([])
 
-  /* ===============================
-     LOAD RESERVATIONS
-  =============================== */
   useEffect(() => {
 
     loadReservations()
@@ -35,9 +32,7 @@ export function AdminReservations() {
     }
   }
 
-  /* ===============================
-     CONFIRM RESERVATION
-  =============================== */
+
   const handleConfirm = async (reservation) => {
 
     try {
@@ -138,7 +133,7 @@ export function AdminReservations() {
               {/* statut */}
               <td
                 className={
-                  r.statut === "confirme"
+                  r.statut === "payee"
                     ? "status-confirm"
                     : "status-wait"
                 }

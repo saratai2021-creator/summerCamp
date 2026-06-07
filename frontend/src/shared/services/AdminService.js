@@ -1,13 +1,9 @@
 const API_URL = "http://127.0.0.1:8000/api";
 
-/* ===============================
-   TOKEN
-================================ */
+
 const getToken = () => localStorage.getItem("token");
 
-/* ===============================
-   HANDLE RESPONSE
-================================ */
+
 const handleResponse = async (res) => {
   if (res.status === 401) {
     localStorage.removeItem("token");
@@ -26,9 +22,7 @@ const handleResponse = async (res) => {
   return res.json();
 };
 
-/* ===============================
-   ATELIERS
-================================ */
+
 
 export const getAteliers = async () => {
   try {
@@ -106,9 +100,6 @@ export const deleteAtelier = async (id) => {
   }
 };
 
-/* ===============================
-   PLANNINGS (UPLOAD)
-================================ */
 
 export const getReservations = async () => {
   try {
@@ -173,7 +164,20 @@ export const cancelReservation = async (id) => {
     return null;
   }
 };
+export const getMesReservations = async () => {
 
+  const res = await fetch(
+    `${API_URL}/mes-reservations`,
+    {
+      headers: {
+        Accept: "application/json",
+        Authorization: `Bearer ${getToken()}`
+      }
+    }
+  );
+
+  return await handleResponse(res);
+};
 /* ===============================
    FORMATEUR
 ================================ */

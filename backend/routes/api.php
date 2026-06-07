@@ -35,7 +35,11 @@ Route::middleware('auth:sanctum')->group(function () {
     // reservation
     Route::post('/reservations', [ReservationController::class, 'store']);
 });
-
+Route::middleware('auth:sanctum')
+->get(
+    '/mes-reservations',
+    [ReservationController::class,'mesReservations']
+);
 /*
 |--------------------------------------------------------------------------
 | ADMIN ROUTES
