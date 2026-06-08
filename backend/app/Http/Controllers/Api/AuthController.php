@@ -10,14 +10,7 @@ use App\Models\User;
 
 class AuthController extends Controller
 {
-    // ==============================
-    // Login
-    // ==============================
-    // Les mots de passe sont stockés chiffrés
-    // dans la base de données. On ne peut donc 
-    // pas comparer directement les mots de passe. 
-    // Hash::check compare le mot de passe saisi avec
-    //  sa version chiffrée stockée dans la base.
+
     public function login(Request $request)
     {
         $request->validate([
@@ -93,9 +86,7 @@ $token = $user->createToken('api-token')->plainTextToken;
     ], 201);
 }
 
-    // ==============================
-    // Logout
-    // ==============================
+
     public function logout(Request $request)
     {
         $request->user()->currentAccessToken()->delete();

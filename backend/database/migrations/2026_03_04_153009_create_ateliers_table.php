@@ -14,15 +14,15 @@ return new class extends Migration
         Schema::create('ateliers', function (Blueprint $table) {
             $table->id();
             $table->string('titre');
-    $table->text('description');
-    $table->date('date_debut');
-    $table->date('date_fin');
-    $table->integer('capacite');
-    $table->decimal('prix', 8, 2);
-    $table->integer('age_min');
-    $table->integer('age_max');
-    $table->string('image')->nullable();
-    $table->timestamps();
+            $table->text('description');
+            $table->date('date_debut');
+            $table->date('date_fin');
+            $table->integer('capacite');
+            $table->decimal('prix', 8, 2);
+            $table->integer('age_min');
+            $table->integer('age_max');
+            $table->string('image')->nullable();
+            $table->timestamps();
         });
     }
 

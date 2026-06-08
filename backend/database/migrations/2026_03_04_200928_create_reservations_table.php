@@ -6,36 +6,38 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
+    /*
      * Run the migrations.
      */
+
     public function up(): void
     {
        Schema::create('reservations', function (Blueprint $table) {
+            $table->id();
 
-    $table->id();
+            $table->foreignId('etudiant_id')
+                ->constrained()
+                ->onDelete('cascade');
 
-    $table->foreignId('etudiant_id')
-          ->constrained()
-          ->onDelete('cascade');
+            $table->foreignId('atelier_id')
+                ->constrained()
+                ->onDelete('cascade');
 
-    $table->foreignId('atelier_id')
-          ->constrained()
-          ->onDelete('cascade');
+            $table->enum('statut', [
+                'en_attente',
+                'payee',
+                'annulee'
+            ])
+            ->default('en_attente');
 
-    $table->enum('statut', [
-        'en_attente',
-        'payee',
-        'annulee'
-    ])->default('en_attente');
-
-    $table->timestamps();
-});
+            $table->timestamps();
+        });
     }
 
-    /**
+    /*
      * Reverse the migrations.
      */
+
     public function down(): void
     {
         Schema::dropIfExists('reservations');

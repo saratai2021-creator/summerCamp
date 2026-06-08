@@ -28,7 +28,6 @@ export function Reservation() {
     fetchAteliers();
   }, []);
 
-
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -36,7 +35,6 @@ export function Reservation() {
       [e.target.name]: e.target.value,
     });
   };
-
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -90,19 +88,12 @@ export function Reservation() {
 
       <div className="reservation-topbar">
         <div>
-          <h2 className="reservation-logo">Summer Camp</h2>
+          <h2 className="reservation-logo">FormaCamp Academy</h2>
 
           <p className="reservation-subtitle">Workshop Reservation</p>
         </div>
 
-
-        <button
-          className="back-btn"
-          onClick={() => navigate("/parent")}
-        >
-{/* =======
         <button className="back-btn" onClick={() => navigate("/parent")}>
->>>>>>> 323d6543823153037ffc4784a2d6adec2cdbe8f7 */}
           Dashboard
         </button>
       </div>
@@ -112,7 +103,7 @@ export function Reservation() {
       <div className="reservation-hero">
         <h1>Reserve Your Workshop 🚀</h1>
 
-        <p>Choose an atelier and confirm your reservation.</p>
+        <p>choisir votre atelier et confirmer votre resérvations </p>
       </div>
 
       {/* FORM */}
@@ -127,7 +118,7 @@ export function Reservation() {
             onChange={handleChange}
             required
           >
-            <option value="">-- choose atelier --</option>
+            <option value="">-- choisir un atelier --</option>
 
             {ateliers.map((atelier) => (
               <option key={atelier.id} value={atelier.id}>
@@ -137,7 +128,7 @@ export function Reservation() {
           </select>
         </div>
 
-        <button className="btn-reserve">Reserve Now</button>
+        <button className="btn-reserve">Reserver maintenant </button>
       </form>
     </div>
   );

@@ -5,108 +5,80 @@ import "../../styles/Dashboard.css";
 export function Dashboard() {
   const navigate = useNavigate();
 
+  // Utilisateur connecté
   const user = JSON.parse(localStorage.getItem("user"));
-
-  // const handleLogout = () => {
-
-  //   localStorage.removeItem("token")
-
-  //   localStorage.removeItem("user")
-
-  //   navigate("/login")
-  // }
 
   return (
     <div className="dashboard-container">
-      {/* TOP BAR */}
-
+      {/* EN-TÊTE */}
       <div className="dashboard-topbar">
         <div>
-          <h2 className="dashboard-logo">Summer Camp</h2>
+          {/* Nom de l'académie */}
+          <h2 className="dashboard-logo">FormaCamp Academy</h2>
 
-
-        
-
-          <p className="dashboard-subtitle">
-            Parent Space
-          </p>
-
+          {/* Sous-titre */}
+          <p className="dashboard-subtitle">Espace Parent</p>
         </div>
-
-        {/* <button
-          className="logout-btn"
-          onClick={handleLogout}
-        >
-          Logout
-        </button> */}
       </div>
 
-      {/* HERO */}
-
+      {/* MESSAGE DE BIENVENUE */}
       <div className="dashboard-hero">
         <div>
-          
-          <h1>
-            Welcome back,
-            {" "}
-            {user?.name || "Parent"} 👋
-          </h1>
+          <h1>Bon retour, {user?.name || "Parent"} 👋</h1>
 
-          
-        
-          <p>Manage your workshops and reservations easily.</p>
-      </div>
+          <p>
+            Gérez facilement les ateliers, les réservations et le suivi
+            pédagogique de votre enfant.
+          </p>
+        </div>
       </div>
 
-      {/* CARDS */}
-
+      {/* CARTES PRINCIPALES */}
       <div className="dashboard-cards">
-        {/* profile */}
-
+        {/* PROFIL */}
         <div className="dashboard-card">
           <div className="card-icon">👤</div>
 
-          <h2>My Profile</h2>
+          <h2>Mon Profil</h2>
 
-          <p>View your personal information.</p>
+          <p>Consultez vos informations personnelles.</p>
 
-          <button onClick={() => navigate("/parent/profile")}>Open</button>
+          <button onClick={() => navigate("/parent/profile")}>Ouvrir</button>
         </div>
 
-        {/* reservations */}
-
+        {/* RÉSERVATIONS */}
         <div className="dashboard-card">
           <div className="card-icon">📅</div>
 
-          <h2>Reservations</h2>
+          <h2>Mes Réservations</h2>
 
-          <p>Check your reservation history.</p>
+          <p>Consultez l'historique de vos réservations.</p>
 
-          <button onClick={() => navigate("/parent/reservations")}>Open</button>
+          <button onClick={() => navigate("/parent/reservations")}>
+            Ouvrir
+          </button>
         </div>
 
-        {/* reserve */}
-
+        {/* NOUVELLE RÉSERVATION */}
         <div className="dashboard-card">
           <div className="card-icon">🚀</div>
 
-          <h2>New Reservation</h2>
+          <h2>Nouvelle Réservation</h2>
 
-          <p>Reserve a new workshop quickly.</p>
+          <p>Réservez un atelier en quelques clics.</p>
 
-          <button onClick={() => navigate("/reservation")}>Reserve</button>
+          <button onClick={() => navigate("/reservation")}>Réserver</button>
         </div>
 
-        {/* reports */}
-
+        {/* RAPPORTS */}
         <div className="dashboard-card">
           <div className="card-icon">📄</div>
 
-          <h2>Reports</h2>
+          <h2>Rapports Pédagogiques</h2>
 
-          <p>View your educational reports.</p>
+          <p>Consultez les rapports de suivi de votre enfant.</p>
 
-          <button onClick={() => navigate("/parent/rapports")}>Open</button>
+          <button onClick={() => navigate("/parent/rapports")}>Ouvrir</button>
         </div>
       </div>
     </div>
