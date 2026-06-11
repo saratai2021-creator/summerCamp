@@ -74,6 +74,7 @@ class AuthController extends Controller
 
         'parent_password' => bcrypt($request->parent_password)
     ]);
+    // Création du Token Sanctum
 $token = $user->createToken('api-token')->plainTextToken;
     return response()->json([
 

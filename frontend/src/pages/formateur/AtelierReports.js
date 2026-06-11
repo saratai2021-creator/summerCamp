@@ -36,6 +36,44 @@ function AtelierReports() {
         setLoading(false);
       });
   }, [page]);
+  async function downloadPdf(id) {
+    try {
+      const token = localStorage.getItem("token");
+
+      const response = await fetch(
+        `http://127.0.0.1:8000/api/formateur/rapports/${id}/download`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        },
+      );
+
+      if (!response.ok) {
+        throw new Error("Erreur téléchargement");
+      }
+
+      const blob = await response.blob();
+
+      const url = window.URL.createObjectURL(blob);
+
+      const link = document.createElement("a");
+
+      link.href = url;
+
+      link.download = `rapport_${id}.pdf`;
+
+      document.body.appendChild(link);
+
+      link.click();
+
+      link.remove();
+    } catch (error) {
+      console.log(error);
+
+      alert("Erreur téléchargement PDF ❌");
+    }
+  }
 
   const filteredRapports = rapports.filter((rapport) => {
     const fullName =
@@ -160,12 +198,19 @@ function AtelierReports() {
                     {/* DOWNLOAD */}
 
                     <td>
-                      <a
+                      {/* <a
                         href={`http://127.0.0.1:8000/api/formateur/rapports/${rapport.id}/download`}
                         className="download-btn"
                       >
                         <i className="bi bi-download"></i>
-                      </a>
+                      </a> */}
+                      <button
+                        onClick={() => downloadPdf(rapport.id)}
+                        className="download-link"
+                      >
+                        <i className="bi bi-download"></i>
+                        Télécharger
+                      </button>
                     </td>
 
                     {/* EMAIL */}

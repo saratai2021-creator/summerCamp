@@ -70,31 +70,40 @@ function LayoutWrapper() {
 
         {/* VISITEUR */}
 
-       {/* PARENT */}
-       
-<Route path="/ateliers" element={<Ateliers />} />
-
         {/* PARENT */}
-        <Route path="/ateliers" element={<Ateliers />} />
 
+        {/* <Route path="/ateliers" element={<Ateliers />} /> */}
+
+        <Route path="/ateliers" element={<Ateliers />} />
 
         <Route path="/reservation" element={<Reservation />} />
 
+        <Route
+          path="/parent"
+          element={
+            <ParentRoute>
+              <Dashboard />
+            </ParentRoute>
+          }
+        />
 
-<Route path="/parent" element={
-  <ParentRoute>
-     <Dashboard />
-     </ParentRoute>
- } />
+        <Route
+          path="/parent/profile"
+          element={
+            <ParentRoute>
+              <Profile />
+            </ParentRoute>
+          }
+        />
 
-<Route path="/parent/profile" element={<ParentRoute>
-      <Profile />
-    </ParentRoute>} />
-
-<Route path="/parent/reservations" element={ <ParentRoute>
-      <MesReservations />
-    </ParentRoute>} />
-
+        <Route
+          path="/parent/reservations"
+          element={
+            <ParentRoute>
+              <MesReservations />
+            </ParentRoute>
+          }
+        />
 
         <Route path="/parent" element={<Dashboard />} />
 

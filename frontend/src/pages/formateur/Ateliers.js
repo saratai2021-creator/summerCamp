@@ -51,7 +51,6 @@ function FormateurAteliers() {
           </div>
         </div>
       </div>
-
       {/* TOP BAR */}
 
       <div className="top-bar">

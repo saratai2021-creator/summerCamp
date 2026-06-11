@@ -32,7 +32,6 @@ Route::middleware('auth:sanctum')->group(function () {
 //     [ReservationController::class,'mesReservations']
 // );
 
-
 Route::middleware(['auth:sanctum', 'admin'])->group(function () {
 
     Route::post('/ateliers', [AtelierController::class, 'store']);
@@ -49,24 +48,23 @@ Route::middleware(['auth:sanctum', 'admin'])->group(function () {
 
 
 Route::middleware(['auth:sanctum', 'formateur'])->prefix('formateur')->group(function () {
-        Route::get('/ateliers', [FormateurController::class,'ateliers']);
+    Route::get('/ateliers', [FormateurController::class,'ateliers']);
 
-        Route::get('/ateliers/{id}/etudiants', [FormateurController::class,'students']);
-
-
-        Route::post('/rapports', [RapportController::class,'store']);
+    Route::get('/ateliers/{id}/etudiants', [FormateurController::class,'students']);
 
 
-        Route::get('/rapports/{rapport}/download', [RapportController::class,'download']);
+    Route::post('/rapports', [RapportController::class,'store']);
 
 
-        Route::post('/rapports/{rapport}/send-email', [RapportController::class,'sendEmail']);
-
-        Route::get('/rapports', [RapportController::class,'history']);
+    Route::get('/rapports/{rapport}/download', [RapportController::class,'download']);
 
 
-        Route::get('/ateliers/{id}/rapports', [RapportController::class,'rapportsByAtelier']);
+    Route::post('/rapports/{rapport}/send-email', [RapportController::class,'sendEmail']);
 
+    Route::get('/rapports', [RapportController::class,'history']);
+
+
+    Route::get('/ateliers/{id}/rapports', [RapportController::class,'rapportsByAtelier']);
 
         // Route::get(
         //     '/ateliers/{atelier_id}/etudiants/{etudiant_id}/rapports',

@@ -1,8 +1,6 @@
 const API_URL = "http://127.0.0.1:8000/api";
 
-
 const getToken = () => localStorage.getItem("token");
-
 
 const handleResponse = async (res) => {
   if (res.status === 401) {
@@ -21,8 +19,6 @@ const handleResponse = async (res) => {
 
   return res.json();
 };
-
-
 
 export const getAteliers = async () => {
   try {
@@ -100,7 +96,6 @@ export const deleteAtelier = async (id) => {
   }
 };
 
-
 export const getReservations = async () => {
   try {
     const res = await fetch(`${API_URL}/reservations`, {
@@ -165,16 +160,12 @@ export const cancelReservation = async (id) => {
   }
 };
 export const getMesReservations = async () => {
-
-  const res = await fetch(
-    `${API_URL}/mes-reservations`,
-    {
-      headers: {
-        Accept: "application/json",
-        Authorization: `Bearer ${getToken()}`
-      }
-    }
-  );
+  const res = await fetch(`${API_URL}/mes-reservations`, {
+    headers: {
+      Accept: "application/json",
+      Authorization: `Bearer ${getToken()}`,
+    },
+  });
 
   return await handleResponse(res);
 };
@@ -278,35 +269,7 @@ export const getAtelierReports = async (id) => {
   }
 };
 
-/*
-|--------------------------------------------------------------------------
-| Créer rapport
-|--------------------------------------------------------------------------
-*/
-
-// export const createRapport = async (data) => {
-//   try {
-//     const res = await fetch(`${API_URL}/formateur/rapports`, {
-//       method: "POST",
-
-//       headers: {
-//         Accept: "application/json",
-
-//         "Content-Type": "application/json",
-
-//         Authorization: `Bearer ${getToken()}`,
-//       },
-
-//       body: JSON.stringify(data),
-//     });
-
-//     return await handleResponse(res);
-//   } catch (e) {
-//     console.error(e);
-
-//     return null;
-//   }
-// };
+// _____________________________________________
 
 export const createRapport = async (data) => {
   try {
@@ -323,12 +286,6 @@ export const createRapport = async (data) => {
 
       body: JSON.stringify(data),
     });
-
-    /*
-    |--------------------------------------------------------------------------
-    | Validation Laravel
-    |--------------------------------------------------------------------------
-    */
 
     if (res.status === 422) {
       const errorData = await res.json();

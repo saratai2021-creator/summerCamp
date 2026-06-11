@@ -49,17 +49,7 @@ class RapportController extends Controller
 
 
 
-        $tauxPresence = (
-
-            $request->seances_assistees
-
-            /
-
-            $request->total_seances
-
-        ) * 100;
-
-
+        $tauxPresence = ($request->seances_assistees/$request->total_seances) * 100;
 
         $rapport = Rapport::create([
 
@@ -67,9 +57,7 @@ class RapportController extends Controller
 
             'atelier_id' => $request->atelier_id,
 
-
-
-            'user_id' => 1,
+            'user_id' => 2,
 
             'date_debut' => $request->date_debut,
 
@@ -81,96 +69,40 @@ class RapportController extends Controller
 
             'taux_presence' => $tauxPresence,
 
-            'moyenne_exercices' =>
-                $request->moyenne_exercices ?? 0,
+            'moyenne_exercices' =>$request->moyenne_exercices ?? 0,
 
-            'moyenne_examen' =>
-                $request->moyenne_examen ?? 0,
+            'moyenne_examen' =>$request->moyenne_examen ?? 0,
 
-            'modules_termines' =>
-                $request->modules_termines ?? '',
+            'modules_termines' =>$request->modules_termines ?? '',
 
-            'modules_en_cours' =>
-                $request->modules_en_cours ?? '',
+            'modules_en_cours' =>$request->modules_en_cours ?? '',
 
-            'appreciation_generale' =>
-                $request->appreciation_generale,
+            'appreciation_generale' =>$request->appreciation_generale,
 
-            'points_forts' =>
-                $request->points_forts,
+            'points_forts' =>$request->points_forts,
 
-            'points_a_ameliorer' =>
-                $request->points_a_ameliorer,
+            'points_a_ameliorer' =>$request->points_a_ameliorer,
 
-            'recommandations' =>
-                $request->recommandations,
+            'recommandations' =>$request->recommandations,
         ]);
 
-
-
-        $rapport->load([
-            'etudiant',
-            'atelier'
-        ]);
-
-
-
+        $rapport->load(['etudiant','atelier']);
         $pdf = Pdf::loadView(
-
             'pdf.rapport',
-
-            [
-                'rapport' => $rapport,
-            ]
-
-        )->setOptions([
-
-            'isRemoteEnabled' => true,
+            ['rapport' => $rapport,]
+        )->setOptions(['isRemoteEnabled' => true,
         ]);
 
+        $studentName = $rapport->etudiant->prenom . '_' . $rapport->etudiant->nom;
 
-
-        $studentName =
-
-            $rapport->etudiant->prenom . '_' .
-
-            $rapport->etudiant->nom;
-
-        $fileName =
-
-            $studentName .
-
-            '_rapport_' .
-
-            $rapport->id .
-
-            '.pdf';
-
+        $fileName =$studentName .'_rapport_' .$rapport->id .'.pdf';
 
         $path = 'rapports/' . $fileName;
 
-
-
-        Storage::disk('local')->put(
-
-            $path,
-
-            $pdf->output()
-        );
-
-
-
-        $rapport->update([
-
-            'chemin_pdf' => $path,
-        ]);
-
-
-
+        Storage::disk('local')->put($path, $pdf->output());
+        $rapport->update(['chemin_pdf' => $path,]);
         return response()->json([
-
             'message' => 'Rapport créé avec succès',
-
             'rapport' => $rapport,
         ]);
     }
@@ -178,99 +110,43 @@ class RapportController extends Controller
 
 
     public function download(Rapport $rapport)
-{
-
-
-   $path = storage_path(
-    'app/private/' . $rapport->chemin_pdf
-);
-
-
-
-    if (! file_exists($path)) {
-
-        return response()->json([
-
-            'message' => 'PDF introuvable',
-
-            'path' => $path
-
-        ], 404);
+    {
+    $path = storage_path('app/private/' . $rapport->chemin_pdf);
+        if (! file_exists($path)) {
+            return response()->json(['message' => 'PDF introuvable','path' => $path], 404);
+        }
+        return response()->download($path);
     }
 
 
+    public function sendEmail(Rapport $rapport)
+    {
+        $parentEmail =$rapport->etudiant->parent_email;
+        $path = storage_path('app/private/' .$rapport->chemin_pdf);
+        if (! file_exists($path)) {
+            return response()->json([
+                'message' => 'Fichier PDF introuvable',
+            ], 404);
+        }
+        try {
+            Mail::to($parentEmail)->send(new RapportMail($rapport));
+            return response()->json([
+                'message' =>'Rapport envoyé avec succès',
+            ]);
 
-    return response()->download($path);
-}
-
-
-public function sendEmail(Rapport $rapport)
-{
-
-
-    $parentEmail =
-
-        $rapport->etudiant->parent_email;
-
-
-
-    $path = storage_path(
-
-        'app/private/' .
-
-        $rapport->chemin_pdf
-    );
-
-    if (! file_exists($path)) {
-
-        return response()->json([
-
-            'message' => 'Fichier PDF introuvable',
-
-        ], 404);
+        } catch (\Exception $e) {
+            return response()->json([
+                'message' => $e->getMessage(),
+            ], 500);
+        }
     }
-
-
-
-    try {
-
-        Mail::to($parentEmail)
-
-            ->send(
-
-                new RapportMail($rapport)
-            );
-
-        return response()->json([
-
-            'message' =>
-                'Rapport envoyé avec succès',
-        ]);
-
-    } catch (\Exception $e) {
-
-        return response()->json([
-
-            'message' => $e->getMessage(),
-
-        ], 500);
-    }
-}
 
 
     public function history()
     {
-        $rapports = Rapport::with([
-
-            'etudiant',
-
-            'atelier'
-
-        ])
+        $rapports = Rapport::with(['etudiant','atelier'])
         ->latest()
-
         ->paginate(10);
-
         return response()->json($rapports);
     }
 
@@ -278,47 +154,27 @@ public function sendEmail(Rapport $rapport)
 
     public function rapportsByAtelier($atelier_id)
     {
-        $rapports = Rapport::with([
-
-            'etudiant',
-
-            'atelier'
-
-        ])
-
+        $rapports = Rapport::with(['etudiant','atelier'])
         ->where('atelier_id', $atelier_id)
-
         ->latest()
-
         ->get();
-
         return response()->json($rapports);
     }
 
 
 
-public function parentReports()
-{
-    $user = Auth::user();
+    public function parentReports()
+    {
+        $user = Auth::user();
+        $etudiant = Etudiant::where('parent_email', $user->email)->first();
+        if (!$etudiant) {
 
-
-    $etudiant = Etudiant::where('parent_email', $user->email)->first();
-
-    if (!$etudiant) {
-
-        return response()->json([]);
+            return response()->json([]);
+        }
+        $rapports = Rapport::with(['atelier'])
+            ->where('etudiant_id', $etudiant->id)
+            ->latest()
+            ->get();
+        return response()->json($rapports);
     }
-
-
-
-    $rapports = Rapport::with(['atelier'])
-
-        ->where('etudiant_id', $etudiant->id)
-
-        ->latest()
-
-        ->get();
-
-    return response()->json($rapports);
-}
 }

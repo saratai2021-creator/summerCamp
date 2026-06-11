@@ -33,6 +33,44 @@ function ParentReports() {
         setLoading(false);
       });
   }, []);
+  async function downloadPdf(id) {
+    try {
+      const token = localStorage.getItem("token");
+
+      const response = await fetch(
+        `http://127.0.0.1:8000/api/formateur/rapports/${id}/download`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        },
+      );
+
+      if (!response.ok) {
+        throw new Error("Erreur téléchargement");
+      }
+
+      const blob = await response.blob();
+
+      const url = window.URL.createObjectURL(blob);
+
+      const link = document.createElement("a");
+
+      link.href = url;
+
+      link.download = `rapport_${id}.pdf`;
+
+      document.body.appendChild(link);
+
+      link.click();
+
+      link.remove();
+    } catch (error) {
+      console.log(error);
+
+      alert("Erreur téléchargement PDF ❌");
+    }
+  }
 
   return (
     <div className="parent-reports-page">
@@ -61,14 +99,22 @@ function ParentReports() {
                 <strong>Présence :</strong> {rapport.taux_presence}%
               </p>
 
-              <a
+              {/* <a
                 href={`http://127.0.0.1:8000/api/formateur/rapports/${rapport.id}/download`}
                 target="_blank"
                 rel="noreferrer"
                 className="download-btn"
               >
                 Télécharger PDF
-              </a>
+              </a> */}
+
+              <button
+                onClick={() => downloadPdf(rapport.id)}
+                className="download-link"
+              >
+                <i className="bi bi-download"></i>
+                Télécharger
+              </button>
             </div>
           ))}
         </div>
