@@ -4,15 +4,10 @@ import {
   getReportsHistory,
   sendReportEmail,
 } from "../../shared/services/AdminService";
+
 import "../../styles/Formateur/atelierReports.css";
 
 function AtelierReports() {
-  /*
-  |--------------------------------------------------------------------------
-  | States
-  |--------------------------------------------------------------------------
-  */
-
   const [rapports, setRapports] = useState([]);
 
   const [loading, setLoading] = useState(true);
@@ -22,12 +17,6 @@ function AtelierReports() {
   const [page, setPage] = useState(1);
 
   const [lastPage, setLastPage] = useState(1);
-
-  /*
-  |--------------------------------------------------------------------------
-  | Charger rapports
-  |--------------------------------------------------------------------------
-  */
 
   useEffect(() => {
     setLoading(true);
@@ -48,24 +37,12 @@ function AtelierReports() {
       });
   }, [page]);
 
-  /*
-  |--------------------------------------------------------------------------
-  | Recherche
-  |--------------------------------------------------------------------------
-  */
-
   const filteredRapports = rapports.filter((rapport) => {
     const fullName =
       `${rapport.etudiant?.nom} ${rapport.etudiant?.prenom}`.toLowerCase();
 
     return fullName.includes(search.toLowerCase());
   });
-
-  /*
-  |--------------------------------------------------------------------------
-  | Calcul moyenne
-  |--------------------------------------------------------------------------
-  */
 
   const moyenneGenerale = (rapport) => {
     return (

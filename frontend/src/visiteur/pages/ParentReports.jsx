@@ -9,11 +9,7 @@ function ParentReports() {
 
   const [loading, setLoading] = useState(true);
 
-  /*
-  |--------------------------------------------------------------------------
-  | Charger rapports parent
-  |--------------------------------------------------------------------------
-  */
+  // | Charger rapports parent
 
   useEffect(() => {
     const token = localStorage.getItem("token");

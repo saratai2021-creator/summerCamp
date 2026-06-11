@@ -10,141 +10,66 @@ use App\Http\Controllers\Api\RapportController;
 
 
 
-/*
-|--------------------------------------------------------------------------
-| PUBLIC ROUTES
-|--------------------------------------------------------------------------
-*/
-
-// login
 Route::post('/login', [AuthController::class, 'login']);
-// register
+
 Route::post('/register', [AuthController::class, 'register']);
-// ateliers
+
 Route::get('/ateliers', [AtelierController::class, 'index']);
 Route::get('/ateliers/{id}', [AtelierController::class, 'show']);
 
-/*
-|--------------------------------------------------------------------------
-| PARENT ROUTES
-|--------------------------------------------------------------------------
-*/
+
 
 Route::middleware('auth:sanctum')->group(function () {
 
-    // reservation
     Route::post('/reservations', [ReservationController::class, 'store']);
 
-    // rapports parent
-    Route::get('/parent/rapports', [
-        RapportController::class,
-        'parentReports'
-    ]);
+    Route::get('/parent/rapports', [RapportController::class,'parentReports']);
+
+    Route::get('/mes-reservations',[ReservationController::class,'mesReservations']);
+
 });
-Route::middleware('auth:sanctum')
-->get(
-    '/mes-reservations',
-    [ReservationController::class,'mesReservations']
-);
-/*
-|--------------------------------------------------------------------------
-| ADMIN ROUTES
-|--------------------------------------------------------------------------
-*/
+// Route::middleware('auth:sanctum')->get('/mes-reservations',
+//     [ReservationController::class,'mesReservations']
+// );
+
 
 Route::middleware(['auth:sanctum', 'admin'])->group(function () {
 
-    // ateliers
     Route::post('/ateliers', [AtelierController::class, 'store']);
     Route::put('/ateliers/{id}', [AtelierController::class, 'update']);
     Route::delete('/ateliers/{id}', [AtelierController::class, 'destroy']);
 
-    // reservations
     Route::get('/reservations', [ReservationController::class, 'index']);
 
-    Route::patch('/reservations/{id}/confirm', [
-        ReservationController::class,
-        'confirm'
-    ]);
+    Route::patch('/reservations/{id}/confirm', [ReservationController::class,'confirm']);
 
-    Route::patch('/reservations/{id}/cancel', [
-        ReservationController::class,
-        'cancel'
-    ]);
+    Route::patch('/reservations/{id}/cancel', [ReservationController::class,'cancel']);
 });
 
 
 
+Route::middleware(['auth:sanctum', 'formateur'])->prefix('formateur')->group(function () {
+        Route::get('/ateliers', [FormateurController::class,'ateliers']);
 
-/*
-|--------------------------------------------------------------------------
-| FORMATEUR ROUTES
-|--------------------------------------------------------------------------
-*/
+        Route::get('/ateliers/{id}/etudiants', [FormateurController::class,'students']);
 
-Route::middleware(['auth:sanctum', 'formateur'])
 
-    ->prefix('formateur')
+        Route::post('/rapports', [RapportController::class,'store']);
 
-    ->group(function () {
 
-        /*
-        |--------------------------------------------------------------------------
-        | ATELIERS
-        |--------------------------------------------------------------------------
-        */
+        Route::get('/rapports/{rapport}/download', [RapportController::class,'download']);
 
-        // Liste ateliers
-        Route::get('/ateliers', [
-            FormateurController::class,
-            'ateliers'
-        ]);
 
-        // Étudiants atelier
-        Route::get('/ateliers/{id}/etudiants', [
-            FormateurController::class,
-            'students'
-        ]);
+        Route::post('/rapports/{rapport}/send-email', [RapportController::class,'sendEmail']);
 
-        /*
-        |--------------------------------------------------------------------------
-        | RAPPORTS
-        |--------------------------------------------------------------------------
-        */
+        Route::get('/rapports', [RapportController::class,'history']);
 
-        // Créer rapport
-        Route::post('/rapports', [
-            RapportController::class,
-            'store'
-        ]);
 
-        // Télécharger PDF
-        Route::get('/rapports/{rapport}/download', [
-            RapportController::class,
-            'download'
-        ]);
+        Route::get('/ateliers/{id}/rapports', [RapportController::class,'rapportsByAtelier']);
 
-        // Envoyer email parent
-        Route::post('/rapports/{rapport}/send-email', [
-            RapportController::class,
-            'sendEmail'
-        ]);
 
-        // Historique
-        Route::get('/rapports', [
-            RapportController::class,
-            'history'
-        ]);
-
-        // Rapports atelier
-        Route::get('/ateliers/{id}/rapports', [
-            RapportController::class,
-            'rapportsByAtelier'
-        ]);
-
-        // Rapports étudiant
-        Route::get(
-            '/ateliers/{atelier_id}/etudiants/{etudiant_id}/rapports',
-            [RapportController::class, 'rapportsByEtudiant']
-        );
+        // Route::get(
+        //     '/ateliers/{atelier_id}/etudiants/{etudiant_id}/rapports',
+        //     [RapportController::class, 'rapportsByEtudiant']
+        // );
     });

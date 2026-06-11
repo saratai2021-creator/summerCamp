@@ -13,12 +13,6 @@ function FormateurAteliers() {
 
   const navigate = useNavigate();
 
-  /*
-  |--------------------------------------------------------------------------
-  | Charger ateliers
-  |--------------------------------------------------------------------------
-  */
-
   useEffect(() => {
     getFormateurAteliers()
       .then((data) => {
@@ -30,41 +24,13 @@ function FormateurAteliers() {
       });
   }, []);
 
-  /*
-  |--------------------------------------------------------------------------
-  | Voir étudiants
-  |--------------------------------------------------------------------------
-  */
-
   function allStudent(id) {
     navigate(`/formateur/ateliers/${id}/students`);
   }
 
-  /*
-  |--------------------------------------------------------------------------
-  | Voir rapports atelier
-  |--------------------------------------------------------------------------
-  */
-
   function formationReports(id) {
     navigate(`/formateur/ateliers/${id}/reports`);
   }
-
-  /*
-  |--------------------------------------------------------------------------
-  | Voir historique global
-  |--------------------------------------------------------------------------
-  */
-
-  // function historyReports() {
-  //   navigate("/formateur/rapports");
-  // }
-
-  /*
-  |--------------------------------------------------------------------------
-  | Recherche
-  |--------------------------------------------------------------------------
-  */
 
   const filteredAteliers = ateliers.filter((atelier) =>
     atelier.titre.toLowerCase().includes(search.toLowerCase()),
@@ -84,13 +50,6 @@ function FormateurAteliers() {
             <p>Catalogue des programmes disponibles</p>
           </div>
         </div>
-
-        {/* HISTORY BUTTON */}
-
-        {/* <button className="history-btn" onClick={historyReports}>
-          <i className="bi bi-clock-history"></i>
-          Historique
-        </button> */}
       </div>
 
       {/* TOP BAR */}

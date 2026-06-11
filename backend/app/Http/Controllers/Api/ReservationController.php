@@ -10,9 +10,7 @@ use App\Models\Atelier;
 use Illuminate\Support\Facades\Auth;
 class ReservationController extends Controller
 {
-    // ==============================
-    // Get all reservations
-    // ==============================
+
     public function index()
     {
         $reservations = Reservation::with(['etudiant', 'atelier'])->get();
@@ -20,56 +18,31 @@ class ReservationController extends Controller
         return response()->json($reservations);
     }
 
-    // ==============================
-    // Create reservation
-    // ==============================
     public function store(Request $request)
     {
         $request->validate([
-            // 'nom' => 'required|string',
-            // 'prenom' => 'required|string',
-            // 'date_naissance' => 'required|date',
-            // 'parent_telephone' => 'required|string',
 
-            // 'parent_email' => 'required|email|unique:etudiants,parent_email',
-            // 'parent_password' => 'required|min:6',
 
             'atelier_id' => 'required|exists:ateliers,id'
         ]);
 
-       $etudiant = Etudiant::where(
-    'user_id',
-    Auth::id()
-)->first();
+       $etudiant = Etudiant::where('user_id',Auth::id())->first();
 
-        // $etudiant = Etudiant::create([
-        //   'user_id' => Auth::id(),
-        // 'user_id' => 1,
-        //     'nom' => $request->nom,
-        //     'prenom' => $request->prenom,
-        //     'date_naissance' => $request->date_naissance,
 
-        //     'parent_telephone' => $request->parent_telephone,
-
-        //     'parent_email' => $request->parent_email,
-        //     'parent_password' => bcrypt($request->parent_password)
-        // ]);
-
-        // find atelier
         $atelier = Atelier::findOrFail($request->atelier_id);
 
-        // check capacity
+
         if ($atelier->capacite <= 0) {
             return response()->json([
                 'message' => 'Atelier complet'
             ], 400);
         }
 
-        // decrease capacity
+
         $atelier->capacite -= 1;
         $atelier->save();
 
-        // create reservation
+
         $reservation = Reservation::create([
             'etudiant_id' => $etudiant->id,
             'atelier_id' => $atelier->id,
@@ -90,7 +63,7 @@ class ReservationController extends Controller
 
 
         $reservation->statut = 'payee';
-    //   $reservation->statut = 'confirme';
+
        $reservation->save();
 
         return response()->json([
@@ -99,9 +72,6 @@ class ReservationController extends Controller
         ]);
     }
 
-    // ==============================
-    // Cancel reservation
-    // ==============================
     public function cancel(string $id)
     {
         $reservation = Reservation::with('atelier')->findOrFail($id);
