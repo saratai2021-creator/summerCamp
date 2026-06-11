@@ -17,12 +17,6 @@ function ReportResult() {
 
   const [error, setError] = useState("");
 
-  /*
-  |--------------------------------------------------------------------------
-  | Envoyer email
-  |--------------------------------------------------------------------------
-  */
-
   function sendEmail() {
     setSending(true);
 
@@ -43,11 +37,6 @@ function ReportResult() {
         setSending(false);
       });
   }
-  /*
-|--------------------------------------------------------------------------
-| Télécharger PDF
-|--------------------------------------------------------------------------
-*/
 
   async function downloadPdf() {
     try {
@@ -67,7 +56,7 @@ function ReportResult() {
       }
 
       const blob = await response.blob();
-
+      // Création d'un lien temporaire.
       const url = window.URL.createObjectURL(blob);
 
       const link = document.createElement("a");

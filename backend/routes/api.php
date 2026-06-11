@@ -26,6 +26,10 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/parent/rapports', [RapportController::class,'parentReports']);
 
     Route::get('/mes-reservations',[ReservationController::class,'mesReservations']);
+    Route::get(
+            '/parent/rapports/{rapport}/download',
+            [RapportController::class, 'download']
+        );
 
 });
 // Route::middleware('auth:sanctum')->get('/mes-reservations',

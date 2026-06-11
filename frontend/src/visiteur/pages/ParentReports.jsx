@@ -36,9 +36,9 @@ function ParentReports() {
   async function downloadPdf(id) {
     try {
       const token = localStorage.getItem("token");
-
+      console.log("ID RAPPORT =", id);
       const response = await fetch(
-        `http://127.0.0.1:8000/api/formateur/rapports/${id}/download`,
+        `http://127.0.0.1:8000/api/parent/rapports/${id}/download`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -47,7 +47,11 @@ function ParentReports() {
       );
 
       if (!response.ok) {
-        throw new Error("Erreur téléchargement");
+        const error = await response.text();
+
+        console.log("ERREUR BACKEND :", error);
+
+        throw new Error(error);
       }
 
       const blob = await response.blob();
